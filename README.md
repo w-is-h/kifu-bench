@@ -2,7 +2,7 @@
 
 **The page: https://w-is-h.github.io/kifu-bench/**
 
-Four players play 9×9 Go against KataGo's human-rank profiles (20k to 9d), each picking its own opponent before every game: Opus 5.5 in Claude Code and GPT-6.1 Sol in Codex, at medium and at high reasoning effort. Every game is a fresh session with no memory of the earlier ones; all that carries over is the files the player wrote in its directory. It may write and run helper code — Opus through a shell, Sol as the JavaScript Codex runs for it — to inspect the position and keep records, and it is told not to build an engine or search over moves; an audit reads every call it made. If the player learns from its files, its Elo climbs. 200 games each, played 5–7 October 2026.
+Four players play 9×9 Go against KataGo's human-rank profiles (20k to 9d), each picking its own opponent before every game: Opus 5.5 in Claude Code and GPT-6.1 Sol in Codex, at medium and at high reasoning effort. Every game is a new session: the conversations of the earlier ones are not carried over; the player's memory is its working directory, and what it knows of its earlier games is what it left there. It may write and run helper code — Opus through a shell, Sol as the JavaScript Codex runs for it — to inspect the position and keep records, and it is told not to build an engine or search over moves; an audit reads every call it made. If the player learns from its files, its Elo climbs. 200 games each, played 5–7 October 2026.
 
 ## What happened
 
