@@ -1,0 +1,16 @@
+Retain 20k: 26 wins / 118 losses / 6 draws; game87 unfinished and excluded.
+Read game-155.md and game-154.md before playing; consult153 for the same capped lower repair, and144/149/30 for completed rooms.
+
+Game155 Black lost W+R after White62 B9; resignation and final board confirmed, next63.
+Physical captures Black0/White10: C1 captured lower nine at30, B9 captured B8 at62.
+All62 actual moves and34 raw boards verified; no ko, invalid move or passes. No numerical score or official dead list.
+
+- E4/E5/D4 were connected, but G4 was separate and White F4 cut the direct right junction. Lower repairs D3/E3/E2/D2/D1/C2 never built eyes. D1 forced E1's actual F1 save; C2 still met B2 and left the lower nine sole C1. Do not repeat this known trap merely because every repair joins.
+- Correct early OPEN at10: all columns rows1-3=27, D4/E4 two, E5 one, GHJ4-9 eighteen =>48. The initial live note said47 by omitting occupied E5; corrected explicitly. Open aspiration, not territory.
+- C6/D6 began upper-left recovery while right G4-G7 existed. White C1 capture REOPENED D4/E5 for White D5 and dissolved its atari. C5 no longer captured the attacker.
+- Recovery reference46: ABC5 three +ABCD6-9 sixteen +GHJ1-9 twenty-seven. C5/B5/A5 removed3; E7/E8/E9 added3; G8/H8/J8 caps and G2/H2/J2 undercuts each removed6 =>34 before invasion (left19/right15).
+- H5/J5 completed right life with independent H6/J6 and H4/J4 two-point rooms. Right eleven stones+four empties=15. Upper-left's large undivided room was still vulnerable while those turns were spent.
+- White C8/B7/A8 invaded upper-left. D8/C7 contained but did not make eyes. B8 knowingly self-ataried while putting separate B7/C8 on sole A7/C9. White B9 captured B8, REOPENING B8 for both attackers. B9 stayed separate from C8/A8; diagonals are not joins.
+- Closing upper ten A6/B6/C6/C7/D6/D7/D8/E7/E8/E9 have only A7/D9 and no eye. Displayed Black25/White53/neutral3 is geometric, NOT official score or settled living area; right15 is the completed living base.
+- Resigned because no credible winning recovery remained; no full whole-board proof against every legal defense claimed. Manual reading/choices only, code current inspection and actual-history replay; no engine/search/recommendations/delegation.52/99/106 limits remain separate.
+

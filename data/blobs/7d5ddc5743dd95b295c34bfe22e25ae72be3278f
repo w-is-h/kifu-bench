@@ -1,0 +1,23 @@
+# Game 3 — Black versus 20k
+
+Result: White wins by 16 points (W+16), after B45 pass and W46 pass. First completed scored game in the series; no win demonstrated at 20k. Chinese area, komi 7, simple ko, no suicide. Captures before scoring: 0 for both players. Exact record: game-003.sgf. No engine analysis, move-ranking code, or sequence-search program was used. Existing-group distinct liberties were inspected after every opponent reply; strategic judgments below are manual, not established optimal play.
+
+Opening: B E5/G3/G7, followed by G2/G4/F4/F5. White took C7 and built along D4–D6, with F1–F3 below. Black extended E6/E7/D7/D8/D9 while White connected C6/C8/C9. This built a connected Black boundary but also let White develop much of the left side. B25 F7 joined G7 to the main chain. W26 H2 entered the lower right; B27 H3 and B29 J3 blocked upward expansion, but W30 H1 connected the invasion to the bottom White stones. The right-side space alone did not win with komi. Future practice: assess the territorial balance while developing; repeatedly answering local boundary moves can leave too little elsewhere. This record does not prove an optimal opening replacement.
+
+Failed invasion: B31 C3 had four liberties {B3,C2,C4,D3}, but no eyes. W32 D2 restricted the bottom. B33 C4 extended toward White D4; W34 C2 removed the lower liberty. B35 C5 extended toward White C6/D5. W36 B3 left the three-stone chain with {B4,B5,D3}. It had no established eye space and no clear exit. Recognizing danger only here was too late to establish a rescue in this game.
+
+B37 B5, W38 B6 left {A5,B4,D3}. B39 B4 joined internally but still left only {A4,A5,D3}; it did not improve the liberty count or establish eyes. W40 B2 joined White B3 to C2/D2, removing the prospect of capturing an isolated B3 stone easily. B41 A5 left {A4,A6,D3}. W42 D3 joined White's upper and lower chains, leaving Black only {A4,A6}. B43 A6 filled one liberty and gained A7; W44 A7 left seven Black stones {A5,A6,B4,B5,C3,C4,C5} in atari at A4. A4 would leave only A3, still without eyes or an exit. Black passed, and White passed; the scorer returned W+16 with those stones still on the board. No explicit dead-stone breakdown was returned.
+
+The main right-side chain had ten distinct liberties at the end: {E8,E9,F6,F8,G5,G6,G8,H4,H7,J4}. Its safety was not the decisive failure. The seven-stone invasion was recognized as lost before passing; unlike game 1, its atari was not overlooked.
+
+Lessons for game 4:
+
+- Liberty counting worked as observation, but did not prevent enclosure. A four-liberty invasion can have poor prospects if extensions lead toward enemy strength and there is no plan for two eyes or an exit.
+- Before invading, identify usable living space and how the opponent can block access to it. C3's open-looking corner was restricted immediately by D2/C2 and then B3.
+- Reassess after each restricting reply. By W34 C2, Black had four liberties but only leftward space; B35 C5 added stones toward the strong upper White chain rather than widening living space.
+- Do not equate connecting or maintaining three liberties with progress. B39 B4 left the same count and reduced interior room; A5/A6 repeated the earlier games' edge-running pattern.
+- Avoid investing more stones in an enclosure just to prolong atari. A rescue needs a concrete capture, eye-space improvement, or exit.
+- Keep a rough area balance in mind before the board is partitioned. Securing one side can still be insufficient with White's komi and lower-right gains.
+- Passing was appropriate only after checking that the endangered group had no identified rescue and the remaining boundary had no identified profitable move. This manual assessment is not an engine-certified claim.
+
+Next training recommendation: stay at 20k. Aim to establish eye space before enclosure and finish another scored game, seeking an actual win before increasing rank. Ultimate target remains consistent wins against 9d.

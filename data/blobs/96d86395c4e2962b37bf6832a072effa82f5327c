@@ -1,0 +1,151 @@
+# Game 30: White vs 20k — W+24
+
+Played 2026-10-06. 9×9, Chinese area scoring, komi 7, simple ko.
+Consecutive passes at moves 56–57 ended the game.
+Official W+24 matches independent White49+7=56 versus Black32.
+Final captures: Black0, White0. Every stone survived; no dead or neutral points.
+The 20k record is now five wins, nineteen losses and two draws. Retain20k: one large win does not establish repeatable strength.
+
+## Records and verification
+
+game-030.sgf records all57 moves, including two passes.
+game-030-log.json saves opponent selection, all28 play responses, every returned board, current-board groups/liberties/empty regions, manual move notes, exact moves, independent area and historical replay evidence.
+Historical replay reproduced the opening selection and every returned play board and capture count.
+No invalid move, capture, ko, attempted recapture or resignation occurred.
+Code inspected returned positions, saved records, converted actual history to SGF, replayed actual moves and counted final area. Every move choice and hypothetical tactical line was manual. No engine, Monte Carlo, future-sequence search or automated move recommendation was used.
+The displayed final “Move number:58” identifies the next move; the actual game ended at move57.
+
+## Exact move record
+
+1 B E5, 2 W C3, 3 B E3, 4 W G7, 5 B E7, 6 W C5, 7 B F4, 8 W G5, 9 B G3, 10 W C7, 11 B E8, 12 W G8, 13 B F6, 14 W G6, 15 B E9, 16 W C8, 17 B H3, 18 W H4, 19 B J4, 20 W H5, 21 B J5, 22 W J6, 23 B J3, 24 W H6, 25 B E6, 26 W C6, 27 B D4, 28 W C4, 29 B F2, 30 W D3, 31 B D5, 32 W D2, 33 B E2, 34 W D1, 35 B E1, 36 W C9, 37 B D9, 38 W G9, 39 B D8, 40 W H8, 41 B D7, 42 W J8, 43 B D6, 44 W B5, 45 B E4, 46 W A5, 47 B F3, 48 W F8, 49 B F1, 50 W F7, 51 B F9, 52 W F5, 53 B G1, 54 W G4, 55 B H1, 56 W pass, 57 B pass.
+
+## Wider frameworks before contact
+
+The opening was C3/G7, then C5/G5/C7 rather than game28's F7/F8 contact strip.
+Black E5/E3/E7 claimed the center, followed by F4/G3/E8.
+White developed both sides before the opponent enclosed them:
+C3/C5/C7 spread across the left; G7/G5 gave right-side room.
+This successful continuation is not a proven optimal opening and does not establish any individual move's value.
+
+At move10 the provisional selected target was:
+A/B/C all nine rows=27 left;
+G/H/J rows5–9=15 plus H4/J4=2 right;
+total44.
+No secure area or life was claimed. These targets needed connections, endpoints and eye divisions.
+
+G8 at12 extended G7.
+After Black F6, G6 at14 directly joined G5 to G7/G8 before a G6 cut.
+C8 at16 extended C7 and protected the upper-left endpoint.
+The early targets were broad enough to tolerate some reduction, unlike game29's initial37 then35.
+This game did not need a desperate late invasion to address an area deficit.
+
+## Right lower boundary: connect the contact stones
+
+Black H3 at17 joined G3.
+White H4 at18 began disconnected, with G4/H5/J4 liberties.
+Black J4 left it G4/H5.
+H5 at20 directly joined H4 to G5; the vulnerable stone was repaired before tenuki.
+J4 removed one selected point, reducing44 to43.
+Black J5 then removed another, leaving42.
+
+J6 at22 capped J4/J5; it began with H6/J7 liberties and left Black J4/J5 only J3.
+The manual cutting check was:
+B H6 would have only H7 because G6/H5/J6 were White;
+W H7 joins G7 and captures H6, reopening H6.
+That branch was not played and establishes only this local reply, not a forced gain.
+Actual Black J3 directly joined J4/J5 to H3/G3.
+H6 at24 directly connected J6 to G6/H5.
+The right group now had one connected boundary and ample upper room.
+
+No gain relied on an ignored atari.
+Black answered the J6 atari by connecting through J3.
+Safe pressure and actual connection were separate facts.
+
+## Left connections and lower expansion
+
+C6 at26 joined C5 to C7/C8.
+After Black D4, C4 at28 joined C3 to C5.
+All left stones were connected before the lower expansion.
+No White stone was ever left in atari on a returned position.
+
+D3 at30 joined C3 and added D2 as a real orthogonal route.
+Black D5 joined D4 to the central E5 group.
+D2 at32 extended the lower boundary while joined to D3.
+The selected left outline became30:
+A/B/C all rows=27 plus D1/D2/D3=3.
+Right15 gave45, with D1 still unplayed.
+Black E2 joined E3 and F2; it was not an isolated stone or an atari target.
+D1 at34 secured the first-line endpoint through D2.
+Black E1 joined E2 and removed no point from the selected left outline.
+
+C9 at36 joined C8 before Black D9, protecting the upper-left first line.
+G9 at38 joined G8 before a possible F9 undercut, protecting the right first line.
+These timely boundaries retained their targets.
+Black D9/D8/D7/D6 filled the shared strip outside the selected left30.
+White spent those turns establishing eyes rather than chasing stones in the center.
+
+## Life proofs and area cleanup
+
+H8 at40 joined G8.
+J8 at42 joined H8 and split the upper-right empty region into:
+H7/J7, bounded by G7/H6/H8/J6/J8;
+H9/J9, bounded by G9/H8/J8.
+All boundaries belonged to one connected White group.
+These are two independent two-point eye spaces, not one connected edge strip.
+At either attempted Black entry into a two-point space, White can capture by filling its other point while retaining the other eye space.
+Never fill a whole eye space merely to add stones.
+
+B5 at44 joined C5.
+A5 at46 joined B5 and divided the left empty region across the board edge.
+The upper region was A6–A9/B6–B9 (8 points).
+The lower was A1–A4/B1–B4/C1/C2 (10).
+All boundary stones belonged to the same connected White group.
+These separate large eye regions supplied ample life room; their points were enclosed by White and inaccessible from outside.
+They are prospective invadable large eyes, not eighteen separate one-point eyes.
+The final official scoring treated every White stone as alive.
+
+Before cleanup, left30 plus right15=45.
+The remaining neutral boundaries were D6 (subsequently Black), F7/F8/F9, F5 and G4.
+F8 at48 and F7 at50 added two points to the right.
+Black F9 at51 took the third point of that strip.
+F5 at52 and G4 at54 each joined the right group and added one further point.
+Final right19 plus left30=49.
+B5/A5 and H8/J8 were internal life moves and did not increase area.
+D1/C9/G9 retained selected boundaries.
+F8/F7/F5/G4 actually expanded the previously selected outline by four.
+
+Black connected all its stones through E4 at45 and F3 at47.
+The lower-right empty region ended as G2/H2/J1/J2.
+It was one four-point space, not already two independent true eyes.
+Black could divide it by H2, producing separate G2 and J1/J2 spaces, or J2, producing G2/H2 and J1.
+No forced attack or capture of Black was established or counted.
+The official final count retained all Black stones and assigned this region to Black.
+
+With no neutral points left and both White groups safe, White passed at56.
+Black passed at57. No capture-dependent rescue, speculative invasion or dead-stone removal contributed to the win.
+
+## Independent final area
+
+White27 stones+22 territory=49:
+left12+18=30; right15+4=19.
+White territory:
+A6/A7/A8/A9/B6/B7/B8/B9 (8);
+A1/A2/A3/A4/B1/B2/B3/B4/C1/C2 (10);
+H7/J7 (2); H9/J9 (2).
+Black28 stones+4 territory=32:
+G2/H2/J1/J2.
+No neutral or dead points.
+Rows1–9 White=4,4,4,5,6,6,7,7,6.
+Rows1–9 Black=5,5,5,4,3,3,2,2,3.
+49+7−32=24 agrees with W+24.
+
+## Carry forward
+
+1. Retain20k. Five wins, nineteen losses and two draws at this rank; do not infer consistent strength from one large win.
+2. Broaden viable bases before contact forces repeated replies. This C3/G7/C5/G5/C7 continuation retained both side regions; game28's unsupported upper strip did not.
+3. Count early with explicit coordinates and distinguish internal eye moves, retained endpoints and genuine expansion. Here44 lost J4/J5 to42, gained D1/D2/D3 to45, then F8/F7/F5/G4 to49.
+4. Repair actual connections promptly: G6, H5, H6, C6 and C4. Inspect all orthogonal same-color neighbors; Black E2 joined E3/F2 and J3 joined both right branches.
+5. Secure first-line boundaries before the undercut: D1/C9/G9 retained selected room. Opponent replies made these successful; no alternate move is established as inferior.
+6. Divide eye room deliberately: H8/J8 created two true two-point spaces; B5/A5 separated two large left eye regions.
+7. Finish neutral boundaries under Chinese scoring after life. Four added right points enlarged the win; filling internal territory to establish eyes preserved rather than increased area.
+8. This win had no captures, no lost stones and no ignored-atari rescue. Territorial development and life can produce sufficient area without chasing a central capture.

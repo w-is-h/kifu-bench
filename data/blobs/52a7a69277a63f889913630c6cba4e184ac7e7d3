@@ -1,0 +1,35 @@
+# Go series notes (read first)
+
+## Results log
+- Game 1: vs 8k, Black. LOST (resigned at move ~59). Was already behind ~10 by area count.
+
+## Lessons (most important first)
+1. **Count liberties of MY OWN groups before every move**, especially edge groups
+   like a chain along row 1-2. In game 1 my bottom chain B1-F2 had only 2 libs
+   (F1, F2-side); white invaded F3/E3 then G2 and the chain died in atari. Before
+   answering an invasion, list libs of every adjacent black group.
+2. **Count the score early (around move 20)**. Area count = stones + surrounded
+   empty. In game 1 I thought I was ahead after the opening but was actually
+   behind ~6: White's two 3rd-line stones (C3, C6) + solid left side were worth
+   more than my right side, and komi is 7.
+3. Opening: E5 then G4 let White take the whole left side cheaply (C3, C6).
+   Consider responding closer / blocking white's second stone (e.g. approach
+   between them early) instead of a slow extension.
+4. Cutting moves deep in the opponent's area (C5 cut, C7 cut, B4) mostly just
+   lost stones vs 8k — the engine answers locally correctly. Don't count on
+   blunders; 8k KataGo reads short tactics fine.
+5. Hane at the 1st/2nd line (D1, F9) created weaknesses that White exploited
+   (F9 stone captured, F8 push). Be careful with hanes that leave cutting points.
+
+6. Game 1 move record (B first): E5 C3 G4 C6 D4 C4 D6 D7 E7 D8 C5 B5 D5 B6 D3 D2
+   E2 C2 E8 E9 F9 D9 D1 F8 F7 G8 G7 H8 H7 J7 J6 J8 C7 C8 B8 B7 C1 H6 H5 J5 J4 J6
+   G6 B2 B1 A2 E1 A1 B9 G9 B4 A4 H4 F3 G3 E3 F2?? G2 (my chain B1-F2 in atari, resigned).
+   At move 59 the right answer was probably F4/E4-type moves *after* first checking
+   my own chain's libs; F2 filled my own liberty situation badly.
+
+## Opponent ladder plan
+- 8k was too strong for my game-1 play. Try 10k-12k next game; move up after a win.
+
+## Tools
+- Board coordinates: columns A-J skipping I; rows 1-9 bottom to top.
+- Can use shell to count liberties / area (allowed: inspection only).

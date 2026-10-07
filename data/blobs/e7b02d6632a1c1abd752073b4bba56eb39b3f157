@@ -1,0 +1,21 @@
+# Game 2 — White versus 12k
+
+Result: Black wins by resignation after B45 J9. White captured one stone; Black captured none before resignation. The 17-stone upper White group was in atari at C8 and could not save itself. Exact record: game-002.sgf (45 board moves; resignation is in RE[B+R]). Chinese area, komi 7, simple ko, no suicide. No engine analysis or sequence-search program was used. Current-position liberty counting was used before every White move.
+
+Progress: the final atari was correctly recognized, unlike game 1. However, counting liberties did not prevent a larger strategic group-safety failure. No demonstrated winning strength at 12k and still no completed scored game.
+
+Opening and shape: White took C3/C6 and expanded through D7/D6/E7/E8. Black's B5–E5 chain separated White's upper and lower groups, while F7/F8 and then F6 restricted the upper group on the right. White's B7/B8/B6 responses to A7/A8/A6 connected the upper stones, but Black A5 joined its edge invasion to the central chain. The invasion was not captured. White's upper group had six liberties after W22 B6, but little enclosed space and no demonstrated two-eye life.
+
+Critical contraction: after W24 E6 B25 F6, the upper group had {B9,C7,C8,D8,E9}. B29 B9 removed B9. W30 C9 created a separate two-liberty group; W32 D9 expanded that group, but B33 C8 invaded the remaining interior. Before W34 D8, the main upper group had {C7,D8,E9}, the C9–D9 pair had {D8,E9}, and Black C8 had {C7,D8}. W34 D8 joined the White groups but left only {C7,E9}; Black C8 was in atari at C7. This was a connection with two liberties and no established eyes, not safety.
+
+White then ran along the first line: W36 E9, W38 F9, W40 G9, W42 H9. Black replied E2, G8, H8, J8. Each White extension still left the large group with just two liberties: C7 and the next point along row 9. This did not produce an escape or eye space. W44 C7 captured Black C8, leaving {C8,J9}. B45 J9 left all 17 stones with {C8}. C8 had four White neighbors, and playing there would fill the group's last liberty without capturing any Black group: suicide. Black could capture the entire group there. Resignation was based on this checked position, not a claim that the lower group was also dead.
+
+Lessons for game 3:
+
+- Count distinct liberties, then separately check where two eyes or an actual exit can come from. A group with several liberties can already have inadequate living space.
+- Before filling an interior liberty to connect, check the merged group's liberties AND remaining eye space. W34 D8 was the clearest warning: two liberties, no established eyes, surrounded externally.
+- Do not assume an enemy stone in atari means the surrounding group is safe. Capturing C8 at C7 yielded only one eye point; it could not save the group after the edge was sealed.
+- Repeated first-line extensions that keep the same two-liberty count are a danger signal. The F9–H9 chase repeated game 1's edge-trapping error on a larger scale.
+- Address shrinking living space earlier. This record does not establish an optimal replacement move; revisit the position before B29 B9 and before filling D8 rather than inventing a proven rescue after the enclosure.
+
+Next training recommendation: 20k or 18k, White or Black as the user specifies, with the aim of preserving eye space and finishing a scored game. Increase rank only on demonstrated results. Keep the ultimate target of consistent wins against 9d.

@@ -1,0 +1,30 @@
+# Game log
+
+## Game 1 — Black vs 8k — LOSS W+14
+Moves: B E5, W C4, B D3, W G3, B G4, W H4, B H5, W H3, B F3, W G5 (G4 now in atari - missed!),
+B G6, W F4 (captures G4), B F5, W H6, B G4 (captures G5), W F2, B E4 (captures F4), W J5,
+B G5, W H7, B G7, W H8, B G8, W C7, B C5, W B5, B C6, W B6, B B7, W C8, B D7, W B8,
+B D8, W C3, B E3, W D2, B E2, W C2, B G2, W H2, B F1 (captures F2), W G9, B F9, W H9,
+B B4 (useless), W B3, B C9, W A7, B B9, W A8, B D4, W H1, B D1, W C1, B E1, W G1, B F2,
+W A9, B D9, W A4, B J6, W J7, pass, pass.
+Final: Black owned center + top-middle (37). White had both edges (left A-C, right H-J).
+Takeaway: overconcentrated center; opponent low stones on both sides settled easily.
+
+## Game 2 — White vs 8k — LOSS B+12 (White ~31 area +7 vs Black 50)
+Moves: B G7, W E5, B F5, W F4, B F6, W G4, B E6, W E4 (forced: E5 had 2 libs), B C4, W D5, B C5,
+W D6, B D3, W C6, B F2, W E3, B E2, W G2, B D8, W D7, B E7, W C8, B F8, W D4, B C2, W G5,
+B G3 (cut), W F3, B H3, W H2, B H6, W H4, B G1, W J3 (captures G3,H3), B C9, W B9, B D9, W B8,
+B B6, W B7, B A6, W G6, B H5, W H7?! (got captured), B H8, W J5, B J7, W A7, B B4,
+W J6?? (SELF-ATARI: J5-J6 had 1 lib J4), B J4 (captures 2), W J5, B H1, W J4, B J6,
+W B3/A4/A3 (invasion probes, died), B B2/B5/A2, W J2, B F1, W J1, B C3, W D2, B D1, W E9, B E8, pass pass.
+Final: White owned only the center column + a thin top-left + bottom-right strip (~31).
+Black had upper-right (rows 6-9, E-J) and the whole lower-left (A-D rows 1-5 + E1/F1).
+Takeaways:
+- Again my stones formed a long center wall (D4-J4, D5-E5, C6-D7) that scored very little.
+  Black just took two opposite corners (G7 then C4) and lived easily on both.
+- After W E5 / B F5 attach, my F4/G4/E4 shape was slow; Black kept sente and invaded C4.
+  Better as White vs a 3-3-ish G7: take a corner myself (C3 or C4/D3) instead of tengen,
+  or after F5 attach play solidly but then grab the open lower-left corner (C3/C4) FIRST.
+- J6 blunder: I extended a stone into a spot where the 2-stone group had a single liberty.
+  Before each move, count the liberties of the stone I'm placing AND its group after placement.
+- H7 cut was over-ambitious (2 libs vs their many); read races before cutting.

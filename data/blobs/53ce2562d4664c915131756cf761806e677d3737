@@ -1,0 +1,19 @@
+# Next game after145
+
+Retain20k:24 wins/110 losses/6 draws;87 unfinished/excluded.
+Read145/144; consult30 for broad development and143 for competing junctions.
+Game145 Black lost W+12 afterWhite46/Black47passes; boardconfirmed,next48.
+AreaB38/W43,neutral0;physicalB0/W2 (White40F9 captured E8/F8),noko.
+All47moves/26rawboardsverified and allrawretained.
+
+- OPEN lower rows1–5=45 was exactly Black's win threshold and had no reduction allowance.
+- Lost ABC5 three, AB4 two, H5/J5 two, J4 one; gained F6 one:38. Lower life moves preserved area.
+- D4 actually joined left/main; G4 actually joined main/G3/H4. White H6/J5/B5 actually joined its intruders.
+- Black J3 had H3/J2, not J5; it was not in atari. Check actual orthogonal liberties before describing a forced save.
+- E8/F8 after D8/G8 caps had only E7/E9/F9 and no completed life plan. Stop an unsupported strip before enlarging it.
+- White E7 joined both upper chains; E9 left soleF9. F9 would only extend to soleG9, while White D9 saves E9.
+- White F9 capturedtwo and REOPENED E8/F8 for adjacent White groups, no ko.
+- E4/E3/E2/E1 divided lower left9/right10; B2/B1 made independent A1/A2 and five-point left rooms. Black21+17=38 survives.
+- Current White22+21=43; D8 and E9/F9 remain separate chains, not one physical group. No dead adjustment needed for W+12.
+- Plan sufficient viable area before endpoints consume the turns. No proved superior alternative opening.
+- No engine/search/recommendation/delegation;52/99/106 limits separate.

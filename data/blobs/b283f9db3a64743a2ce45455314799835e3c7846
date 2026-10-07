@@ -1,0 +1,19 @@
+Retain20k:29 wins/135 losses/6 draws; game87 unfinished/excluded.
+Read game-175.md and game-174.md before playing. Consult173/54/86 for one-room reentry and172 for own-chain checks.
+
+Game175 Black lost W+26 afterBlack69/White70passes;closingconfirmed,next71.
+PhysicalB1/W6;70 actual moves/37 raw boards verified. No ko, invalid move or resignation.
+DisplayedB36/W40/neutral5 is geometric, not official score.
+Inferred removal of BlackH3/H4/J4/J2 givesB31/W50/neutral0,matchingW+26;noofficialdeadlist.
+
+- Count a complete disjoint prospective area budget early. This game had no full winning ledger before contact; at48 Black had only30. Safe life did not repair width.
+- Track every separate flank stone while working elsewhere. B5 never joined; White B6/B4 made it soleA5 and A5 captured it. ReopenedB5 dissolved WhiteB4's old atari.
+- Keep the successful immediate H8/J8 divider: two independent H9/J9 and H7/J7 rooms, same physical chain. Upper became14 after safe F9 gain.
+- Preserve real shared-eye boundaries. C2 joined D2/main and left trueD3;B2 joined A2/main and completed A1/B1 room. Left17 was alive.
+- Audit the WHOLE chain after hypothetical capture/join. B9 would captureA9 but leave six soleA9;J3 would join lower chains but leave five soleJ1. Both full recapture/capture traps were avoided.
+- Rebuild liberties and actual joins after capture. J2 capturedJ3,reopenedJ3for main,but newJ2 was still separate. Temporary atari rescue supplied no independent eyes.
+- B8 and H3 recovery failed under endpoint/cut caps. Do not copy them as reliable life plans. Final surviving31=left17+upper14.
+
+Manual choices/reading;current-position inspection and actual-history replay only.
+No engine,Monte Carlo,future-sequence search,programmed selection/ranking/recommendations or delegation.
+Game52 discrepancy and99/106 evidence limits remain separate.

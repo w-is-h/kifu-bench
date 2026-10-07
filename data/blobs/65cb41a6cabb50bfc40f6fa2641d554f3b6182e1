@@ -1,0 +1,25 @@
+# Game 6 — White versus 20k
+
+Result: Black wins by 26 points (B+26), after W56 pass and B57 pass. Chinese area, komi 7, simple ko, no suicide. Captures before scoring: White 2, Black 0. Exact record: game-006.sgf. Fourth scored game; no win yet at any rank. Current-position distinct liberties were counted after every opponent board move. No engine analysis, move-ranking code, or future-sequence search was used. Tactical and strategic conclusions below are manual.
+
+Opening: W2 C3 and W4 C6 took the left; W6 D7, W8 D6 built upward while Black occupied E5/E3/G6/E7. W10 C4, W12 D4, W14 D5 connected the left boundary. B15 D8 capped the upper route. W16 E4 extended the boundary, but B17 F4 blocked further expansion. The connected White group had six liberties and broad left space, but too little prospective area by itself. This was recognized before entering the lower right, yet the new group's life plan remained too vague.
+
+Lower-right failure: W18 G3 was earlier than game 4's invasion, with open bottom and corner space. However, those directions were not independently secured eye regions. W20 H3, B21 F3; W22 G2, B23 F2; W24 G1, B25 J2. White answered the invasion with W26 J3 and W28 H2; B29 J1 left Black J1/J2 in atari at H1. W30 H1 correctly captured both stones. At that point the White group, after B31 G4, had only {F1,J1,J2}. J1/J2 formed ONE eye region; the capture did not establish two-eye life. The only external route was F1. W32 F1, B33 E1 left eight White stones {F1,G1,G2,G3,H1,H2,H3,J3} with {J1,J2}, no exit and no second eye. White correctly stopped adding stones then, but recognized the enclosure too late. Playing inside the two-point region would reduce the group's liberties to one; no capture or rescue was identified.
+
+Left boundary completion: W34 C7, W36 B7, W38 A7 were answered by C8/B8/A8. W40 C2, W42 B2, W44 A2, W46 A1 closed the bottom boundary against C1/B1/D1. The final 15-stone left chain had {A3,A6,B3,B4,B6,C5}, with a broad connected interior behind it. Preserving that space was useful, but this framework occupied only roughly 24 area points, far short of a winning share even with komi.
+
+Second failed entry: After B47 G7, White reconsidered passing because the upper right was open. W48 H8 had three liberties after B49 G8, and W50 H7 still had three after B51 H6: {H9,J7,J8}. Those were already a narrow corridor, not two secured eye regions. W52 J7, B53 J6 left {H9,J8}; W54 H9, B55 G9 left four stones {H7,H8,H9,J7} with {J8,J9}. Again these were one adjacent two-point eye region with no exit. The proposed top/right living areas overlapped and Black sealed their boundaries in successive replies. White passed rather than fill the remaining region; Black passed.
+
+The scorer returned B+26 without a dead-stone breakdown. A rough partition of 24 White area versus 57 Black area gives the same margin with komi 7, but this is a consistency check, not an explicit report of how each group was adjudicated.
+
+Lessons for game 7:
+
+- Naming two directions is insufficient. Name two DISTINCT potential eye regions and the boundary points required to preserve each. Bottom and corner space in the lower right collapsed into the same J1/J2 region.
+- A capture can be tactically correct while the group remains strategically enclosed. After W30 H1, explicitly count eyes separately from liberties: three liberties, one eye region, and only F1 as an external route.
+- Check closure threats before answering an interior invasion. J2 diverted moves while Black F2/F3/G4 and later E1 sealed the outside. This record does not prove an optimal alternative, but the assessment must happen before the enclosure is complete.
+- Reassess a new group after its FIRST restrictive reply. After B49 G8 and especially B51 H6, the upper-right group's three liberties did not imply adequate living space. H7/J7 extended a narrow boundary without securing eyes.
+- Do not repeat a failed corner pattern elsewhere in the same game. Both right groups finished with exactly one two-point eye region.
+- Maintain the successful connected boundary and open interior, but contest a larger share earlier. By B15 D8, the left framework was capped; continuing local development could not supply enough area.
+- Liberty counting is now exposing failures accurately, but must change decisions earlier. Another completed loss is not evidence of improved playing strength.
+
+Next training recommendation: remain at 20k. Aim for an actual scored win through early area balance and groups with distinct usable eye space or checked outside connections. Ultimate target remains consistent wins against 9d.

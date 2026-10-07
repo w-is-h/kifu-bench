@@ -1,0 +1,142 @@
+# Game 144: White vs 20k — W+6
+
+Played 2026-10-07. 9×9 Chinese area, komi7, simple ko.
+Black59/White60 consecutive passes ended the game; board() confirms W+6, next61.
+Area White40/Black41, neutral0. All final stones survive; no dead removal needed.
+Physical captures Black0/White4: White42 A1 captured A2/A3/B2/C2.
+No invalid move, actual ko or resignation.
+Completed20k record:24 wins/109 losses/6 draws;87 unfinished/excluded. Retain20k.
+
+## Evidence
+
+Read143/142 and30 before selection. Selected20k before Black1 E5.
+All60 actual moves replay legally and match all32 returned boards, physical capture totals, next numbers and ko markers.
+Snapshots: selection with Black1,30 play responses,final board confirmation.
+Every raw response was retained in the persistent store before parsing and saved to disk before the next move.
+A recorder scope error after C3 and a parser error on Black55's first pass were corrected from retained raw responses before continuing. No move was resubmitted and no raw evidence was lost.
+Inspector examines recorded current boards only; verifier replays actual history only.
+Manual move choices and hypothetical reading; no engine, Monte Carlo, future-sequence search, programmed move selection/ranking/recommendation or delegation.
+Saved review/log/SGF/inspector/recorder/verifier/verification/focus.
+Game52 scoring discrepancy and99/106 evidence limits remain separate.
+
+## Exact moves
+
+1 B E5, 2 W C3, 3 B G3, 4 W G7, 5 B C7, 6 W C5, 7 B D6, 8 W G5, 9 B F4, 10 W F7, 11 B C6, 12 W E7, 13 B D4, 14 W C4, 15 B B6, 16 W B5, 17 B A6, 18 W A5, 19 B C8, 20 W G6, 21 B C9, 22 W D3, 23 B E3, 24 W D2, 25 B E2, 26 W D1, 27 B E1, 28 W D7, 29 B D5, 30 W D8, 31 B E4, 32 W D9, 33 B B2, 34 W B3, 35 B C2, 36 W C1, 37 B A3, 38 W A4, 39 B A2, 40 W B1, 41 B G4, 42 W A1, 43 B H5, 44 W H6, 45 B J5, 46 W J6, 47 B H4, 48 W F8, 49 B F5, 50 W F9, 51 B F6, 52 W G8, 53 B E6, 54 W G9, 55 B pass, 56 W H8, 57 B pass, 58 W J8, 59 B pass, 60 W pass.
+
+## Width and connections
+
+C3/G7 began diagonal bases. Black took G3/C7, preventing the broad full-side target of game30.
+C5/G5 spread each boundary; F7/E7 broadened the connected top toward center.
+Before10, the OPEN reference ABC1–5 fifteen +GHJ5–9 fifteen=30 was below White38.
+It was an aspiration, not secure area or a scoring estimate.
+
+Black D4 approached C4; White14 C4 actually joined C3/C5.
+B5/A5 blocked Black B6/A6 from descending into the lower-left room.
+G6 at20 actually joined G5 to G7 before a cut.
+No enemy occupied G6 in this game; the successful delayed join does not prove tenuki was forced-safe in other openings.
+
+After E7 and these joins, the OPEN reference was left15 +EFGHJ7–9 fifteen +GHJ5–6 six=36.
+D3/D2/D1 added three connected lower points and retained the endpoint against E3/E2/E1.
+Prospective39 was still unfinished.
+D7/D8/D9 added three more top points, each actually joined, retaining the upper-left endpoint against C8/C9.
+Thus the broad disjoint reference became42 before Black H5/J5 reductions.
+
+Black D5 joined D4/D6/E5; Black E4 joined that group to E3/E2/E1 and F4.
+These were actual enemy connections, not capture targets.
+F7/E7 and D7/D8/D9 supplied viable top room, rather than a late unsupported third base.
+This outcome establishes neither optimal opening nor individual move superiority.
+
+## Lower-left invasion: preserve the other liberty while attacking
+
+Black33 B2 entered the unfinished lower-left room.
+White B3 joined C3 and capped the invasion from above.
+Black C2 joined B2; White C1 joined D1 and closed the bottom-right escape.
+Black A3 began SEPARATE from B2/C2, with A2/A4.
+
+At37, White's ten stones had only A4/B1/B4.
+White38 A4 joined A5 and capped A3.
+Black39 A2 then actually joined A3 to B2/C2.
+Position before40:
+- White11 had B1/B4.
+- Black A2/A3/B2/C2 had A1/B1.
+
+White40 B1 joined C1 and put the four invaders on sole A1.
+White retained A1/B4; B4 was surrounded by one joined White chain, a true eye.
+Black A1 would fill its last liberty without capturing White, because B4 remains.
+Thus Black A1 was suicide, not a capture-of-attacker defense.
+White B4 would have destroyed that protection; do not fill a true eye during the race.
+
+Black instead played G4. White42 A1 captured all four invaders.
+Rebuild the board: A2/A3/B2/C2 reopened, while B4 stayed separate.
+White A1 joined B1; all thirteen lower-left stones belong to one chain.
+The lower group has the true B4 eye and a separate four-point room, protected from outside entry.
+The capture restored already targeted points; it did not add four outside points to the area ledger.
+No ko arose, and no White stone was captured.
+
+The result depends on Black's actual invasion and replies.
+It does not prove every earlier invasion is doomed or that delayed eye division always works.
+
+## Upper group: contain the outside chain before dividing
+
+Black43 H5 entered the right boundary with H4/H6/J5.
+White H6 joined G6 and blocked upward continuation.
+Black J5 joined H5; White J6 joined H6 and closed the edge endpoint.
+Black H4 then actually joined H5/J5 to the main Black chain.
+No H5 capture was available or counted.
+
+This differs from143's failed right room:
+here H6/J6 contained the connected enemy below row6 BEFORE the H8/J8 divider.
+The enemy never occupied H7/J7.
+H5/J5 reduced the upper reference from24 to22, leaving sufficient room.
+
+White F8/F9 joined F7 and formed a protected E8/E9 two-point room.
+Its boundary D8/D9/E7/F7/F8/F9 is one chain.
+Black F5/F6/E6 filled outside boundary points, rather than entering this room.
+G8/G9 joined and retained the upper-right endpoint.
+Black first passed at55; White continued H8/J8 to make the final divisions explicit.
+
+Final upper16 has three independent true two-point rooms:
+E8/E9, H7/J7, H9/J9.
+H7/J7 is bounded by G7/H6/J6/H8/J8.
+H9/J9 is bounded by G9/H8/J8.
+All boundary stones belong to the same upper chain.
+F8/F9 and H8/J8 retained existing area; they did not increase Chinese area.
+
+## Exact area
+
+Use the disjoint reference before10:
+ABC1–5=15 and GHJ5–9=15, total30 OPEN.
+Added upper E/F rows7–9 six points =>36.
+Added D1/D2/D3 three =>39.
+Added D7/D8/D9 three =>42.
+Lost H5/J5 two =>40.
+No other point in that expanded reference was lost.
+F5/F6/E6 were outside the reference and ended Black; no added central gain.
+All captured lower points lie inside the original left15.
+
+Final White:
+lower13 stones+5 empty (B4 and A2/A3/B2/C2)=18;
+upper16 stones+6 empty (E8/E9, H7/J7, H9/J9)=22.
+White29 stones+11 territory=40.
+
+Final Black:
+23 stones+18 empty=41.
+Top-left A7/A8/A9/B7/B8/B9 six;
+lower F1/F2/F3/G1/G2/H1/H2/H3/J1/J2/J3/J4 twelve.
+Both regions are enclosed by the same Black chain and supply ample separate life room.
+Neutral0; all81 points assigned.
+40+7−41=6 agrees with official W+6, without dead-stone adjustment.
+
+## Carry forward
+
+Retain20k:24wins/109losses/6draws;87 excluded. One win does not establish repeatable strength.
+Read144/143 and consult30.
+Broaden viable room while checking actual orthogonal joins: F7/E7 and both D-file endpoints worked in this history.
+Count OPEN30→36→39→42→40; do not call an unfinished outline safe.
+Protect a true eye during a liberty race: B4 prevented Black A1 from capturing the attackers.
+Rebuild after A1 capture; the new lower room was independent of B4.
+Contain outside enemy extensions before eye division: H6/J6 preserved H7/J7 against H5/J5.
+F8/F9 offered an additional independent room; H8/J8 then completed two right rooms.
+Internal divisions preserve area; endpoint extensions and outside gains need separate accounting.
+Continue life work after the opponent's first pass when necessary; accept the final pass once every group is safe and neutral points are gone.
+All raw evidence retained and all60 moves/32 boards verified.

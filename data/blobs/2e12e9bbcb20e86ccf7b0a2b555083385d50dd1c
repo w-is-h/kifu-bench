@@ -1,0 +1,139 @@
+# Game 154: White vs 20k — W+4
+
+Played 2026-10-07. 9×9 Chinese area scoring, komi7, simple ko.
+White32/Black33 consecutive passes ended the game; board() confirms W+4, next34.
+Area White39/Black42, neutral0. Retaining every final stone reproduces the official result; no dead removal needed.
+Physical captures Black0/White0. No ko, invalid move or resignation.
+Completed20k record:26 wins/117 losses/6 draws;87 unfinished/excluded. Retain20k.
+
+## Evidence
+
+Read153/152/149/144/30 before choosing20k, which returned Black1 G7.
+All33 actual moves replay legally and match all18 raw boards, capture totals, next numbers and ko markers.
+Evidence: opponent selection,16 play responses,final board confirmation.
+Every raw response was retained immediately and saved before the next dependent Go call.
+Saved log, SGF, recorder, inspector, final inspection, verifier, verification, review and focus.
+Every move choice and unplayed consideration was manual. Code inspected current boards and replayed actual history only.
+No engine, Monte Carlo, future-sequence search, programmed selection/ranking/recommendation or delegation.
+Game52 scoring discrepancy and99/106 raw-evidence limits remain separate.
+
+A recorder setup scope error occurred before any Go call; its helper was instantiated with an explicit return and selection then ran once. No Go action was repeated and no raw response was lost.
+
+## Exact moves
+
+1 B G7, 2 W D4, 3 B G3, 4 W D5, 5 B E5, 6 W E4, 7 B E6, 8 W D6, 9 B F4, 10 W E3, 11 B E2, 12 W D3, 13 B F3, 14 W D2, 15 B E1, 16 W D1, 17 B G2, 18 W D7, 19 B E8, 20 W E7, 21 B F7, 22 W D8, 23 B E9, 24 W D9, 25 B F8, 26 W C5, 27 B F2, 28 W B5, 29 B pass, 30 W A5, 31 B G5, 32 W pass, 33 B pass.
+
+## A continuous boundary with enough prospective width
+
+Black G7/G3 occupied both right corners, unlike recent E5-first White games.
+White D4 began on the fourth line. D5 immediately joined it.
+Black E5 approached; E4 joined D4 and broadened the lower boundary toward the E-file.
+Black E6 joined E5. D6 joined D5 before a competing D6 junction was occupied.
+White's first four stones thus all belonged to one chain.
+
+Before White10, exact disjoint OPEN reference:
+A/B/C/D all nine rows=36;
+E1/E2/E3/E4=four;
+total40.
+This was an unfinished aspiration with open endpoints and undivided room, not secure territory or a scoring estimate.
+Four columns alone supply36, insufficient for White38 when all81 points are assigned; the extra E-file width mattered to the eventual narrow margin.
+No individual move or alternate opening is established optimal or winning.
+
+E3 joined E4. Black11 E2 undercut that lower outline.
+White D3 immediately joined D4/E3 and retained D2 as a route.
+Black F3 joined F4/G3; E2 was still separate, diagonal to F3.
+D2 joined D3. Black E1 joined E2.
+D1 joined D2 and secured the first-line endpoint before an undercut at D1.
+Black E1/E2 retained F1/F2; no imaginary capture of that chain was pursued.
+
+The revised reference was38: left36 plus E3/E4 two.
+The undercut cost E1/E2, without splitting White or eliminating its large left room.
+
+## Upper extension and retained endpoints
+
+D7 joined D6. Black E8 began separately from E5/E6.
+E7 joined D7 between the Black E6 and E8 stones and added one point outside the original40 reference.
+Black F7 joined G7, but E8 remained separate until F8.
+D8 joined D7 and preserved the top route.
+Black E9 joined E8; D9 immediately joined D8 to retain the first-line endpoint.
+Black F8 then joined the upper Black branches.
+
+Every White extension was an actual orthogonal join; no returned board put White in atari.
+White did not treat the adjacent Black chains as an isolated capture target.
+The actual opponent replies left enough room for this continuous boundary.
+This is evidence for this history, not proof that all alternative cuts or invasions fail.
+
+The geometric White outline now consisted of all A-D columns36 plus E3/E4/E7 three=39.
+Its left empty region still needed an independent-room divider.
+
+## Finish the divider after the first pass
+
+C5 joined D5; B5 joined C5.
+Black27 F2 connected its E1/E2 stones to F3/G2/lower.
+Black first passed at29, but White continued A5 at30.
+A5 joined B5 and completed an edge-to-wall divider across row5.
+
+Upper room: A/B/C rows6-9, twelve empties.
+Lower room: A/B/C rows1-4, twelve empties.
+Both rooms have only White boundary, and every boundary stone belongs to the same chain.
+These are two separate large eye rooms, not twelve unconditional one-point eyes each.
+No Black invasion tested them in this game.
+The completed divider and substantial room justified passing; the final official score required no White dead removal.
+
+C5/B5/A5 replaced empty reference points with White stones, preserving39 under Chinese scoring.
+D1/D9 retained reference endpoints; E7 added outside area.
+These three types of move have different roles in the ledger.
+
+Black31 G5 remained separate and outside White's rooms.
+White32 passed; Black33 passed, ending the game.
+
+## Exact final count
+
+White15 stones:
+D1-D9 nine, E3/E4/E7 three, A5/B5/C5 three.
+All are one physical chain.
+White24 empties: the two twelve-point rooms.
+Area White39.
+
+Black15 stones in four physical chains:
+upper5 E8/E9/F7/F8/G7;
+central2 E5/E6;
+isolated G5;
+lower7 E1/E2/F2/F3/F4/G2/G3.
+Do not invent a single joined Black wall.
+
+Black27 empties form one connected region with only Black boundary:
+F1/F5/F6/F9;
+G1/G4/G6/G8/G9;
+H1-H9;
+J1-J9.
+Area Black42.
+The central E5/E6 pair has F5/F6; it has not been physically joined to the upper or lower chain.
+No separate unconditional-life proof is claimed for every Black chain; retaining all stones reproduces the official score without adjustment.
+
+Neutral0. White39+7-Black42=4, matching W+4.
+No capture bonus exists under Chinese scoring; there were no captures anyway.
+
+Exact ledger: initial40 minus E1/E2 two plus E7 one=39.
+No point of the retained left36 was lost.
+The game needed neither ignored enemy atari nor capture-dependent recovery.
+One win does not establish repeatable strength or justify increasing the rank.
+
+## Carry forward
+
+Retain 20k: 26 wins / 117 losses / 6 draws; game87 unfinished and excluded.
+Read game-154.md and game-153.md before playing; consult144/149/30 when eye-room or capture patterns recur.
+
+Game154 White won W+4 after White32/Black33 passes; board confirmed, next34.
+Area White39/Black42, neutral0; no dead removal needed. Physical captures0/0.
+All33 actual moves and18 raw boards verified and retained; no ko, invalid move or resignation.
+
+- Black G7/G3 took the right corners. White D4/D5/E4/D6 made one connected boundary from the start, then E3/D3/D2/D1 retained the lower endpoint.
+- Early exact OPEN before10: A-D all nine rows36 +E1-E4 four=40. It was unfinished aspiration, not secure territory. Black E2/E1 removed two; White E7 added one outside point: 40-2+1=39.
+- D7/E7/D8/D9 continued actual joins and retained the top against E8/E9/F7/F8. No White chain split or friendly atari occurred in the actual game. No alternative opening is established optimal.
+- C5/B5/A5 joined D5 to the left edge. This divider preserved Chinese area and separated upper A-C6-9 twelve from lower A-C1-4 twelve. These are two independent large rooms, not 24 one-point eyes.
+- Black first passed at29; White finished A5 at30. Black G5 at31 stayed outside the White rooms. Passes32/33 then ended play.
+- Final White15 stones+24 empty=39, Black15+27=42; 39+7-42=4. All final stones retained reproduces the official result. Black has FOUR physical chains, not one: upper5, central2, isolatedG5, lower7.
+- This win required neither capture nor ignored enemy atari. No invasion tested the large White rooms, and one success does not prove the opening reliable or justify promotion.
+- Manual choices/reading; code inspected current boards and replayed actual history only. No engine, future search, recommendations or delegation. Game52/99/106 limits remain separate.
+

@@ -1,0 +1,13 @@
+## Carry forward
+
+Retain20k:26 wins/123 losses/6 draws;87 unfinished/excluded.
+Read160/159 before the next game; consult154 for broad continuous development.
+
+- Game160 White lost B+14; W30/B51, neutral0, no dead removal, captures0/0. All49 moves/26 raw boards verified.
+- D4/D5/E4 made actual joins, but D6/C5 caps prevented a full-height boundary. Reproducing a White stone does not reproduce154's different opponent replies.
+- Live lower OPEN24 lost A4/B4, A3/B3, A1/A2=>18. Include empty points and whole regions lost after caps.
+- C3/C2, F2/F1 and B2/B1 retained endpoints; these repairs preserved18, not winning width.
+- Upper recovery needed20 living outside points. It finished12: initial viable11 minus C9 plus G8/G9 two. Both groups lived but combined30 was eight short of38.
+- C8/G8 were separate until actual D8/F8 joins. D9 joined D8 before its atari; Black B9 joined and saved C9. No self-atari capture error or capture occurred.
+- E9 separated true E8/F9. D2 separated true D3 from C1/D1/E1/E2 four-point room. Dividers completed life while preserving Chinese area.
+- Black eight physical chains. No promotion, optimal-move or repeatable-strength claim.

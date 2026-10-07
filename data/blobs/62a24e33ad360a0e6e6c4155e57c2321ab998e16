@@ -1,0 +1,23 @@
+# Usage: python3 libs.py <<< "board rows 9..1 as 9 lines of X/O/." ; prints groups and liberties
+import sys
+cols="ABCDEFGHJ"
+rows=[l.split() for l in sys.stdin.read().strip().splitlines()]
+rows=[r[1:10] if len(r)>9 else r for r in rows]
+B={}
+for i,r in enumerate(rows):
+    for j,c in enumerate(r): B[(j,9-i)]=c
+def nb(p):
+    x,y=p
+    for q in((x+1,y),(x-1,y),(x,y+1),(x,y-1)):
+        if q in B: yield q
+seen=set()
+for p in B:
+    if B[p] in"XO" and p not in seen:
+        g=[p];libs=set();k=0;seen.add(p)
+        while k<len(g):
+            for q in nb(g[k]):
+                if B[q]=='.':libs.add(q)
+                elif B[q]==B[p] and q not in seen: seen.add(q);g.append(q)
+            k+=1
+        n=lambda s:",".join(sorted(cols[a]+str(b) for a,b in s))
+        print(B[p],n(g),"libs:",len(libs),n(libs))

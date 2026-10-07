@@ -1,0 +1,96 @@
+# Game 10: White vs 20k — W+10
+
+Played 2026-10-05. 9x9, Chinese area scoring, komi 7, simple ko.
+Completed by consecutive passes at moves 63–64. There were 64 moves: 61 stone moves and three passes (61, 63, 64).
+Final captures: Black 0, White 4. No ko, invalid move, resignation or dead-stone removal occurred.
+
+This is the first win in the series, following five losses at 20k. It establishes one successful game at 20k, not consistent strength or an optimal opening. Retain 20k until wins and living groups are repeatable, including as Black.
+
+## Records and verified score
+- game-010.sgf contains all 64 moves.
+- game-010-log.json contains opponent selection, all 32 play responses, every returned board, current-board group/liberty inventories, complete moves and independent area count.
+- Official result: White wins by 10 points.
+- Independent final-board count: Black 26 stones + 13 territory = 39; White 31 stones + 11 territory = 42. White plus komi = 49. All 81 points are assigned; no neutral points.
+- White's lower group: 14 stones plus E1/D2/D3 = 17 area.
+- White's upper group: 17 stones plus A9/C8/D9/E9/F9/G9/H9/J9 = 25 area.
+- Upper area by rows: all nine points in row 9, all nine in row 8, B7/C7/D7/E7/G7 (five), and C6/D6 (two): 25.
+- Black territory: A5 and H1/J1/H2/J2/H3/J3/H4/J4/G5/H5/J5/J6.
+- Black captured no White stones. The four captured Black stones were E1 at move 24 and C2/D2/D3 at move 26.
+
+## Lower fight: cut, pressure the shared escape, then secure the eyes
+Opening:
+1 B E5, 2 W C3, 3 B D3, 4 W C4, 5 B C5,
+6 W D4, 7 B D5, 8 W E3, 9 B D2,
+10 W E4, 11 B F4, 12 W F3, 13 B G4.
+
+E3 put D3 in atari, and Black D2 extended downward. E4 joined E3 to C3/C4/D4; F3 extended into still-open lower-right space. Unlike the late E4 extension in game 8, this extension had more than one temporary destination.
+
+14 W C7 established an upper foothold while the lower group still had options.
+15 B B4, 16 W B3, 17 B C2, 18 W B2,
+19 B B1, 20 W E2, 21 B E1.
+
+B3/B2 answered the left-side pressure, but B1 undercut the first-line boundary. The group was not yet alive. After move 21, Black C2/D2/D3 had only C1/D1; Black E1 had D1/F1.
+
+22 W F1 reduced E1 to D1. Black ignored this atari with 23 B A4.
+24 W D1 captured E1 and put C2/D2/D3 in atari at C1.
+Black ignored that atari with 25 B A3.
+26 W C1 captured C2/D2/D3.
+27 B A2 kept Black B1 in atari at A1 while connecting the left-edge Black stones.
+
+F1 before D1 mattered. In the actual move-21 position, immediate W D1 would be a self-atari at C1; B C1 captures that stone and opens D1 for the Black group. After F1, W D1 instead captures E1, opening E1 as a second liberty for the new White stone.
+
+Black's ignored ataris were concrete mistakes. The opening is not proven to force the played captures. A short manual alternative after W F1 is B D1 connecting E1 to C2/D2/D3; that joined five-stone Black group would have only C1, where White can capture it. This limited reading is not a proof of every alternative or a forced win.
+
+The capture at C1 did not itself prove life. White C1/D1 and F1 were still separate from the main group, and the empty C2/D2/D3 region was connected.
+28 W F2 connected F1 to E2/F3.
+29 B B5, 30 W C2 connected C1/D1 through B2/C3 and closed the left boundary of D2/D3.
+
+After move 30 the lower group had two independent secured eye spaces:
+- E1: bounded by White D1/E2/F1, all connected.
+- D2/D3: bounded by White D1/C2/E2/C3/E3/D4, all connected.
+This life proof held when Black G3/G2/G1 closed the remaining outside liberties. The final lower group had exactly E1/D2/D3 as liberties and was alive.
+
+White did not chase the atari Black B1 by W A1 after move 27. That would capture B1 but leave the new isolated A1 stone with only B1, introducing a simple-ko dependency. F2/C2 secured unconditional eyes elsewhere instead.
+
+## Upper development: make the second base large enough and repair each connection
+31 B G3, 32 W E7, 33 B G2, 34 W G7, 35 B G1.
+The lower group stayed alive but shrank to 17 area. The earlier C7 foothold allowed White to develop the open upper side, rather than attempting another late lower-right invasion.
+
+36 W C6, 37 B F5, 38 W D6, 39 B B6,
+40 W B7, 41 B A7, 42 W A8, 43 B A6,
+44 W B8, 45 B E6, 46 W D7.
+
+B8 immediately joined A8 to B7. A8 had only B8/A9 after Black A6; leaving it disconnected would have allowed further pressure. D7 then joined the left upper chain to E7.
+
+47 B F7 cut between E7 and G7, with only F6/F8.
+48 W F8 put it in atari; 49 B F6 connected it to Black's main group.
+50 W E8 connected F8 to the left upper chain.
+51 B G6 left White G7 only H7/G8.
+52 W G8 joined G7 to F8 before 53 B H7 removed H7.
+54 W H8, 55 B H6, 56 W J8 closed the upper-right boundary.
+57 B A1 connected Black B1 to the main group.
+58 W D8, 59 B J7.
+
+The choice of F8 rather than F6 at move 48 avoided a counter-atari trap: W F6 would have only G6, and B G6 could capture it, reopening F6 for Black F7. The actual F8 had E8/G8/F9 and supplied a viable connection.
+
+## Settle the eyes before accepting the winning count
+60 W B9, 61 B pass, 62 W C9, 63 B pass, 64 W pass.
+
+B9 first connected to B8 and made a true eye at A9, bounded by A8/B9.
+C9 then connected through B9 and made a second true eye at C8, bounded by B8/C7/D8/C9.
+All boundaries belong to the connected upper group. D9–J9 remained a third, larger eye space.
+
+C9 would not have connected directly to B8 or D8: those are diagonal neighbors. The actual B9–C9 sequence supplied the stone connection needed for the life proof.
+
+The formal row/region count came late, around moves 52–63: 17 lower plus 25 upper = 42, enough to beat Black's 39 with komi. Early area estimates were provisional and were not recorded as a detailed secure/potential count around moves 10–16. Improve that timing next game; this win does not erase the counting weakness.
+
+## Carry forward
+1. Keep 20k for repeatability, especially as Black. One win does not establish consistent strength.
+2. A small living group can anchor a winning total if a second base is developed while open space remains. Here 17 lower + 25 upper won; no late right-side invasion was needed.
+3. Use the capture's newly opened liberty explicitly. F1 before D1 meant D1 captured E1 and survived; immediate D1 would have been captured.
+4. Finish connections and eye boundaries after a capture. F2/C2 established E1 and D2/D3; the capture alone did not.
+5. Repair short-liberty stones before tenuki: A8–B8, F8–E8, and G7–G8 all survived. Check the new atari stone too: F6 would have failed to G6.
+6. Name actual orthogonal connections, not diagonals. B9 before C9 produced two independent true eyes A9/C8.
+7. Count by rows earlier. Preserve the separation between secure area and unsecured outlines even when the opponent plays weakly.
+
+All moves and tactical variations were chosen/read manually. Code only parsed returned current boards, counted present groups/liberties and empty regions, recorded responses, and converted the move record to SGF. No engine, Monte Carlo, future-sequence search, or automated move selection/ranking/recommendation was used.

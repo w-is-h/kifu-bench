@@ -1,0 +1,17 @@
+Retain20k:25 wins/114 losses/6 draws;87 unfinished/excluded.
+Read150/149; consult144/30 for successful connected rooms.
+Game150 White lost B+R by resignation afterBlack41 J8; boardconfirmed,next42.
+PhysicalBlack7/White0:Black29 A2 captured A3/A4/A5/B2/B3/B5/C3. No ko or invalid move.
+No official numerical score or dead-stone list. All41 actual moves/23 raw boards verified; selection,all20 plays,resignation,final board retained.
+
+- Early exact OPEN beforeWhite10:ABC rows1–9=27 +GHJ rows7–9=9 =>36, unfinished and below White38 when all81 assigned.
+- C3/C6 left TWO empty junctions C4/C5. BlackC5/C4 split them; B5 was diagonal toC6. Broad placement without a timely connection plan failed.
+- B3 joinedC3 but allowedBlackB4. A4 began separate; BlackB6 leftB5 soleA5. A5 joinedA4/B5; BlackA6 leftsoleA3. A3 joinedlowerpair, addingA2/B2/C2 without eyes.
+- BlackC2,WhiteB2,BlackB1 leftlower7 soleA2. UnplayedWhiteA2 wouldleaveA1;BlackA1 joinsB1 andcaptures8. B1 retainedC1, so no capture-of-attacker defense.
+- G3/H3 recovery was actually joined, avoiding148's diagonalH4 mistake, but BlackG4/H4 cappedit; no life or sufficient area established.
+- WhiteB7 joinedC7 and putBlackA6/B6 onsoleA7. BlackA2 capturedlower7 and REOPENEDA5/B5 for those attackers, dissolvingtheatari. Do not continue a pre-capture edge chase.
+- D7/E7/E8/E9 actually joinedupperleft; sevenstones atfinish haveA7/B8/C8/D8/D9 but no completedeyeproof.
+- G7/G8/G9 endpoints neverprovedlife. BlackH7 invaded beforecontainment; WhiteH8 joinedG8 but BlackJ8 leftupper4 soleH9.
+- UnplayedWhiteH9 leavesJ9,BlackJ9 captures5; WhiteJ9 insteadalso hasonlyH9,BlackH9 captures5. No ko. Stop futile saves beforeaddinganotherstone.
+- Next game: audit connection cost and viable eye room after the first cap; contain the enemy before spending turns on endpoint/divider plans. An early second base alone did not fix delayed left joins.
+- No engine, Monte Carlo, future search, programmed recommendations or delegation.52/99/106 limits remain separate.

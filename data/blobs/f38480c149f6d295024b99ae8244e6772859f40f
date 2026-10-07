@@ -1,0 +1,15 @@
+# Game 1 — Black versus 9d
+
+Result: White wins by resignation after White 40 J4. Captures: Black 0, White 6. Exact record: game-001.sgf. No external engine analysis was used; conclusions below are manual and do not establish optimal alternatives.
+
+Opening: B E5, W C4; B F3, W D6; B F6, W E8. Black intended to develop the right and center, while White took the left/top. B7 F8 attached on the second line without checking how the stone would escape. W8 F7 and later W16 G8 left it isolated. B17 F9 and B19 G9 expanded the trapped first-line chain. It remained in atari at the end, with H9 its sole liberty. Better future practice: assess liberties and connection routes before an edge attachment; do not repeatedly invest in a chain without a viable exit.
+
+Black invaded C7 at move 25 and followed B7/C8. The corner had room, but its life was not established. Do not record this invasion as confirmed alive or successful.
+
+Decisive fight: W30 G6 cut between Black F6 and G7. B31 H6, W32 G5; B33 G4, W34 H5. At this point the four-stone Black chain G7-H7-J7-H6 had only J6 as a liberty. B35 J5 did not remove its atari. White instead played G2. B37 J6 joined that chain to J5, but the resulting six-stone group had only J4 as a liberty. White played F2. Black wrongly believed the connection was safe and played B39 H4; W40 J4 captured all six stones.
+
+The exact distinct-liberty sets matter: before B39 H4, the six-stone upper-right group had {J4}, while White's G6-G5-H5 group had {F5,H4}. B39 H4 put the White group in atari at F5, but left Black's larger group in atari at J4. White captured first, opening several liberties for its own stones. This was not a successful attack.
+
+Primary lesson: a connection can preserve atari. Count the merged group's external liberties, excluding occupied connecting points and counting shared empty points only once. Attacking a neighboring group does not protect your own group if the opponent can capture it immediately.
+
+Training for game 2: use explicit liberty counts every turn; fix endangered groups before new invasions; play against an easier profile if useful to practice complete games and area scoring. Avoid claiming a move is best from this single unreviewed loss. Record recurring errors and results so progress can be measured.

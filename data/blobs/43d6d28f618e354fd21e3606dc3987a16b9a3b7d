@@ -1,0 +1,34 @@
+# Go notes (9x9, Black vs KataGo human-style) — READ FIRST
+
+See `games.md` for the per-game log. Update both files after every game.
+
+## Ladder status
+- Game 1: vs 8k, lost W+14 (Black 37 area vs White 44 + komi 7).
+- Next suggestion: stay at 8k (or try 10k) until winning, then climb ~2 ranks per win.
+
+## Key facts
+- Komi 7, area scoring: Black needs >= 44 of 81 points to win. Count areas mid-game!
+  In game 1 Black had a fine-looking center but only ~37 points -> center walls do not
+  score on their own. Each side of the board matters.
+- Area scoring: playing inside opponent's territory late is free (no point cost), so
+  probing invasions at the end costs nothing.
+- Opponent passes when the game is settled; engine removes dead stones itself.
+
+## Lessons (game 1)
+1. CHECK LIBERTIES OF MY OWN STONES before every move, especially after the opponent
+   plays adjacent. I lost G4 because White's G5 put it in atari (1 lib) and I didn't notice.
+2. Opening: after 1.E5 White played C4 and G3 (low 3rd-line stones on two sides).
+   My D3 / G4 approach let White settle both sides AND later invade the upper-left (C7).
+   White ended with the whole left edge + right edge. Black's center wall was too
+   thick/inefficient. Better: take territory on a side yourself instead of only pressing
+   (e.g. answer C4 with C6/D6-type moves that also claim the top, or take a corner).
+3. Don't throw in cutting stones (B7, B4) that end up with 1-2 liberties inside the
+   opponent's strong area; they just die and give the opponent tempo. Read 2-3 moves first.
+4. When behind on count by 15+, the only hope is to kill — identify the weakest enemy
+   group EARLY (before it settles), not at the end.
+5. A 1-wide strip of 4 on the edge (straight four) is alive; don't waste moves there.
+
+## Process checklist each move
+- What did the opponent's last move threaten? (Count libs of all my groups next to it.)
+- Any of my groups at 1-2 libs? Any of theirs?
+- Rough count: who is ahead? If behind, play bigger/more aggressive.

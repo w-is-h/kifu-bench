@@ -1,0 +1,13 @@
+# Go learning record
+
+Goal: improve at 9x9 Go and eventually win consistently against human-style KataGo 9d. Read game-001.md before game 2. Game 1: Black versus 9d, W+R after 40 moves; no demonstrated strength at this rank yet.
+
+Rules: Chinese area, komi 7, simple ko, no suicide. User's current instructions govern each game. Play through a result and save lessons and SGF before ending the session. Tools and analysis code may inspect the current board, count liberties and check legality; never build/use an engine, Monte Carlo, future-sequence search, or a program recommending/ranking moves.
+
+Critical improvement: count DISTINCT liberties of ALL endangered friendly groups before each move. Joining groups does not guarantee safety. Check again after selecting a move, especially if it fills a friendly liberty. Game 1 lost six connected stones because the sole liberty J4 was overlooked. Use current-position-liberties.js as a counting aid, not as a move selector.
+
+Before tenuki, identify opponent's immediate captures and cuts. Treat groups with one liberty as emergencies and two liberties as tactical concerns. Near the first line, assess escape routes before attaching: F8 in game 1 became trapped after F7/G8, and chasing along row 9 did not create an escape.
+
+Do not describe groups as alive, connected safely, or enemy stones as dead without checking actual liberties and eye space. Distinguish observations from unverified strategic impressions.
+
+Suggested next training opponent: 10k or 12k to practice basic group safety and finish a scored game; increase rank based on demonstrated results. This is a training recommendation, not a user requirement. Keep the ultimate 9d target.

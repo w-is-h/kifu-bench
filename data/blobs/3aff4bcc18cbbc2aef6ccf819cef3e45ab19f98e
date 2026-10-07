@@ -1,0 +1,35 @@
+// Current-position inspection only. No move generation or future search.
+// Paste this function into functions.exec and call it with the text returned
+// by board()/play(). Its result lists existing chains and distinct liberties.
+function inspectLiberties(boardText) {
+  const columns = 'ABCDEFGHJ';
+  const cells = new Map();
+  for (const line of boardText.split('\n')) {
+    const m = line.match(/^\s*([1-9])\s+([XO.](?:\s+[XO.]){8})\s+[1-9]\s*$/);
+    if (m) m[2].split(/\s+/).forEach((v, x) => cells.set(columns[x] + m[1], v));
+  }
+  if (cells.size !== 81) throw new Error('Expected a complete 9x9 text board');
+  function neighbors(p) {
+    const x = columns.indexOf(p[0]), y = Number(p[1]);
+    return [[x-1,y],[x+1,y],[x,y-1],[x,y+1]]
+      .filter(([a,b]) => a >= 0 && a < 9 && b >= 1 && b <= 9)
+      .map(([a,b]) => columns[a]+b);
+  }
+  const seen = new Set(), groups = [];
+  for (const [point, color] of cells) {
+    if (color === '.' || seen.has(point)) continue;
+    const stones = [], liberties = new Set(), stack = [point];
+    seen.add(point);
+    while (stack.length) {
+      const p = stack.pop(); stones.push(p);
+      for (const q of neighbors(p)) {
+        if (cells.get(q) === '.') liberties.add(q);
+        else if (cells.get(q) === color && !seen.has(q)) {
+          seen.add(q); stack.push(q);
+        }
+      }
+    }
+    groups.push({ color, stones: stones.sort(), liberties: [...liberties].sort(), count: liberties.size });
+  }
+  return groups;
+}

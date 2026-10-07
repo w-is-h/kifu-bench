@@ -1,0 +1,22 @@
+## Next-game focus
+
+Retain20k:33 wins/156 losses/7 draws;game87 unfinished/excluded.
+Read game-201.md and game-200.md;consult197 for supported right rooms and179 for winning width.
+Game201 Black lostW+18 afterBlack45/White46passes;closingnext47.
+All46moves/25originalrawboardsverified;physicalB1/W1:C2capturedC3,J4capturedH4,noko/invalid/resignation.
+DisplayedB35/W46+7,neutral0;no dead removal needed to match.
+
+- OPEN45 had ZERO margin: lost11/gainedG5one=>35. C3 capture restored a reference point. Count losses as caps arrive; nominal width is not secured area.
+- C5 actually joined three bases; C3 used the reopened capture point to join FOUR friendly chains. E3 completed ONE two-point central room.
+- Main21+left12+central2=35;two independent rooms but TEN below45. Life alone did not repair width.
+- H4 initiallyH3/J4 metWhiteH3,becomingsoleJ4. Check the FIRST cap before entry; do not start another unsupported edge rescue. Abandoning after the cap limited investment but did not validate H4.
+- WhiteJ4 capturedH4 physically;capturerhadH4/J3/J5. Capture reopened H4 for OTHER White chains,includingH5. An H5 atari would be stale if this other-chain capture were missed.
+- Retain game200's correction: A1capturerhadA2 AND B1,noKO;separatefriendlychainscan share TWO supported true eyes. A8/B9 in201 were DIAGONAL,notan atari.
+
+Countby10-16;separatelyauditindependenteyespaces/actualjoinsforeachbase.
+BeforeEVERYatari,checkplacedattackerANDALLotherfriendlychainscurrentlyin atari.
+RebuildALLlibertiesaftercaptures/reentries;capturercanbeseparateandrescueOTHERchain.
+Auditcaptureofeveryeye-boundarystone;friendlyneighborsalonearenottrueeyeproof.
+Supportboundarystoneswithoutunnecessarilyfillingtrueeyes.
+Preserveoriginalrawsbeforeparsing/earlierpasses/bothfinalpassphrases/resignation.
+Manual/current-inspection/actualhistoryonly;noengine/search/recommendations/delegation. Game52/99/106 limitsremainseparate.

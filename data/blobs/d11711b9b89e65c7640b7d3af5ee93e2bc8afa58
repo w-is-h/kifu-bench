@@ -1,0 +1,50 @@
+# Game 1: Black vs 9d — W+R
+
+Played 2026-10-05. 9x9, Chinese area scoring, White komi 7, simple ko.
+Black resigned after move 56, White D2. No numerical final score was produced.
+The opponent was the strongest available human-style profile. This was a baseline, not a calibrated training level.
+
+## Full record
+- game-001.sgf: standard SGF, all 56 stone moves.
+- game-001-log.json: tool responses including every board and final resignation.
+- Final captures: Black 2, White 2. Final ko point: D1.
+
+## Main strategic failure
+Black occupied the center and connected many stones, but White obtained the left and right sides. Center influence did not become enough area or a productive attack. By the middle game, the rough territorial count was clearly losing even assuming the main Black chain survived.
+
+The opening was:
+1 B E5, 2 W C5, 3 B E3, 4 W D7, 5 B F7, 6 W G5,
+7 B G6, 8 W H6, 9 B G7, 10 W G3, 11 B C3, 12 W C6.
+Black's upper-right contact exchanges let White establish the right side. This is an observation about the resulting position, not proof that a particular opening move was objectively inferior. Earlier C3 or a more territorial response to G5 are candidates for future manual study.
+
+## Concrete tactical error: the upper cut
+31 B D8, 32 W C8 put D8 in atari.
+33 B E9, 34 W D9 captured D8.
+I had considered capturing E8 with F8, but overlooked that removing D8 opened a NEW liberty at D8 for White E8. E9 itself was also in atari after White D9, so 35 B F9 was needed to extend it.
+
+Later, 49 B F8 put E8 in atari. White played 50 J7, allowing 51 B D8 to capture E8. This created a ko at E8 rather than a secure new eye: Black D8 had only E8 as a liberty.
+The lesson is to account for liberties exposed by removed stones, and distinguish a ko capture from unconditional life.
+
+## Life-and-death failure
+The central chain had almost no internal eye space. At the end:
+- G9 was a genuine enclosed eye point.
+- D2 was an apparent lower eye whose border stone D1 was isolated and in atari after White E1.
+- E8 was an apparent upper eye whose border stone D8 was isolated and in atari.
+- Filling either D2 or E8 to connect the vulnerable stone would consume that eye space.
+
+55 B J9 gained the corner point, but 56 W D2 captured D1 and started a ko at D1.
+Black was already far behind in area and had no identified adequate ko threat to protect the lower eye. The main chain's life was therefore also in serious jeopardy. Resignation was appropriate.
+
+Do not describe this as established double-ko seki. Both vulnerable appendages were initially Black stones; after White takes one ko, Black cannot automatically capture at the other, already-owned ko as a response.
+
+## What worked, within limits
+- 37 B D1 forced 38 W B1 and secured a useful boundary point at the time.
+- 39 B G4 required 41 B E4 after White F3 put F4/G4 in atari.
+- 43 B F6 forced 44 W H5.
+- 53 B D6 forced 54 W C7.
+These local gains did not repair the opening's area deficit or the global eye problem.
+
+## Next experiment
+Keep the first move flexible; E5 was not disproved. Prioritize territory and eye space sooner, count both sides before the board becomes crowded, and reconsider contact exchanges that merely give the opponent a safe side group. A lower-ranked practice opponent is an option, but no training rank has been calibrated yet.
+
+No external analysis engine or automated move recommendation was used. The review is manual and its proposed alternatives are unverified.

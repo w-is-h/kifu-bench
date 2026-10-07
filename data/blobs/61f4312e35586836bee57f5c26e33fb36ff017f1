@@ -1,0 +1,179 @@
+# Go notes (9x9 vs KataGo human-style) — READ FIRST
+
+See `games.md` for the per-game log. Update both files after every game.
+Color alternates per game (G1 Black, G2 White, ... odd = Black, even = White; G9 = Black). Check the prompt.
+Helper: `python3 libs.py <<'EOF' ...board rows 9..1 pasted from the board output... EOF`
+prints every group with its liberties. Use it whenever stones are touching (it's allowed:
+it only inspects the current position).
+
+## Ladder status
+- Game 1: Black vs 8k, lost W+14 (Black 37 area).
+- Game 2: White vs 8k, lost B+12 (White ~31 area + 7 komi vs 50).
+- Game 3: Black vs 10k, lost W+12 (Black 38 area vs 43).
+- Game 4: White vs 14k, lost B+12. Was WINNING at move 20 (~39 pts); lost to one tactical
+  blunder (diagonal cut D8, see lesson 0).
+- Game 5: Black vs 14k, WON B+6 (47 vs 34+7). Opening C4/F4/E5 + killed a G3 invasion.
+- Game 6: White vs 12k, lost B+14 (30 area). Crawled along row 4 under B's tengen wall, then B
+  invaded under my wall (G3/E2/C3): wall had no eyes, spent the game living. See lesson 000.
+- Game 7: Black vs 12k, WON B+4 (46 vs 35+7). C4/F4 then solid row-4 wall vs White's 3rd-line
+  crawl; White's top invasion lived (13 pts) which cut my margin. See "Opening that won" below.
+- Game 8: White vs 12k, lost B+20. Low opening (C4/F4/G3) gave a clean rows-1-4 split (~34),
+  then two late invasions behind Black's finished wall both died. See lesson W1.
+- Game 9: Black vs 12k, LOST W+66: 20-stone center group with one eye died (see lesson E1).
+- Game 10: White vs 14k, resigned at move 46 (~-25). Opening D4/D6 got wedged (B C5/C4/D3),
+  my stones became a sandwiched center wall again; right-side invasion died (lesson E2).
+- Game 11: Black vs 14k, resigned at move 55 (~-18). W attached D4 to my C4; my D5/E5/C5/G5
+  answers gave W the whole rows 1-4 strip. Killed a 4-stone top group (good tactic, see
+  games.md) but W's left group escaped via A4/B4, I lost H4 (tenuki at 2 libs), bottom
+  invasion died. See lesson F1.
+- Game 12: White vs 16k, DRAW (37+7 = 44). Best White game so far: see "White vs tengen" below.
+- Game 13: Black vs 14k, lost W+2 (43 area). Even row-5 split (C4/F4/E5 vs C6/F6/E6) would
+  have WON with solid play; my G6 hane got crosscut (W G5) and cost ~3 pts. See lesson H1.
+- Game 14: White vs 16k, lost B+2 (36 area). Tengen again; B E3 approached my C4 and my
+  3rd move D6 let B cut it off (E6, D5, C5, C3) -> C4 died. Top rows 6-9 alone = 36 = loss.
+  See lesson T1.
+  Record so far: as Black 2-4, as White 0-7-1.
+- Next suggestion: G15 = Black vs 14k. G16 = White vs 16k again.
+  Climb one rung per win; drop one rung after two straight losses; a draw = stay.
+
+## Lesson T1 (G14): AS WHITE vs TENGEN, ROWS 6-9 ALONE = 36 = LOSS. NEED A LIVING 2ND AREA
+- After W C4, B E3 (approach under), W G6, B G4: my D6 was on the wrong side of E5; B E6/D5/C5/
+  C3 sealed C4. Better 3rd move: strengthen C4 toward its own side (C6 extension or D3/C3
+  base) so the left side (A-C cols) stays mine, OR take the top-left corner low (C7) and treat
+  C4 as aji. A white group needs ~10 pts outside the top to reach 38.
+- Don't play gote 2-lib stones (B5 next to B C5 -> needed B6 at once). Play the solid point.
+- Row-6 edge points (H6/J6) are worth 2-4 pts each in close games — take them before black.
+
+## White vs tengen that worked (G12, draw vs 16k)
+W C4, B C5 attach, W G6 (other side, high), B G5 attach, W D7 (top framework), B D4, W C3,
+B D3, W D2/C2 (corner base), then W E6! (head of E5, links D7/G6), F6 & G7 solid fills,
+H7/J7 block the right. Result: top rows 6-9 (~27) + small live corner (10) = 37 = draw.
+To WIN by a few points: (1) after B B6 vs my C6, secure the top-left corner (B7/B8) before
+black's B8 + A7-A6 crawl connects out (cost ~6 pts); (2) avoid making the A9-type point black's
+sente (B9 atari left B9-C9 with 2 libs); (3) spend fewer moves on the corner if possible.
+
+## Lesson H1 (G13): WHEN THE SPLIT ALREADY WINS, PLAY SOLID — COUNT FIRST
+As Black, rows 1-5 = 45 = win. After C4, F4, E5 vs W C6, F6, E6 I owned row 5 if I just
+played solid boundary moves (F5/G5 then D5, B5). I hane'd G6 (touching F6, 3 libs) and W
+crosscut G5 -> I lost G5/H5/G6. RULE: before any hane into the opponent's side, count. If my
+count is >= 45 already, play the solid move on my side of the boundary (e.g. G5 not G6).
+A hane is only OK if the cut behind it (here G5/F5) is already covered.
+
+## Lesson F1 (G11): AS BLACK, DON'T ACCEPT A 4-ROW vs 5-ROW SPLIT
+- Rows 1-4 = 36 for White means I need ALL of rows 5-9 with zero White life there. Any
+  surviving White group (8 pts) or one lost edge stone loses the game. When W attaches (D4 on
+  my C4), keep a foothold on White's side: hane underneath (D3) or take the 3-3 (C3) so White's
+  strip is split; don't spend a gote move (C5) defending a cut while W extends F4.
+- To kill an invader on my side, CUT IT FROM ITS HOME FIRST: in G11 the W left group's only
+  link was A4->B4; B4 (not B5) would have killed it.
+- A hane stone left at 2 libs WILL be ataried next move (H4 after W H3 -> W H5). Connect it.
+
+## Lesson E2 (G10): AS WHITE, KEEP A CORNER UNDER EVERY GROUP; EDGE-STRIP EYES
+- vs B F6 I played D4 then D6 (same line) -> B C5 wedge, C4, D3 cut me off from BOTH left
+  corners: my 7 stones were a wall with black on 3 sides. Next time as White: first move a
+  3-3/3-4 corner point (C3, C7, G3...), second move the OTHER low corner. Answer a wedge on
+  the side where the corner is (C4/C3 block the corner), so the group keeps an edge base.
+- A group along the edge (H5-H9 with J6-J9 empty) whose end touches a LIVING enemy stone (J5)
+  has only straight-three of real space -> dead to the vital point. Count eye space as points
+  the opponent can't push into; secure the end (H4/J5) BEFORE it's taken.
+
+## Lesson E1 (G9): COUNT MY OWN GROUP'S EYES BEFORE ATTACKING
+My "territory" (rows 5-9, cols E-J) was enclosed by W stones on ALL sides once W played J5, H6,
+J7 (right edge) and E8/F9/G8/H9 (top edge). Only F6 was an eye -> 20 stones dead.
+=> An area isn't territory until its open edges are blocked; a stone on J5/J6 or row 9 by the
+   opponent turns "territory" into a group needing eyes. Block edge crawls SOLIDLY (J6 had 2
+   libs and was captured).
+=> Before a capturing race, run libs.py and classify: whose group has an eye? Eye beats no-eye
+   on shared liberties. Don't extend a reduction (G2/F2/G1/J2) into a race unless my count of
+   private libs beats theirs (eye counts 2 for a 2-point eye).
+
+## Lesson W1 (G8): AS WHITE, A CLEAN SPLIT LOSES — CONTEST THE BIG SIDE EARLY
+White needs 38 of 81. A 4-row strip (rows 1-4 = 36) minus Black's edge stones is ~34 = loss.
+Black opened G6 + D7 (top framework) and I answered low twice (C4, F4) and then followed every
+Black move (B4, D4, E5, F5, G4). By move 20 Black's top (rows 5-9) was sealed.
+=> By move 4-8 put a stone INTO the side Black is framing while it is still thin (e.g. vs G6/D7:
+   W E7/F7 or a 3-3 at G8/C8), even if it gets attacked; a living group there is worth 15+.
+=> Invading behind a finished wall (G8 at move 25) dies: Black's 1-2 point placement (H9) plus
+   the 2nd-line hane (J6) leave one eye. If I must invade late, pick the widest edge (5+ points
+   of 1st/2nd line) and take the 2-2/2nd-line base first.
+=> Edge hane by Black on my side (A4): block solidly next to my wall; a lone atari stone (A3)
+   got cut off and the whole corner (A1-B3) became Black's.
+
+## Lesson 000 (G6): NO SANDWICHED WALLS
+A wall with enemy stones on BOTH sides has no eye space and scores nothing. If the opponent
+attaches on top of my stone (B C5 on W C4), do NOT extend along the same line again and again
+(D4,E4,F4...). Either hane once and then switch to another corner, or secure the space below
+the wall IMMEDIATELY (2nd/3rd-line move) before they invade it.
+As White vs tengen E5: take two separate low corners (C3/C4 and G6/G7 side), make each a base
+that lives on its own, then reduce Black's center. Score target 38 = two good corners/sides.
+
+## Key facts
+- Komi 7, area scoring, 81 points. Black WINS with >= 45 (44 = draw). White wins with >= 38
+  (37 = draw).
+- Area scoring: playing inside the opponent's territory late costs nothing, so probing
+  invasions at the end are free (but they rarely work vs correct answers).
+- Opponent passes when the game is settled; engine removes dead stones itself.
+- The opponent (even 10k) answers ataris and connects cutting points correctly. It does make
+  odd moves (G3: W F6 self-dead stone, W E1 filling own eye) but not game-losing ones.
+
+## THE BIG RECURRING PROBLEM (all three games)
+I end with ~31-38 points: center stones + a little. The opponent takes the edges.
+A center wall does NOT score on 9x9. In G3 tengen E5 as Black gave White three sides
+(left B5/C7, bottom G3-invasion, then the entire right edge by crawling down the J column).
+=> Fixes to try next:
+   a) Open in/near a corner-side point (C3/C4/G3/G7 style 3-4 points), not E5.
+   b) When the opponent invades under my framework (e.g. W G3 under E5), DON'T cap from above
+      (G4) — that hands them the 2nd line + edge. Block their base on the side where my
+      territory is: e.g. play the hane/attach on the edge side (H3/F3 or J4-direction) so the
+      invader lives small in one corner at most.
+   c) Never let a single white stone crawl along MY edge (J4-J5-J6-J7-J8 in G3). Block in front
+      of it early with a stone that has 3+ liberties.
+   d) Count only points actually enclosed. In G3 at move ~40 I thought I had 42, true was 38.
+
+## Opening that WON (G5, as Black): C4, then F4 (other low corner/4th line), then E5.
+Board splits rows 1-5 (45 = Black win) vs rows 6-9.
+G7 variant: B C4, W E3 (low), B F4, W C3 attach -> B D4, E4 (solid), hane B3/H3 and connect
+B4/H4 when the hane stone has 2 libs. White's bottom = ~22 pts, I own rows 4-9 IF I stop the
+top invasion. Lesson G7: a 5-row-high open top lets White live on the edge. Kill an invader by
+taking its EDGE/BASE side (block on row 8/9 or the 3-3), not by blocking from below it each
+time (D6/F7/G7/B7 pushed it along row 8 and it made eyes C9/E9). Ideally pre-empt with a
+3rd-line stone (D7 or F7), not E7. Then hold row 5 (D5, C5, F5) and kill any
+invasion under it: cut it from its outside friend first (G4 between G3 and G6), block crawls.
+
+## Lessons
+00. SEKI CHECK BEFORE PASSING: a surrounded enemy group whose only libs are shared with my
+   inside stones (G5: W group + my H2 both had libs H1,J2) is SEKI, not dead. Break it by
+   self-atari that leaves them a 2-point eye (G5 B H1), or by making sure they have a 3-space
+   killed shape. Run libs.py on every "dead" group before the last pass.
+0a. Run libs.py BEFORE EVERY MOVE once stones touch (G6: I thought D8 had lib C7 — C7 is
+   diagonal — and lost 2 stones). Mental liberty counts keep going wrong.
+0. DIAGONAL IS NOT CONNECTED. Before extending a chain (e.g. F8 hane), list every diagonal
+   link in my wall (D7/E8 in G4) and fill the cut (D8) first if the opponent can play there.
+   After a capture that "saves" a group in atari, recount: is the capturing stone actually
+   orthogonally connected to the group? (G4: G9 was diagonal to F8 -> group died.)
+   If a group of mine is at 1-2 libs, do NOT play elsewhere (G4 C8) until it has 3+.
+1. CHECK LIBERTIES OF MY OWN STONES before every move — AND count libs of the stone I am about
+   to place AFTER THE OPPONENT'S MOST NATURAL REPLY (usually a hane next to it). G3: J6 (2 libs,
+   W H6 atari), H7 (W H8 atari), G9 (W H9 atari) — each cost a tempo or the stone. A stone placed
+   touching two enemy stones is usually 1 hane away from atari.
+   Game 2: W J6 self-atari. Game 1: lost G4 in atari.
+2. Don't throw in cutting stones that end with 1-2 libs inside the opponent's area (G1 B7/B4,
+   G2 H7). Read the capturing race first: count my libs vs theirs, who moves next.
+3. When behind on count by 10+, identify the weakest enemy group EARLY (before it settles).
+   Late kill attempts in G3 (bottom/left) all failed: both had two eyes or two connections.
+4. A 1-wide strip of 4 on the edge (straight four) is alive; don't waste moves there.
+5. Good things that worked: capturing-race reading (G2 F3/H2/J3); in G3 E4 atari + D5 capture,
+   F5 atari, C6 cut with D6 backup, A4 corner endgame, connecting before cutting.
+6. Ignoring an atari to capture elsewhere (G3 move 33 F3 instead of saving J6) cost the whole
+   right edge. Compare the value: an edge stone that walls a side is worth more than 1 capture.
+
+## Opening that worked (G4, as White vs B G6 3-4 point)
+W C4, then D6 (claim left), answer the press E7 with D7, attach-under D3 with C3 then D4,
+hane E5 then E6 => solid left side + center. Left 4 columns = 36 pts; White needs 38, so I
+also need ~2-4 points of the top or bottom edge (E8/E9 or D1/E1). Got there - then blundered.
+
+## Process checklist each move
+- What did the opponent's last move threaten? Run libs.py; any of my groups at 1-2 libs?
+- Libs of the stone I'm about to place, and after the opponent's hane next to it?
+- Rough count: who is ahead? If behind, play bigger: open corners/sides first, then attack
+  weak groups. Edges/corners before center.

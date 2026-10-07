@@ -1,0 +1,68 @@
+# Game log
+
+## Game 1 — Black vs 8k — LOSS W+14
+Moves: B E5, W C4, B D3, W G3, B G4, W H4, B H5, W H3, B F3, W G5 (G4 now in atari - missed!),
+B G6, W F4 (captures G4), B F5, W H6, B G4 (captures G5), W F2, B E4 (captures F4), W J5,
+B G5, W H7, B G7, W H8, B G8, W C7, B C5, W B5, B C6, W B6, B B7, W C8, B D7, W B8,
+B D8, W C3, B E3, W D2, B E2, W C2, B G2, W H2, B F1 (captures F2), W G9, B F9, W H9,
+B B4 (useless), W B3, B C9, W A7, B B9, W A8, B D4, W H1, B D1, W C1, B E1, W G1, B F2,
+W A9, B D9, W A4, B J6, W J7, pass, pass.
+Final: Black owned center + top-middle (37). White had both edges (left A-C, right H-J).
+Takeaway: overconcentrated center; opponent low stones on both sides settled easily.
+
+## Game 2 — White vs 8k — LOSS B+12 (White ~31 area +7 vs Black 50)
+Moves: B G7, W E5, B F5, W F4, B F6, W G4, B E6, W E4 (forced: E5 had 2 libs), B C4, W D5, B C5,
+W D6, B D3, W C6, B F2, W E3, B E2, W G2, B D8, W D7, B E7, W C8, B F8, W D4, B C2, W G5,
+B G3 (cut), W F3, B H3, W H2, B H6, W H4, B G1, W J3 (captures G3,H3), B C9, W B9, B D9, W B8,
+B B6, W B7, B A6, W G6, B H5, W H7?! (got captured), B H8, W J5, B J7, W A7, B B4,
+W J6?? (SELF-ATARI: J5-J6 had 1 lib J4), B J4 (captures 2), W J5, B H1, W J4, B J6,
+W B3/A4/A3 (invasion probes, died), B B2/B5/A2, W J2, B F1, W J1, B C3, W D2, B D1, W E9, B E8, pass pass.
+Final: White owned only the center column + a thin top-left + bottom-right strip (~31).
+Black had upper-right (rows 6-9, E-J) and the whole lower-left (A-D rows 1-5 + E1/F1).
+Takeaways:
+- Again my stones formed a long center wall (D4-J4, D5-E5, C6-D7) that scored very little.
+  Black just took two opposite corners (G7 then C4) and lived easily on both.
+- After W E5 / B F5 attach, my F4/G4/E4 shape was slow; Black kept sente and invaded C4.
+  Better as White vs a 3-3-ish G7: take a corner myself (C3 or C4/D3) instead of tengen,
+  or after F5 attach play solidly but then grab the open lower-left corner (C3/C4) FIRST.
+- J6 blunder: I extended a stone into a spot where the 2-stone group had a single liberty.
+  Before each move, count the liberties of the stone I'm placing AND its group after placement.
+- H7 cut was over-ambitious (2 libs vs their many); read races before cutting.
+
+## Game 3 — Black vs 10k — LOSS W+12 (Black 38 area vs White 43+7)
+Moves: B E5, W B5, B C4, W C7, B E7, W G3 (invasion), B G4 (cap), W H4, B H5, W F4 (G4 atari),
+B G5, W E3, B D3, W D2, B C2, W D4 (D3 atari), B C3, W E2, B E4, W B4, B D5 (captures D4), W H2,
+B B3, W D8, B E8, W J5, B J6, W J4, B F5 (atari F4), W H6 (J6 atari!), B F3 (captures F4),
+W F2 (F3 atari), B F4, W J7 (captures J6), B H7, W H8 (H7 atari), B G7, W G8, B G6, W J6,
+B F8, W C5, B G9?! (1 lib after W H9), W H9, B F9, W J8, B D7, W C8, B C6, W B6, B D6, W A7,
+B D9, W B8, B C9, W B9, B E9, W C1, B B1, W D1, B A4, W A5, B A3, W F6 (dead), B J3 (probe),
+W H3, B E6, W J2, B F7 (captures), W A2, B B2, W G1, B A1, W E1, pass pass.
+Final: Black = center + top middle + small lower-left (38). White = left side (A-C cols),
+whole bottom (rows 1-3 from D to J) and the whole right edge (H/J cols) => 43.
+Takeaways:
+- THIRD game in a row with a center-heavy result. Tengen E5 as Black gave White three sides.
+- G3 invasion under my E5: my G4 cap pushed White along the 2nd line AND the J column;
+  White's crawl H4-J4-J5-J6-J7-J8-H8-H9 took the whole right edge (~10 pts I "owned").
+- Tactical: J6 hane got atari'd by W H6 (J6 had only 2 libs: J7,H6). H7 had 1 lib after W H8.
+  G9 had 1 lib after W H9. Each time the opponent's obvious hane put my new stone in atari.
+- My count at move ~40 said 42 but true was 38: I credited edges (J col, H8/H9) that White
+  already reached. Count only points actually enclosed.
+
+## Game 4 — White vs 14k — LOSS B+12 (White ~31 area +7 vs Black ~50)
+Moves: B G6, W C4, B F3, W D6, B E7, W D7, B D3, W C3, B D2, W D4, B E4, W E5, B F5, W E6,
+B F6, W E8 (atari E7), B F7, W F8?!, B G8, W C2, B F9, W E9, B D8!! (cut: E8-E9-F8 in atari),
+W G9 (captures F9 but group still has only D9+F9), B D9, W C8?? (group had 1 lib F9), B F9 (captures 3),
+W C7, B C9, W B8, B B9, W H3 (invasion), B G2, W G4, B F4, W G3, B H2, W H5, B J3, W J4, B J2,
+W G5, B H6 (kills: only eye H4), W J6, B J7, W D1, B E2, W H7, B J5 (ko, but group in atari),
+W J8, B H4 (captures 6), ... W E1, B F1, W C1, B A8, W A7, B A9, pass pass.
+Position at move 20 was GOOD (my count ~39 = winning): left side + top E8/E9/F8.
+Takeaways:
+- THE LOSS: E8 and D7 were only DIAGONAL; D8 was an open cutting point. F8 (extending the
+  diagonal chain further) instead of D8 (solid connect) let Black cut and capture 3 stones +
+  the top-left corner. Diagonal stones are NOT connected; before extending, fill the cut.
+- When my group is in atari and I capture a stone to escape, RECOUNT the libs after the capture
+  AND after the opponent's next move. G9 captured F9 but G9 was diagonal to F8 (not connected),
+  so after B D9 the group had 1 lib again; I tenuki'd (C8) and lost it.
+- Late invasion of the bottom right (H3) died: Black had G5/H6 miai to deny the 2nd eye.
+  Invading a 3x5 space next to a strong wall doesn't live vs 14k.
+- Opening as White vs B G6 (C4, D6, D7, C3, D4, E5, E6) worked fine: solid left side.

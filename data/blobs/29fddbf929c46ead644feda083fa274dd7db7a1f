@@ -1,0 +1,12 @@
+Retain20k:26 wins/124 losses/6 draws;87 unfinished/excluded.
+Read161/160 before the next game; consult154 for broad continuous boundaries.
+
+- Game161 Black lost W+24 after45/46 passes; closing board confirms,next47. PhysicalB0/W5; White30 D6 captured central E5/E6/F5/F6/G6.
+- C3/G3 corner starts did not ensure enough width. E5 and lower C3/D4 were diagonal until a future junction; E4 stayed EMPTY through15 and White16 E4 cut before joining. Audit an intended connection before expanding another boundary.
+- F5/G6 joined central stones but supplied no eyes. White F7 left soleD6. No viable eye space was identified beyond C6/D7; J4 attack did not rescue the central five.
+- D6 capture REOPENED E5/E6/F5/F6/G6 for White. The White cut chain gained E5/F5/G6; H3 no longer captured it. This was rebuilt correctly before31 H3.
+- H3/J3 actually joined threatened right H5/J5/J4 to lower; A3 retained left endpoint. D3 joined all lower stones. D2/D1 completed independent left6/right10 rooms, retaining32.
+- Initial OPEN lower45 lost thirteen whole reference points=>32; all row1-3 twenty-seven retained plus C4/D4/J4 and H5/J5. Central outside E6/F6/G6 failed.
+- Upper recovery needed13; E8 met F8 first cap and was abandoned without futile additions. E8 inferred dead remains displayed; removal givesB32/W49+7,neutral0,matchingW+24. No official dead list.
+- Final lower16 living stones+16 empties=32. White22 in TWO chains+27 empty=49 after inferred removal. All46moves/25rawboards verified.
+- No promotion, optimal-move or repeatable-strength claim. Manual choices/current inspection/actual-history replay only; no engine/search/recommendations/delegation.

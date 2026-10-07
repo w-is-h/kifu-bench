@@ -1,0 +1,58 @@
+# Go notes (9x9 vs KataGo human-style) — READ FIRST
+
+See `games.md` for the per-game log. Update both files after every game.
+Color alternates per game (G1 Black, G2 White, G3 Black, so G4 = White). Check the prompt.
+Helper: `python3 libs.py <<'EOF' ...board rows 9..1 pasted from the board output... EOF`
+prints every group with its liberties. Use it whenever stones are touching (it's allowed:
+it only inspects the current position).
+
+## Ladder status
+- Game 1: Black vs 8k, lost W+14 (Black 37 area).
+- Game 2: White vs 8k, lost B+12 (White ~31 area + 7 komi vs 50).
+- Game 3: Black vs 10k, lost W+12 (Black 38 area vs 43).
+- Next suggestion: drop to 12k or 14k. 0-3 so far; get a win, learn what works, then climb.
+
+## Key facts
+- Komi 7, area scoring, 81 points. Black WINS with >= 45 (44 = draw). White wins with >= 38
+  (37 = draw).
+- Area scoring: playing inside the opponent's territory late costs nothing, so probing
+  invasions at the end are free (but they rarely work vs correct answers).
+- Opponent passes when the game is settled; engine removes dead stones itself.
+- The opponent (even 10k) answers ataris and connects cutting points correctly. It does make
+  odd moves (G3: W F6 self-dead stone, W E1 filling own eye) but not game-losing ones.
+
+## THE BIG RECURRING PROBLEM (all three games)
+I end with ~31-38 points: center stones + a little. The opponent takes the edges.
+A center wall does NOT score on 9x9. In G3 tengen E5 as Black gave White three sides
+(left B5/C7, bottom G3-invasion, then the entire right edge by crawling down the J column).
+=> Fixes to try next:
+   a) Open in/near a corner-side point (C3/C4/G3/G7 style 3-4 points), not E5.
+   b) When the opponent invades under my framework (e.g. W G3 under E5), DON'T cap from above
+      (G4) — that hands them the 2nd line + edge. Block their base on the side where my
+      territory is: e.g. play the hane/attach on the edge side (H3/F3 or J4-direction) so the
+      invader lives small in one corner at most.
+   c) Never let a single white stone crawl along MY edge (J4-J5-J6-J7-J8 in G3). Block in front
+      of it early with a stone that has 3+ liberties.
+   d) Count only points actually enclosed. In G3 at move ~40 I thought I had 42, true was 38.
+
+## Lessons
+1. CHECK LIBERTIES OF MY OWN STONES before every move — AND count libs of the stone I am about
+   to place AFTER THE OPPONENT'S MOST NATURAL REPLY (usually a hane next to it). G3: J6 (2 libs,
+   W H6 atari), H7 (W H8 atari), G9 (W H9 atari) — each cost a tempo or the stone. A stone placed
+   touching two enemy stones is usually 1 hane away from atari.
+   Game 2: W J6 self-atari. Game 1: lost G4 in atari.
+2. Don't throw in cutting stones that end with 1-2 libs inside the opponent's area (G1 B7/B4,
+   G2 H7). Read the capturing race first: count my libs vs theirs, who moves next.
+3. When behind on count by 10+, identify the weakest enemy group EARLY (before it settles).
+   Late kill attempts in G3 (bottom/left) all failed: both had two eyes or two connections.
+4. A 1-wide strip of 4 on the edge (straight four) is alive; don't waste moves there.
+5. Good things that worked: capturing-race reading (G2 F3/H2/J3); in G3 E4 atari + D5 capture,
+   F5 atari, C6 cut with D6 backup, A4 corner endgame, connecting before cutting.
+6. Ignoring an atari to capture elsewhere (G3 move 33 F3 instead of saving J6) cost the whole
+   right edge. Compare the value: an edge stone that walls a side is worth more than 1 capture.
+
+## Process checklist each move
+- What did the opponent's last move threaten? Run libs.py; any of my groups at 1-2 libs?
+- Libs of the stone I'm about to place, and after the opponent's hane next to it?
+- Rough count: who is ahead? If behind, play bigger: open corners/sides first, then attack
+  weak groups. Edges/corners before center.

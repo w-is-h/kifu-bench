@@ -1,0 +1,17 @@
+Retain 20k: 25 wins / 117 losses / 6 draws; game87 unfinished and excluded.
+Read game-153.md and game-152.md before playing; consult149/144/30 for completed eye rooms.
+
+Game153 Black lost W+2 after Black47/White48 passes; board confirmed, next49.
+Area Black43/White38, neutral0; no dead removal needed. Physical captures Black0/White6.
+White22 D1 captured C2/D2/D3/D4/E2/E3. No ko, invalid move or resignation.
+All48 actual moves and26 raw boards verified; all responses saved before dependent Go calls.
+
+- D4/D6 left the D5 junction open. White D5 cut; C5 was still separate from both, and White C4 took the lower junction. C6 joined the upper three, while D4 was left in atari after E4. Opening width and connection cost must be budgeted together.
+- Early exact OPEN before9: ABCD6–9 sixteen +ABC5 three +DEFGHJ1–3 eighteen +D4 one =38. Seven below Black45 if all81 assigned; unfinished aspiration, not score.
+- D3/E3/E2/D2/C2 actually joined lower, but C3/F3/F2/E1/B2 caps drove the group to C1/D1. Neither direct edge continuation establishes life. Stop roomless repairs; no unplayed alternative is established winning.
+- E6 joined upper before the lower capture. F5 put central D5/E4/E5 on sole F4, but White D1 capture REOPENED D4/E3 and dissolved that atari. Rebuild before selecting the next move; F6 actually joined F5 to E6.
+- G5/H5/J5 and B5/A5 retained a connected upper43: rows6–9 all36 +ABC5 three +FGHJ5 four. This recovery was possible in the actual replies, not a forced opening result.
+- C7/B7/A7 made protected A6/B6 two-point room. H6/H7/J7 made true J6 eye, all in one chain. Internal dividers preserve area. White's first pass did not end life work.
+- Final Black17 stones+26 empty=43; White21+17=38; 43−(38+7)=−2. All final stones survive, with no neutral or dead adjustment. The six prisoners add no bonus under Chinese scoring.
+- Initial38 lost lower19, retained upper-left19, gained EFGHJ6–9 twenty +FGHJ5 four =>43. A viable recovery still fell two short of victory; avoid spending the early game on a narrow, cut lower base.
+- Manual choices and reading; code inspected current boards/replayed actual history only. No engine, future search, recommendations or delegation.52/99/106 limits remain separate.

@@ -1,0 +1,25 @@
+import sys
+rows=[l.split()[1:10] for l in sys.stdin if l.split() and l.split()[0].isdigit()]
+dead=set(sys.argv[1:])
+C="ABCDEFGHJ"
+b={}
+for r,t in enumerate(rows):
+    for c,v in enumerate(t):
+        n=f"{C[c]}{9-r}"
+        b[(c,8-r)]='.' if n in dead else v
+sc={'X':0,'O':0};seen=set()
+for p,v in b.items():
+    if v in 'XO': sc[v]+=1
+    elif p not in seen:
+        reg=[];st=[p];seen.add(p);bd=set()
+        while st:
+            q=st.pop();reg.append(q)
+            for d in((1,0),(-1,0),(0,1),(0,-1)):
+                n=(q[0]+d[0],q[1]+d[1])
+                if n not in b:continue
+                if b[n]=='.':
+                    if n not in seen:seen.add(n);st.append(n)
+                else: bd.add(b[n])
+        if len(bd)==1: sc[bd.pop()]+=len(reg)
+        else: print("dame",len(reg))
+print(sc, "W+komi", sc['O']+7)

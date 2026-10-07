@@ -1,0 +1,20 @@
+# Next-game focus after game 149
+
+Retain20k:25 wins/113 losses/6 draws;87 unfinished/excluded.
+Read149/148; consult144/30 for broad room and containment.
+Black won B+2 after White56/Black57 passes; boardconfirmed,next58.
+Area Black45/White36+7,neutral0; no dead removal needed.
+Physical Black7/White0: Black41 D9 captured E4/E5/E6/E7/E8/E9/F5. No ko or invalid move.
+All57 moves/31 returned boards verified; selection,all29 plays,final board retained.
+
+- Early exact OPEN at10: A/B/C/D rows4–9=24 +F/G/H/J rows1–9=36 minus WhiteF5one=35 =>59. Broad aspiration was unsafe.
+- E6/F5/G6 cuts separated initial Black bases. G4 joined F4/G5; F6 atari required F7/F8 saves.
+- H8/J8 contained upper-right; F9 endpoint and H9 divider established independent true G9/J9 at27.
+- F3/E3 kept lower route. White H4 instead of D3 allowed actual D3 join to left at33. Do not assume this route stays available against another reply.
+- Audit enemy chains too: White central seven had only D8/D9 after37. D8 at39 put them on soleD9; White B4 ignored atari; D9 at41 captured7.
+- Capture reopened all seven, with no prisoner bonus under area scoring. E8 at49 actually joined main/upper and enclosed E9 plus central five-point room.
+- B5 began separate from C4/D5; A5 blocked edge advance and C5 actually joined the pair to main.
+- C7/B7/A7 split left12 into lower3 and upper6 rooms, preserving area. All28 final Black stones are one living chain.
+- Exact ledger59−A4/B4two−right21+D3/E3two+capturedcentral7=45. Right21 are F1/F2;G1/G2/G3/G6/G7;H1–H7;J1–J7.
+- Win depends on ignored central atari and permitted D3 connection; no optimal opening or forced win established. Retain20k.
+- Raw saved before parsing; opponent-pass parser error corrected without repeating A7. No engine/search/recommendation/delegation;52/99/106 limits separate.

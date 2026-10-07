@@ -1,0 +1,2433 @@
+# Go series notes (read first)
+
+## Results log
+- Game 1: vs 8k, Black. LOST (resigned at move ~59). Was already behind ~10 by area count.
+- Game 2: vs 12k, White. WON W+14 (both passed, move 64).
+  Moves (B first): E5 C4 D3 C6 G6 E7 C3 B3 B2 B4 G7 D5 E4 E6 D4 C5 F6 F8 G8 G3 F3 G4
+  H3 H4 G2 H2 F2 J3(capt) H1 J2 G1 H5 H6 J5 J6 G5 F5 F7 F9 E9 G9 A2 B1 A3 C2 F4 D9 E8
+  C9 C8 B8 D8 B7 B9(capt 2) pass B6 A1 C7 J1 A7 A8 A9(capt 3) pass pass.
+  What worked: (a) counting at move ~20 showed I was behind ~10 -> (b) invaded the
+  3-3-ish point G3 inside Black's lower-right framework; 12k let me capture H3 and
+  live with eyes H3+J4 (made J5 to secure the edge eye). (c) Black's late invasions
+  (D9/C9, B8/B7) into my top-left died; I captured them rather than trust the engine's
+  dead-stone judgment (costs nothing under area scoring).
+
+- Game 3: vs 10k, Black. LOST (resigned move 57, behind ~20+).
+  Moves (B first): E5 C5 C4 B4 B3 B6 D6 D4 C3 D5 E4 D3 C6 E6 E3 D2 C2 D7 C7 C8
+  F6 B7(capt 3) E7 D6 B2 E2 D1 E1 C1 G2 A4 B5 A2 G4 G3 F3 H3 F5 G5 F7 G6 E8(capt E7)
+  F4 F5(capt 4) H4 F4 G7 G8 H8 G9 H9 H2 J2 H1 J3 J1 resign.
+  What went wrong: (a) contact fight right after White's C5 (C4 attach, B3, D6 hane)
+  created MANY weak black groups at once (C4 group, D6, E5 column). White cut through
+  with D4/D5/D3/D2 and every group of mine had 2-3 libs. (b) D6/C6/C7 group died in
+  a ladder-like chase (atari at B7) — I never checked that C7 extension only gave 2 libs.
+  (c) My E3-E5 wall had only F-side liberties; once White played F3 and F5 it died
+  (F4 was suicide for me). A wall of stones with liberties only on one side is NOT strong.
+  (d) Invasion G2/G4 then destroyed my "territory".
+
+- Game 4: vs 12k, White. LOST (resigned move 60). Was behind ~12 anyway, then my
+  ENTIRE 29-stone group got captured: I filled my own internal liberties.
+  Moves (B first): G7 E5 F3 G5 F5 F4 F6 G4 E3 E4 C3 E6 E7 G6 F7 D7 D8 D6 C8 G3 G2 H2
+  F2 C7 C5 C6 D4 H7 H8 H6 B8 B7 A7 A6 H1 H3 A8 B5 B4 D5 C4 A5 A4 B6 J8 J7 G8 J2
+  J5 H5 J4 H4 G1 J1 J3 J6(capt 3) J4 J5?? J3(captures my 29 stones).
+  What went wrong: (a) my one big group wall E4-G6 + left + right had NO real eyes —
+  its territory was only ~a few points and I kept filling them (B6, D5, A5, H5, H4,
+  J6, J5). At J5 the group had exactly ONE liberty (J3). (b) Opening: splitting G5
+  between G7/F3 gave Black both top and bottom; I ended up with a center wall and
+  little territory (~31 area vs ~50).
+
+- Game 5: vs 12k, Black. LOST W+20 (both passed, move 55). No group died, no
+  blunders: a pure TERRITORY loss. My area ~34 vs White ~47.
+  Moves (B first): E5 C3 C6 G3 G5 G7 F7 F8 G6 H7 E7 E8 H6 D8 C7 D7 E6 D6 D5 C8
+  C5 B7 B6 A7 E3 E2 D3 D2 F3 F2 H4 H3 C4 B3 J4 J3 B4 A3 J7 H8 J8 H9 J6 J9 A6 B8
+  G4 G1 A4 C2 G9 G8 pass pass.
+  What went wrong: ALL my stones were on rows 3-7 (center); White sat on rows 1-3
+  AND rows 7-9 = both edges. (a) After E5 C3, my C6 and G5 were too high/slow;
+  White took G3 too -> whole bottom. (b) vs White's G7 invasion I played contact
+  F7 *underneath* (from the center side): White hane F8, E8, D8, C8, B7, A7 crawled
+  along row 8 and got the ENTIRE top as territory. Attacking from the center side
+  pushes the enemy toward the edge = gives them territory.
+  Fix ideas: as Black take a 3rd-line point early (e.g. after E5 C3 play G3 or C7
+  type moves on row 3/7, not row 5/6). Against an invasion at G7, block on the
+  EDGE side (e.g. G8/F8/H8 area) or play so that the top stays mine; never let them
+  crawl along row 8 while I build an empty center wall. Count at move ~20: here I
+  only counted at move 37 when it was already -20.
+
+- Game 6: vs 12k, White. WON W+4 (both passed, move 64).
+  Moves (B first): E5 C4 G5 C6 D7 E3 D3 D4 E4 D2 C3 B3 C2 B2 E2 C1(capt 3) F3 D3 D5 C5
+  F2 C7 C8 B8 D8 G7 D6 F8 F7 G8 H6 H7 E8 F9 E9 J7 H9 H8 J6 J9?? J8(capt, ko) F6 G6
+  E7(capt F7) E6 J9(capt) B7 B6 J8(retake ko) F7 F5 J9(retake) B9(threat) G9(capt H9,
+  alive) A8 A6 A7 E1 F1 D1 H3 pass pass.
+  What worked: (a) answered Black's D3 wedge with D4, then D2/B3/B2 atari chain
+  captured 3 stones -> solid bottom-left. (b) count at move ~26 showed -12 -> invaded
+  top-right at G7 (F8, G8, H7, F9, J7, H8) and lived. (c) In the ko, IGNORED black's
+  ko threat (B9 atari on B8, cost ~2 pts) and played G9 to settle life (worth ~20).
+  Mistakes: J9 at move 40 was a self-atari (J9 had only lib J8 once black played J8)
+  -> started a ko that nearly killed the group. When making eyes on the 1st line,
+  check the stone you play has >=2 libs AFTER the opponent's obvious reply.
+  Better at move 40 was G9 (atari H9) or checking libs of every candidate with libs.py.
+
+- Game 7: vs 10k, Black. LOST (resigned move 45, behind ~25-30 by area).
+  Moves (B first): E5 C4 C6 F7 G3 E3 E4 F3 F4 G2 G4 H2 H3 D4 D5 H6 G6 G7 E7 E8 D8 D7
+  D6 E6(capt E7) C7 E7 F6 C8 B8 D9(capt D8) H5 H7 B4 B3 B5 B9 B7 C9 D2 D3 C5 C2 E2 F2 resign.
+  What went wrong: (a) SAME pattern as game 5: all my stones ended on rows 3-6 (center
+  wall), White got rows 1-2 (whole bottom) AND rows 7-9 (whole top). (b) G3 after White
+  E3 was cut off from E5: White F3, G2, H2 crawled along row 2 and I answered each with
+  a center-side block (E4, F4, G4, H3) = I built a wall, White got the bottom edge.
+  (c) E7/D8 at the top was too thin: White D7 cut, I lost E7 and D8.
+  (d) Late bottom invasion (D2, E2) had no chance under White's strong row-3 stones.
+  Fix: as Black after E5 C4, consider playing the bottom myself (e.g. D3/E3 area or
+  C3 attach-block) so White's C4 doesn't also get the bottom. When White approaches
+  my 3rd-line stone (E3 next to G3), don't play the "head" E4; protect the edge stone
+  (e.g. F2/F3 side) so the territory stays on MY side. Don't give a 10k free crawls.
+
+- Game 8: vs 12k, White. WON W+18 (both passed, move 72). Best game so far.
+  Moves (B first): G6 C4 F3 D7 D3 C3 D4 D5 E5 D6 E6 E7 F7 F8 G8 E8 F9 E9 G9 D2 E2 C2
+  D1 C1 E1 H3 G4 G2 J2 H2 J4 J3 H4 F2 F1 G1 E3 J1(capt J2) G3 C5 B8 B7 B6 C7 A6 A7
+  A4 B5 A2 B3 pass, then I captured all dead stones (C6 A5 B4 A3 B2 A1 D8 C9 A8 B9).
+  What worked: (a) C4 + D7 took the whole left side; answered D3 approach with C3
+  (edge-side block) and D4 with D5 hane/D6/E7/F8/E8/E9 = top edge mine. (b) Counted at
+  move 20-26: about even -> invaded lower right at H3 (G2, H2, J3, F2, G1, J1) and lived
+  with eyes H1+J2; F2/G1 also threatened Black's D1-F1 chain (forcing E3 = sente for me).
+  (c) Black's invasions B8/B6/A4/A2 in my left side: B7, C7(connect, B7 had 2 libs),
+  A7, B5, B3 (vital point of the eyespace) killed everything.
+
+- Game 9: vs 12k, Black. LOST (resigned move 59, behind ~16: my area ~36 vs 45).
+  Moves (B first): C4 F6 G3 G7 D7 E6 D5 D6 C6 D8 C7 C8 B8 E7 B7 E4 D4 E3 F3 G4 H4 F4
+  H3 E2 F2 H5 D3 F1 G1 E1 D2 J2 H2 J1 J3 J5 H1(capt 2) D1 C1 C2 C3 B2 B3 A3 A4 A2
+  H6 G6 H7 H8 J4 J7 C5 E5 C9 D9 B9 F8 resign.
+  What went wrong: (a) 3-4 corner start was OK, but D7 (move 5) got cut off by E6/D6
+  and I spent 4 moves (C6 C7 B7 B8) saving it = slow, White built E-column wall.
+  (b) White's E4/E3/E2/E1 push down the CENTER of the board split it: White took the
+  whole top + right (rows 5-9 from E to J) while I got only left cols A-D and the bottom
+  right corner. Splitting line ran right through my area. Should have blocked E4
+  earlier / played E4-E5 myself at move ~9 (D5 then E5 shape) instead of letting White
+  wall down column E. (c) Late invasion H6/H7 in White's top-right had no room and died.
+  Bottom line: as Black 0-5 now. My corner stones (C4, G3) were fine; the problem is
+  letting White own the CENTER dividing line, which decides who gets the big side.
+
+- Game 10: vs 10k, White. LOST (resigned move 52; whole bottom group of 13 died).
+  Moves (B first): G7 C4 C3 D3 D4 B3 C2 D2 B4 B2 C5(capt C4) C1 C4 E4 G4 F5 D7 G5 F4 F3
+  E5 E3 G3 H4 H3 G2 H2 J3 H5 F6 H6 E6 D5 E7 D8 E8 G8 F8 G9 D6 C6 C7 F2 E2 D1 E1(capt)
+  G1(capt G2) D1 F1 B1 A3 A4 A5(capt A4) resign (move 54).
+  What went wrong: (a) answered Black's C3 undercut with D3 hane -> D4 CROSSCUT; my
+  B3/D2/B2 atari sequence let Black capture C4 and get a wall at C4-D4 facing the whole
+  board. The crosscut fight gave me 4 weak groups (exactly lesson 0). Better: answer
+  C3 attach with a calm extension (e.g. D3 only if ready for D4; else B3/C5 solid,
+  or just D4 myself to keep the wall). (b) I made contact plays G2, J3, H4 inside
+  Black's bottom-right group area that each had only 2 libs; H5 then put H4 in atari
+  and all three stones were useless. (c) My bottom group (D2-F3) was walled in with
+  NO eye space: libs only on row 1. Black F2, D1, F1, A3 shortened it to death.
+  A group whose only libs are first-line points is dead, run libs.py and make an
+  eye EARLY (e.g. E2/F2 when it still had 3 libs).
+
+- Game 11: vs 12k, Black. LOST (resigned move 47, behind ~10: my area ~39 vs 42+7).
+  Moves (B first): E5 C5 D3 D4 E4 E6 F6 F7 G7 G6(cut) F5 D6 H6 G5 G4 G8 H5(capt 2) C3
+  D2 H7 G6 E8 H8 C2 J7(capt H7) D5 G9 F8 C7 C8 B6 D7 B8 B9 B7 B5 F9 E9 H9 D1 E2 E1 F1
+  C1 A9 C9 resign.
+  Tactics went fine (won the G6/G5 cut fight, captured 3, no blunders). Loss was again
+  DIRECTION: (a) after E5 C5, my D3 got wedged by D4; I answered E4 (center side), then
+  White E6 + D6/D5 made a wall down column D and took the whole LEFT (A-D) AND the top
+  (E8/F7/G8). I got only the right/bottom-right (~39). (b) late invasion C7/B6/B8 in a
+  4x4 top-left space vs a 12k: White C8, D7, B9, B5 and it was dead (no 2nd eye).
+  Takeaway: when Black E5 vs White side-star C5, the board splits on column D/E —
+  White's single stone at C5 already owns 4 columns. Black needs 4.5+ columns: next time
+  try answering C5 with an attach/contact that stays on the 3rd line on BOTH sides,
+  e.g. C7 or C3 (3-3-ish under C5) at move 2, then the other one later, or play D6
+  (shoulder hit pressing White low). Don't let White get both D4 and E6.
+
+- Game 12: vs 12k, White. WON W+8 (both passed, move 59). Clean game, no weak groups.
+  Moves (B first): G7 C3 G3 D7 D3 D4 E3 E4 F5 E6 F4 E5 F6 E7 F7 D2 E2 C2 D1 C1 E1 F8
+  G8 E8 C7 C6 B7 B6 C8 D8 A8 B9 C9 D9 B5 A6 B4 C4 B3 C5 B2 B1 A9 A7 A5 B8(capt 6) F9 E9
+  G9 A1 F3 A3 pass A2 pass A4(capt 5) pass pass.
+  What worked: (a) 3-3 at C3 (no undercut possible) + D7; vs Black's D3 attach I
+  hane'd D4 then E4/E6/E5/E7 = column E dividing line; counted at move 24: 42+7 vs 39.
+  (b) D2 hane underneath, C2 solid when D2 had 2 libs, C1 atari in sente, F8 hane/E8.
+  (c) Killed the C7 invasion: C6/B6 seal below, D8, B9 placement, D9, A6 (before A7!),
+  A7 double-atari -> B8 captured 6. Killed B2-B5 group with C4/C5 connect + B1, then
+  captured it outright (A3, A2, A4 - check each capture move isn't self-atari).
+  Recipe as White vs 12k now 4-1. Next: move up to 10k with same recipe.
+
+- Game 13: vs 12k, Black. LOST (resigned move 51, behind ~20-25).
+  Moves (B first): E5 C5 C3 F3 G4 G3 D3 D7 F7 H4 H5 H3 E3 G5(cut) F4 H6 G6 J5(capt H5)
+  F5 H5 H7 E8 E7 F8 G8 D6 D5 C4 B4 B5 D4 B3 B2 A4(capt B4) C2 E6 F6 D8 F2 G2
+  C7 C6 B7 C8 B8 B9 B6 A6 A8 A2 resign.
+  What went wrong: (a) after E5 C5 C3, White F3 split the bottom; my G4 cap let White
+  G3/H4/H3 crawl along row 3 and H5 got cut off by G5 (G4 was in atari immediately!)
+  -> White got the whole bottom-right AND right side. (b) White D7 took top-left free;
+  I never played on the top-left. (c) B4 hane after C4 got cut by B5/B3 and captured.
+  (d) Top-left invasion C7/B7/B8 had ~10 points of space inside strong walls -> dead.
+  As Black now 0-7. My stones were again a center blob (D4-G6) = Lesson -2 again.
+  Concrete idea for next Black game: try a 12k WITHOUT tengen: first move C3-ish
+  3-3/3-4 (e.g. C4), second move the OTHER side on the same edge (e.g. G4 / C7),
+  and answer every White approach with a block on the EDGE side. Or drop to 14k as
+  Black to learn what winning as Black feels like (as White vs 12k: 4-1).
+
+- Game 14: vs 10k, White. LOST B+8 (both passed, move 80). No group died; territory loss.
+  Moves (B first): E5 C3 G3 D7 G6 E7 C5 D4 D5 E4 F4 E3 C7 C8 C6 B7 B6 B8 G7 F7 F8 E8
+  F9 E9 H8 C4 F2 E2 F1 D2 D1 C1 G2 B5 B4 B3 A5(capt) A3 A4 H4 G4 H3 H2 H5 H6 D6 F5
+  A6 A7(capt) A8 A6 pass J3 pass J5 pass J4(capt 3) pass B9 C9 B1 C2 A2 A9 B2 A1(capt 3)
+  B2 A2 J6 B1 J8 pass pass.  Final area ~33+7=40 vs 48.
+  What went wrong: (a) Black's C5 (move 7) split my C3/D7 left side; I answered D4/E4/E3
+  (bottom wall) and C8/B7/B8 (top) — each fine locally but Black got the WHOLE right
+  half (cols F-J) AND a wedge C5-E5 through my side. My E7 (move 6) was slow: G-side
+  was already Black's. Better move 6/8: something that stops C5-type splitting, e.g.
+  C5 myself (connecting C3-D7 along the left), then take the bottom/top edges.
+  (b) Counted at move 20 (~even), but then played small solid moves (E9, C4, E6, D8)
+  while Black took F2/F1/E1/D1 bottom endgame in sente (~4 pts).
+  (c) B5 hane at move 41 had 2 libs -> Black B4 put it in atari, lost it (Lesson -5 again).
+  (d) H4 invasion of the right (2-wide strip H/J cols) was hopeless and just died.
+  (e) Near-disaster: at move 71 B2 would have reduced my 13-stone group to ONE liberty
+  (D3) -> libs.py caught it. ALWAYS run libs.py on the board AFTER a planned capture move.
+  The game-12 recipe (C3+D7) did not work vs 10k because Black played C5 between them.
+
+- Game 15: vs 14k, Black. LOST W+16 (both passed, move 77). As Black now 0-8.
+  Moves (B first): C4 F6 G4 C7 E5 E3 E4 F3 F4 G3 H3 H2 D3 D2 C2 E2 G7 F7 G6 G8 H8 F8
+  D6 D7 C6 B6 B5 B7 E6 E7 G9 H4 H5 J4 J5 J3(capt H3) F9 E9 H9 A5 A4 A6 D1 E1 C1 F5
+  G5 D8 J2 J1(capt) B8 A8 D9 C9(capt) pass B3 B4 C3 B2 D4 D5 D3 A3 J7 H7 pass J6 A1 A2
+  B9 J8(capt) pass B1(capt) C8 pass pass.
+  What went wrong: (a) C4+G4 on the 4th line left a 3-wide gap at the bottom; White
+  invaded E3 and I blocked from ABOVE (E4, F4) = White crawled E3-F3-G3 on row 3 and
+  LIVED on rows 1-3 (~19 pts) = exactly lesson -4 again. Against a 3rd-line invasion
+  between my stones, attach/block from the EDGE side (e.g. D2/F2 undercut, or E2/D3
+  first) so the stone can't get a base; never push it along row 3 from above.
+  (b) H3 hane after G3 had only 2 libs (H4, J3); White H4 put it in atari -> lost H3
+  and White got the J-column bottom too. (c) White F6+C7 took the whole top cheaply.
+  (d) Late B3 invasion nearly cut my bottom-left: D3 had 2 libs (C3,D4) all game ->
+  B2 saved C2 group but lost D3/D4. Fix weak 2-lib stones during the endgame.
+  Positive: 14k wasted moves (D8, passes); white's invasions J7/A1 were killed.
+  Count at move 37 was already ~-8 — all from the bottom invasion living.
+  NEXT as Black: 3-3/3-4 points on the 3RD LINE (C3, G3), not 4th line, so no
+  invasion fits between; or stay at 14k/16k until a first win as Black.
+
+- Game 16: vs 12k, White. DRAW (both passed, move 48; 44-44 by area incl. komi).
+  Moves (B first): E5 C4 G5 C6 E7 E3 F3 E4 F4 D6 E6 D7 D8 C8 E9 F2 G2 E2 D5 C5 D4 D3
+  F1 E1 G1 C3 H3 C9 D9 G7 F7 F8 E8 G8 H6 H7 J7 J8 J6 F9 H9 H8 G6 C7 G4 pass pass.
+  Opening was fine (left side A-D + bottom E1-E4/F2 = 37 area, Black 44 -> EVEN at
+  move 30, not ahead). Invaded top-right G7: got F8 G8 H7 J8 F9 H8 but Black's H9 +
+  G6 turned it into a SEKI (my 7 stones libs G9,J9 shared with black H9).
+  THE ENGINE SCORED MY SEKI GROUP AS DEAD -> draw instead of a ~W+16 win.
+  Lessons: (a) NEVER pass with a seki on the board / never settle for seki: the
+  scorer treats it as dead. Need two real eyes. (b) At move 42 (black H9 placement)
+  the real problem was the outside liberty G6: I should have played G6 myself
+  earlier (e.g. instead of H7 or right after G8) so the group had outside libs, or
+  answered H9 with a move that captures it later. Before making an invasion group's
+  shape, count its OUTSIDE liberties; if black can fill them all, eyes must be real.
+  (c) Count was already even at move 30 -> the invasion was necessary, so it had to
+  live unconditionally.
+
+- Game 17: vs 14k, Black. DRAW (44-44 by area, both passed move 75). Best Black result.
+  Moves (B first): C3 C4 D4 C5 D5 D3 E3 D2 C2 E2 F2 F3 E4 G2 F4 G3 G4 H4 H5 J4 C6 B6
+  C7 B7 B8 B3 B2 A3 D1 F1 C1 A2 B4 B5 A7 A4 J5 H2 C8 A6 A8 G5 G6 pass F5 E1 G1 B1(capt 6)
+  J3 H3 G5 G7 G8 H7 H8 F7 F8 E6 E7 D6 F6 H6 J7 D7 J6(capt 4) E8 D8 pass E5(capt 3) C2
+  E9(capt) F2 pass pass.
+  What worked: (a) C3 3-3 then hane D4 on top of White's C4 attach, D5 extension = I
+  owned the center line; (b) G4/H5/J5 blocked White's row-3 crawl -> whole top+right mine.
+  (c) Killed White's late G7 invasion: G8, H8 (edge side), F8, E7 cut, F6 split into
+  two weak groups, J7/J6 captured 4, D8 double-atari, E5/E9 captured. Run libs.py
+  during kills: my main 11-stone group had only 2 libs at move 63!
+  What went wrong: my bottom-left C3/C2/B2/C1/D1 group (6 stones) DIED: after White's
+  D3 crosscut I chose E3 atari (pushing White along row 2) which left C3 with few libs;
+  White B3/A3/A2 shrank it to 2 libs, my B4 rescue try failed (W B5). Also F2 hane
+  was lost (W G2 atari). Without that loss I'd have won by ~15.
+  Fix: after C3/C4 attach + D4 hane + C5 + D5 + D3 cut, play D2 atari instead
+  (keep my corner, White runs out E3 into my strong side) or just strengthen C3
+  (B3/C2 early) BEFORE White's B3 makes it a 2-lib group. Corner group needs eye
+  space: B2+B3 shape, not a C-column string.
+
+- Game 18: vs 12k, White. LOST (resigned move 54, behind ~20 then right group dead).
+  Moves (B first): G6 C4 E4 D6 C3 B3 D3 D4 G3 E5 F4 F5 G5 F6 F7 E7 F8 E8 E9 D9 F9 C2
+  D2 B2 D8(cut!) D7 C8 C7 C5 D5 B8 B5 B7 B6 C1 B1 D1 H4 G7 G4 F3 H3 H2 F2 G2 J2 H1
+  E2 E3 H5 H6 J3 J5 resign.
+  At move 24 I counted W 38+7 vs B 43 = AHEAD. Then lost it all in one move:
+  (a) E9/D9 exchange left D9 with 1-2 libs and a cutting point at D8. Black D8 cut put
+  D9 in atari AND split E7-E8; my D7/C7 saved the center but Black got the whole top
+  edge (A7-D9, ~10 pts) -> from +2 to -20. When I block a hane on the 1st line (D9),
+  check the cutting point behind it (D8) and protect it (D8 myself, or C8/C9 first).
+  Better at move 20: D8 instead of D9 (solid, Black E9 just a 1-pt endgame).
+  (b) Invasion H4/G4/H3 into Black's right: every new stone (F2, J2, E2) had 2 libs,
+  and the black group I attacked had a connection (E3) + more libs. I lost the semeai
+  by exactly one tempo. Count semeai libs BEFORE starting it; if I'm a tempo short,
+  don't start — invade somewhere it can make 2 eyes on its own.
+  (c) Opening G6 C4 E4 D6 C3 B3 D3 D4 = fine (D4 hane on top, E5/F5/F6/E7 wall
+  pushed Black to the right). But the wall F5-F6-E7-E8 faced Black's strong stones;
+  the left territory was the only profit, so the top edge D8/D9 was essential.
+
+- Game 19: vs 14k, Black. LOST (resigned move 67, behind ~30). As Black 0-9-1.
+  Moves (B first): C3 F7 G4 E4 E3 F4 F3 D4 C4 D3 D2 G3 G2 H4 H3(capt) G5 G3 J5 C6 C8
+  D6 D5 C5 F5 D7 D8 E7 E8 C7 B7 B6 A7 H7 G7 G8 F8 H8 H6 J7 J6 H9 F9 F6 G6 E6 A6 A5 A4
+  B5 B3 B4 C2 A3(capt) E2 B2(capt) D1 B8 B9 A8(capt 3) F2 H2 G1 H1 F1 J2 J4 resign.
+  What went wrong: (a) C3+G4 left a gap; W E4 then D4/D3 made a row-4 wall with a
+  stone (D3) INSIDE my bottom -> D3 later became the anchor for W's C2/D1/E2/F2/G1
+  invasion that killed my bottom-right group (E3-J2, 9 stones: no eye space, it
+  was a row-3 wall with only row-1/2 libs = lesson from game 10 AGAIN).
+  (b) My 14-stone left group silently went to ONE liberty (E5) at move 53 — W's A4/B3
+  pushes filled its outside libs. libs.py caught it just in time. RUN libs.py EVERY
+  MOVE once groups touch, not "from move 30".
+  (c) H7 invasion at move 33 died (W G7/H6/J6/F9 = one eye). Too small space.
+  (d) At move 59 I spent B8/A8 capturing 3 (good) but should have FIRST given the
+  bottom-right group an eye (e.g. G1/F1 at move 57-61): a group whose libs are all
+  on row 1-2 with an enemy stone (D3/E2) next to it is the most urgent thing.
+  Next as Black: maybe 16k. Make bottom groups' eyes BEFORE grabbing elsewhere.
+
+- Game 20: vs 12k, White. LOST (resigned move 52; 13-stone right group died).
+  Moves (B first): E5 C4 E3 C6 E7 G4 G3 H4 H3 G6 C3 B3 C2 D4 E4 D3 D2 B2 C7 B7 C8 D6
+  E6 F5 G7 H7 G8 H8 J4 J5 J3 D7 D8 B8 D5 C5 F6 G5 J6 H5 F4 H6 H9 J7 J9 F8 F7 G9 F9
+  E9 E8 resign.
+  At move 34 my count was W 42+7 vs B 39 = AHEAD by ~10. Then the invasion group
+  (G4/H4/G6/F5/G5/H5/H6/H7/H8/J5) died because it had NO EYE SPACE: I filled its
+  own inside with G5 and H5 (both forced-looking connections), Black's J6/F4/H9
+  then left it with 2 libs and only a 1-point eye at J6. H9 (black 1st-line
+  placement next to my H8) was the killer: I should have played H9 or J8 myself
+  much earlier (e.g. instead of J5 at move 31 or H8->H9 at move 29+).
+  (a) J5 (move 31) was a mistake: a lone stone with libs only H5 after J6 —
+  it forced me to fill H5 = my own eye. Better: H5/H6 shape or J8/H9 edge.
+  (b) Count eyes, not libs: after move 38 the group's empty interior was only
+  H5,H6,J6-J9 — a 12k can reduce that to one eye in 3 moves. When ahead, the
+  invasion group's 2 eyes are the ONLY priority (before B8, C5 etc).
+
+- Game 21: vs 16k, Black. LOST (resigned move 41; 7-stone right group died).
+  Moves (B first): C3 F6 C7 F3 D5 E5 E7 F7 E6 E4 D4 E8 D7 D8 C8 F8 E3 E2 D3 F2
+  G4 F4 G5 G6 G3 G2 H3 H6 F5(cut) H2 H5 J3 J4 J2 J6 J7 H7 J5(capt, ko) J8 J6 resign.
+  Opening C3/C7 + D5 was OK but White's F-column wall gave White cols F-J (~45).
+  At move 21 I was ~-10 and invaded G4 (fine idea). Mistake: F5 CUT (move 29) — it
+  used a tempo to cut instead of making eyes; White H2 + J3 then left my group
+  (F5 G3-G5 H3 H5) with ONE liberty (H4) and the only "eyes" H4/J5 were too small.
+  Before cutting with an invasion group, count ITS libs+eye space first (it had 3).
+  Better move 29/31: H2 or J4/J3 (secure the corner eye space H1-J4) — life first.
+  Also D2 (bottom) was never played; White's E2/F2 took the bottom E-col.
+
+- Game 22: vs 12k, White. WON W+10 (both passed, move 66). Clean, no weak groups.
+  Moves (B first): G7 C3 F3 C6 D7 D6 E6 C7 D8 C8 E5 D4 D2 C2 E3 D3 E2 H4 E4 G3 G2 H2
+  G4 H3 G1 H1 G5 H5 H6 J5 J6 C9 D9 D5 D1 C1 B4 B5 B3 B2 A2 C4 A8 B7 A1 B8 A5 B6 A7
+  A6 pass A9 A8 A7(capt) B1 A3(capt 3) J2 J3 pass A4(capt 3) F8 J1(capt) H8 pass pass.
+  What worked: (a) C3+C6 left side, C7/C8 blocked Black's D7 approach on the EDGE side,
+  D6/D4/D3/D5 = column D wall; C2 blocked the D2 undercut on the edge side.
+  (b) Count at move 18: ~39 vs 49 -> invaded H4 (2 from F3), G3, H2, H3, then H1
+  (stop black H1 hane) and H5+J5 -> STRAIGHT FOUR J1-J4 fully enclosed = unconditionally
+  alive (answered J2 placement with J3). Lesson -11 applied: made eyespace enclosed
+  BEFORE black could reduce it.
+  (c) Killed late invasions B4 (B5 above, B2, C4) and A8 (B7, B8, A6 double atari).
+
+- Game 23: vs 16k, Black. WON B+6 (both passed, move 69). FIRST WIN AS BLACK (1-10-1).
+  Moves (B first): C3 E5 G7 C7 G3 E3 F4 C4 E4(cut) D4 D3 E2 D2 G2 F3 F2 H2 D1 C2 H1
+  H3 B3 B2 A3 C1 A2 E1(capt D1) A1 F1 B1 G1(capt 4) B5 F6 E6 F5 F7 F8 E7 E8 H7 G6 D8
+  G8 H6 H5 H8 J6 E9 F9 D9 J7 J8 J5 pass H9 B8 J9(capt 4) D7 J1(capt) B4 pass E2 E3
+  C9 F2(capt) B6 pass pass.  Final area 47 vs 34+7.
+  What worked: (a) C3 + G7 + G3 (3rd-line corners). When White E3 came between C3/G3,
+  F4 shoulder then E4 CUT (connected to F4, 4 libs) separated E3 from E5; D3/D2/F3/H2
+  surrounded it on the edge side -> White's bottom chain had no eyes.
+  (b) Liberty race: my C3 group got down to 1-2 libs (B3/A3/A2 pushes) but the white
+  chain had fewer: C1 atari, E1 capture, F1 (atari, no self-atari), G1 captured 4.
+  Read every race by counting libs on BOTH sides before each move.
+  (c) Then solid boundary: F6, F5 (cut point), F8 hane-atari, E8, G6/G8 connect;
+  killed H6-H8 invasion with H5 (seal below), J6, J7, J5, H9, J9.
+  Lesson: vs 16k, 3rd-line corners + cutting the wedge stone off from its support
+  works. Next as Black: 14k with same opening (C3, G7, G3).
+
+- Game 24: vs 12k, White. WON W+8 (both passed, move 86). 2 wins in a row vs 12k.
+  Moves (B first): E5 C3 D3 D4 E4 C4 E3 D5 D6 C6 D7 C7 C8 B8 D8 G7 H6 H7 G6 F7 F6 E7
+  E8 F8 E6 J7 H9 H8 F9 G9(ko) G8(capt) E9(threat) D9(capt) G9(retake) B9 J9(capt H9)
+  B7 B6 A7 A6 A8(capt B8) D2 E2 G3 C2 B2 D1 C1?? B1(capt C1) B3 C1 H4 J6 H2 F2 G2 J3
+  J4 J2 H3 G5 J1(capt 2) G4 G1 F1 H5 F3 E9(capt F9) A4 B4 F9(ko) A5 E9 A3(capt) A1 A2
+  C5 B5(capt) J5 pass J2 J3(capt) F4 pass pass.
+  What worked: (a) left side C3/C4/D4/D5/C6/C7 solid (lost B8/top-left edge though).
+  (b) Counted at move 16 (~-10) -> invaded G7 IMMEDIATELY: F7/E7/F8/J7/H8 got a top
+  group. Black placements H9/F9 inside: G9 double-atari ko; my "ko threat" E9 was a
+  self-atari that also made black's G9 connection self-atari, black had to capture,
+  I retook and lived (J9 capture -> eyes G8, H9, J8). (c) 2nd invasion G3 at move 45
+  (black's bottom-right 4x5 space): H4 diagonal, H2, G2 solid, J4 vs J3 wedge, H3,
+  J1 capture -> two eyes H1 + J2. Two live invasions = win.
+  Mistakes: C1 at move 49 was 1-lib stone (B1 captured it) - check libs of every
+  atari move I play. B9/B7 ko threat cost me B8 + top-left edge.
+
+- Game 25: vs 14k, Black. WON B+4 (both passed, move 40). As Black now 2-10-1.
+  Moves (B first): C3 F7 G3 C6 E5 D4 D5 C5 C4 E4 F4 E3 E2 F5 F3 E6 D3(capt 3) D6 G5 F6
+  G6 G7 H7 H8 H6 B4 B3 A5 J8 H9 A3 A4 J7 G8 J9 B5 D4 pass pass.
+  What worked: (a) C3+G3 on the 3rd line, then E5 between them = whole bottom half.
+  (b) White's D4 wedge: D5 (from above, connected to E5) + C4 cut -> wedge stones
+  isolated in MY area; F4 block, E2 UNDERNEATH (took base), F3 atari -> captured 3
+  with D3. Read the race: my D5E5 had 2 libs but White's chain was in atari first.
+  (c) Pushed the line up on the right: G5, G6, H7 hane, H6 solid (cut point), J8.
+  (d) Final count at move 37: 46 vs 35+7 -> filled own weak point D4 and passed.
+  Next as Black: 12k with the same C3/G3/E5 plan.
+
+- Game 26: vs 10k, White. WON W+6 (both passed, move 58). FIRST WIN VS 10k (1-5).
+  Moves (B first): G7 C3 G3 D6 E5 D4 E6 D7 D5 C5 E4 E3 F3 E2 F2 E7 F7 E8 F8 F9 G9 E9
+  B4 C4 B5 B6 B3 C2 B2 B1 E1 D2 D1 C1 F1 C6 A2 A4 C8 D8 pass C7 B8 B7 A6 A7 A5 A1 C9
+  A3(capt 7) A8 D9 G5 B9 pass A9(capt 4) pass pass.
+  What worked: (a) vs Black's right-side G7+G3, took left with C3+D6, then D4 (split
+  point), D7, C5 vs D5 wedge; hane on top E3/E2 at bottom and E7/E8/F9/E9 at top =
+  column E dividing line, ~40 area +7. No invasion needed. (b) Killed B4 invasion:
+  C4 (deny cut), B6 above, C2 solid, B1 reduce from below, A4 VITAL point of A3-A5,
+  then A1 (outside lib from the safe side) so black's A3 capture left 1 lib.
+  (c) Killed C8 invasion: D8, C7, B7, A7, D9, B9/A9.
+  Close calls: after F1 my big group had only 3 libs (A1, D3 eye, C6) — C6 connect
+  was urgent; E1 by black left E2-E3 with 2 libs -> D2 fixed it. Kept checking libs.
+
+- Game 27: vs 12k, Black. LOST (resigned move 33). As Black now 2-11-1.
+  Moves (B first): C3 F6 G3 C6 E5 E6 G5 F5 F4 E4 D5 D4 C5 C4 B4 B5 D3 E3 F3 E2 D2 B3
+  F2 D6(capt 3) B2 A4(capt B4) G7 D1 C2 E1 A3 A2(capt A3) resign.
+  What went wrong: (a) E5 was played ADJACENT-diagonal to White's row-6 stones (E6
+  contact came at once) and then G5 left a gap at F5: White F5 wedge + E4 cut put E5
+  in atari. Every black stone on row 5 had only 2 libs -> D5/C5/B4 all died.
+  Unlike game 25 (White stones were far away), here White F6+C6 were on row 6, so
+  row 5 was CONTACT range. vs row-6 stones, take the dividing line on row 4
+  (E4, D4/F4) — solid, connected to C3/G3 — not row 5.
+  (b) Once cut, I kept extending a 2-lib group (D5, C5, B4) = feeding stones. Should
+  have given up E5 at move 11 and played E3/D4 to keep the bottom intact.
+  (c) Cutting stones C4-E4 ended up ANCHORED in my bottom (E3/E2/E1/D1) and my left
+  corner group (B2-D3) had no eye space -> dead. Lesson -10 again.
+
+- Game 28: vs 10k, White. LOST B+2 (both passed, move 62). Close; no blunder of a
+  big group, lost on small things.
+  Moves (B first): E5 C4 C6 F3 G6 G4 G5 H5 H6 E4 H4 H3 J5(capt H5) D5 D6 C5 F6 B6 B7
+  J3 B5 B4 A6(capt B6) F8 E8 H8 G7 G8 E7 H7 J7 J8 F9 J6(capt J7) H5 G9 E9 J4 F5 F4
+  F7 C8 D7 B8 A8 D8 A4 A3 A5 C7 D9 B9 C9 B3 A9(capt 5) C8 D8 J9 B8 pass pass.
+  What went wrong: (a) H5 hane (move 9) had only 1 lib after black H6+H4 -> lost it
+  and the right side. I read the H4 cut as failing but forgot H5's OWN libs
+  (G5,H6 black): check libs of the hane stone itself after the cut.
+  (b) B6 hane (move 19) also became 1-lib after black B5 -> lost B6/B5/A5/A6 area
+  (~4 pts) — same mistake twice. A hane between two enemy stones = 2 libs max.
+  (c) Top invasion F8-J8 got one edge eye + a KO-eye at J7 (my J6 stone had no
+  libs except J7) = dead. An "eye" whose wall stone can be captured is not an eye.
+  (d) Black's A4 placement inside my left cost 1 pt (A3 atari let it connect).
+  Count at move 24: ~even; ended -2. Good: E4/C5/D5 shape solid, F4/J4 endgame.
+
+- Game 29: vs 14k, Black. WON B+14 (both passed, move 68). As Black now 3-11-1 (3-0
+  vs 14k/16k with C3/G3 opening).
+  Moves (B first): C3 E7 G3 C6 E5 G6 C5 B5 B4 B6 D5 D6 G5 F6 F5 H5 H4 H6 E6 D7 J5 J6
+  J4 A4 A3 A5 G8 F7 H7 J7 H8 J8 F8 E8 C8 E9 B7 F9 C7 A7 A8 A6 B9 D9 C9 A2 B3 D3 C2 D4
+  E3 D2 E4 C4 E2 D1 E1 B2 C1(capt 5) H9 B1 G9 D8 G7(capt 4) A1(capt 2) pass pass.
+  What worked: (a) C3+G3 then E5 (White far on rows 6-7, so row 5 was safe), solid
+  row-5 line C5-G5 + H4/J4/J5 hane = whole bottom 4 rows (~42). Count at move 27: -4.
+  (b) Top-right invasion G8/H7/H8/F8 died (too narrow, J7/J8/E8 blocked) - but it cost
+  nothing and White spent moves there, so I got a FREE second try in the top-left:
+  C8, B7, C7, then A8 atari (W A6 forced), B9 + C9 = two eyes A9 & B8. Corner shape
+  A8+B9+B7+C8 connected via C9 = alive. 14k let it live.
+  (c) White's D3 invasion inside my bottom: C2 (strengthen my 3-lib group + deny base),
+  E3, E4 (connect to wall), E2, E1 -> race won by a tempo, C1 captured 5.
+  Lesson: under area scoring, a hopeless invasion is free when the boundary is settled;
+  try a second one in the other corner — the opponent may answer the wrong one.
+
+- Game 30: vs 10k, White. LOST (resigned move 44). Previous session ended mid-game;
+  I took over at move 40 with BOTH left groups already near-dead: the left side was
+  split by a black row-5 wall (A5-E5 + D6/D7 + A6). Top-left O group (A7-C7,B6,C6)
+  had 2 libs vs black C8; bottom-left O group (A4-D4,B3-C3,B2-C2,A1-B1) had only a
+  2-point eye (A2,A3) + 1 outside lib. Played B8 (B C9), D4 (B E4) -> both dead, resigned.
+  Lesson: my white stones on BOTH sides of a black wall (rows 4 and 6-7) = two weak
+  groups with no eye space. Never let Black's line run THROUGH my side; and a group
+  whose only empty interior is 2 adjacent points is dead (one eye).
+  ALSO: if a session might end mid-game, write the move list + plan into this file
+  every ~10 moves so the next session knows how the position arose.
+
+- Game 31: vs 12k, Black. LOST W+22 (both passed, move 59). As Black now 3-12-1.
+  Moves (B first): C3 F7 G3 C6 E5 G5 H4 H5 F5 G4(cut) F4 H3 H2 J4(capt H4) C5 G2 F3 J2
+  F2 H1(capt H2) D6 B5 B4 D7 B6(double atari) C7 A5(capt) B7 E6 E7 G6 H6 F6 G7 H7 H8
+  A6 A7 J6 J7 D8 C8 F8 E8 pass F1 E1 G1 pass E2 D2 D1 E3 E1 C1 D9 pass pass.
+  What went wrong: (a) after C3 F7 G3 C6 E5, White G5 pressed G3; my H4 (diagonal
+  "block") was cut by G4 at once, and H3/G2/J2/H1 took the WHOLE bottom-right corner
+  incl. under G3. H4 was too thin vs a stone already at G5: better H3 or G4 myself
+  (solid, keeps the corner) — lesson -14 again (my new stone had 2 libs after the cut).
+  (b) Count at move 31: ~37 vs 43+7 = -13; no invasion space left (White's row-7 wall
+  + H8/J7). The game was decided by move 20 in the bottom-right corner.
+  (c) I PASSED at move 46 while White still had a 1st-line hane (F1, E2) = lost ~3
+  more. Don't pass while the opponent's boundary moves into my area are unanswered;
+  play the boundary (e.g. G1/F1 block) myself first.
+  Good: B6 double atari (C6 and B5) captured B5; D6 shoulder pressing C6 worked.
+
+- Game 32: vs 10k, White. LOST (resigned move 50; right group and bottom-right
+  invasion both died). vs 10k now 1-8.
+  Moves (B first): E5 C3 D3 D4 E3 C4 C2 B2 E2 D6 D5 C5 C7 C6 E7 D7 E6 C8 G4 B7(capt)
+  B1 B3 E8 G7 G8 H7 H8 H5 H4 G5 F5 G6 J6 J7 J8 J5 J4 G2 F3 H3 G3 H2 G1 F1 F2 H1 E4
+  J2 E1 resign.
+  What went wrong: (a) opening left me only cols A-C (+D) = ~29 area; Black got a
+  full E-column wall facing the empty right half. My D6 and C5/C6 were all slow
+  connecting moves; Black played E2/E3/E5/E6/E7/E8 = the dividing line on column E
+  was BLACK's, too far left for me. (b) G7 invasion at move 25 got pushed: G8 above,
+  H8, H4 below, F5, and J6 placement INSIDE my eye space = the group had one eye
+  (H6/J6) and no outside space. My H5 and G5/G6 built a 6-point-wide rectangle but
+  its inside (H6, J6) was only 2 points. Invading with G7 under black's E7/E8 wall
+  plus G4 already there was too late; space F-J x rows 5-8 shrank in 4 black moves.
+  (c) bottom-right invasion G2/H3/H2 got G1 placement -> one eye at J1 only, J3 false
+  (touches black J4). An eye point adjacent to an enemy stone is NOT an eye.
+  Fix: vs E5 C3 D3, D4 hane is OK but then Black E3/C2/E2 took the bottom; next time
+  try C3 -> after D3 play D2 underneath? or pick C4/C6 (games 16/22 recipe) instead
+  of C3. Invade the open side EARLIER (move ~16-18, before black's G4/E8 arrive),
+  and choose a point with room for TWO eye areas (e.g. G6+G3 side not between walls).
+
+- Game 33: vs 14k, Black. LOST (resigned move 55, behind ~10-15). As Black 3-13-1.
+  Moves (B first): C3 E5 G7 C5 G3 G5 E3 E7 G6 H5 H6 B3 B2 B4 C4 B6 F6 E6 F5(cut) F4
+  G4 H4 H3 F3 E4 D4 F2(capt 2) D3 C2 D2 E2 D1 F8 E8 F7 F9 G9 E9 C7 B7 B8 C6 D8 D7 C8
+  A2 D9 D5 B9 A8 A7 A6 G8 A7 resign.
+  The right side went GREAT (F5 cut, G4/H3/E4/F2 captured 2 + killed G5-H5-H4).
+  What lost it: (a) bottom-left corner group B2-C2-C3-C4 DIED. White B3 attach under
+  C3 -> my B2 block + C4 left C3/C4 with only 2-3 libs, then White D4/D3/D2/D1 crawled
+  UNDER my C-column and A2 finished it. The corner had no eye space (A1,A2,B1,C1 only).
+  When I played E4 (move 25) White D4 put BOTH C3C4 and E3E4 at 2 libs; I should have
+  played D3 myself at move 25-27 (connects C3-E3, keeps the bottom whole) instead of
+  chasing the F3/F4 stones — the 2 captured stones were worth less than the corner.
+  (b) Top-left invasion C7/B8/D8/C8/D9/B9 died: one real eye (C9) only; A8 white
+  killed it. Space inside B6/B7/D7/E7 walls was too small (lesson -11 again).
+  Opening note: vs C3 White played E5 tengen + C5 + G5 = row-5 wall; my G7 got
+  pressed but held the top-right. Fine, but bottom-left needed one more solid move.
+
+- Game 34: vs 12k, White. DRAW (both passed, move 46; exactly 37+7 vs 44).
+  Moves (B first): G7 C3 G3 D6 E7 D7 D8 C8 E8 E5 E6 D5 F5 E4 F4 E3 F3 C7 E2 D2 F2 H5
+  H6 H3 H2 H4 G5 D9 E9 C9 D1 C1 E1 H8 G8 H7 J6 J7 H9 J5 G6 J2 H1 pass pass.
+  No group of mine was ever weak; both invasions (H5-H3 right side, H8/H7 top-right)
+  died, at no cost. Why only a draw: the dividing line ended on column E rows 3-5
+  only. Black got E1/E2/D1 (bottom edge) AND E6-E9/D8 (top), so I had A-C + D + 3 = 37.
+  (a) Move 10 E5 was a jump; Black E6 + F5/F4/F3 pushed down and E2/D1/E1 hane
+  took the bottom E column. Solid E4/E3 was right per lesson -14, but I was always one
+  step behind on the bottom: after F3 (move 17) I spent C7 (cut fix) and Black got E2.
+  Better there: E2 myself (bottom edge, ~2-3 pts) and fix C7 later; a 12k rarely cuts.
+  (b) Move 6 D7 vs E7: Black D8 hane + E8 got the top D/E columns. Maybe C7 (one line
+  back, solid) or E6 (hane at the head) keeps more.
+  (c) Count at move 22 said EVEN -> invasion was needed, but H5 (between G7/G3 with
+  black wall F3-F5 two lines away) had no room: H6/H2/G5 sealed it in 3 moves.
+  Invade EARLIER (move ~12-16) when the right side is still open, or pick the 3-3
+  under a lone stone (e.g. H2/H8 under G3/G7) where edge eye space exists.
+
+- Game 35: vs 14k, Black. LOST W+2 (both passed, move 51). As Black 3-14-1.
+  Moves (B first): C3 D4 G7 D7 G3 D3 E3 F5 F4 E4 G5 E2 F3 C4 F6 E5 E6 D6 E7 E8 F8 E9
+  C7 C8 C6 C5 C2 B3 D2 F2 G2 B2 E1 C1 F1(capt 2) F9 G9 B7 C9 D8 B6 B5 D1 B1 A4 B4 B8 A6
+  pass pass.  Final area 43 vs 38+7.
+  (a) White D4 (diagonal shoulder on C3) + D7 took the left; my G7/G3/E3/F4 got the
+  right. Count at move 22: 38 vs 43+7 = -12.
+  (b) Recovered 10 points at the bottom: C2 (strengthen C3) -> D2 cut off W's E2 wedge,
+  G2, E1 atari, F1 captured 2 = whole bottom row mine. Cutting a wedge stone off from
+  its support with a connected cutting stone works again (as in game 23).
+  (c) The C7/C6 invasion of the top-left was 2 libs from the start (W C8, C5) and died;
+  it cost nothing (area scoring), but did not gain either.
+  (d) Where the 2 points went: at move 9, F5 split my G7/G3; F4 + G5 was fine but E6/E7
+  let W get E8/E9/F9 (top edge). F7-solid instead of F8 or G9 earlier = same. Also
+  move 3 G7 maybe should be E3/D3-side play to keep the bottom-left (W D3 took C3's base).
+  New tool: count.py <dead stones...> < board rows -> area score (inspection only).
+
+- Game 36: vs 12k, White. LOST (resigned move 50, behind ~12; both invasions dead).
+  Moves (B first): G6 C4 F4 D6 E7 D7 D3 C3 D5 D4 E3 E5 E6 C5(capt D5) E4 D8 E8 H3 F5 D5
+  G2 G3 H2 H4 H5 G8 H7 H8 F7 F8 E9 F9 D9 J7 J6 J8 H9 G7 H6 D2 C8 C7 B8 B7 A8 A7 C9
+  E2 F2 resign.
+  What went wrong: (a) left side only (A-D) = ~31 area. Tactics in the D5 wedge
+  fight were fine (captured D5) but slow: D5 connect + D8 + C7/B7/A7 were all gote
+  defensive moves, and Black's E-column wall faced the whole open right.
+  (b) H3 invasion (move 18) under F4: Black G2 undercut + H2, H5 cap -> no eye
+  space at all (eye points next to black F4 aren't eyes). (c) G8 invasion in the
+  top-right: Black H7, F7, E9, J6, then H9 PLACEMENT made it seki/dead. I spent F9
+  (move 32) instead of H9/J7 — the corner 1st-line point (H9) was the vital point
+  AGAIN (same as game 20 lesson -11). (d) Top-left: Black D9/C8/B8/A8 crawled along
+  row 8 and took my top edge (~6 pts) while I blocked on row 7 (lesson -4 again):
+  should have played C8 myself when D8/D9 got contested.
+  Opening idea for next time vs G6 F4 (Black on right): play the 3-3 C3 + C7 / D7
+  and invade the right EARLY at a corner 3-3 (G3/H3 area) by move ~10, not 18.
+
+- Game 37: vs 14k, Black. WON B+16 (both passed, move 57). As Black now 4-14-1.
+  Moves (B first): C3 E5 G3 E3 F4 C7 E4(cut) F3 D3 G4 E2 F2 G2 D4 F1(capt 3) F5 H4 C4
+  G5(capt G4) G6 H6 B3 C2 G7 E7 E6 D8 D7 E8 F8 F7 G8 F6 C8 D6 D5 B4 C6(capt D6) B5 D9
+  C5 B6 D6(capt 6!) A5 E6 E9 B2 H7 J6 J7 H5 A4 A3(capt B3) A6 pass pass.
+  What worked: (a) vs W tengen E5 + E3 wedge between C3/G3: F4 shoulder, E4 CUT
+  (connected to F4, 4 libs), D3 + E2 + G2 took the wedge's base -> F1 captured 3
+  (white always one tempo short; my E4F4 got atari'd by D4 but F1 capture freed it).
+  (b) Count at move 25 was ~-15 (white top rows 6-9 huge) -> invaded E7. The group
+  itself was dead (D9 atari), BUT F6 (cutting stone) left White's center group
+  E5/E6/F5/D5/D4/C4 short of libs; probes D6, B4, B5, C5 inside White's area (free
+  under area scoring) shortened it to 1 lib and D6 captured 6 = game won.
+  Lesson: an invasion that cuts the opponent's wall can win by attacking the WALL's
+  liberties (walls next to my strong area have few libs), not by making eyes.
+
+- Game 38: vs 12k, White. WON W+18 (both passed, move 44). Fast clean game.
+  Moves (B first): E5 C4 C5 D4 F5 E4 G3 F3 G4 G7 F4 E3 D5 E7 D7 D8 C8 E8 C6 F6 E6 G6
+  G5 H6 H5 G2 H2 F2 G1 F1 H1 B5 B6 B4 A5 A4 A6 D9 C9 J6 J5 pass pass.
+  What worked: (a) Black attached C5 on my C4 -> D4/E4 solid row-4 wall took the
+  bottom; F3 vs G3, E3 connect. (b) Black built a row-5 wall facing an EMPTY top, so
+  I invaded G7 at move 10 (early!), then E7, D8 hane + E8 solid, F6, G6, H6, J6 =
+  row-6 wall of my own; the top rows 6-9 E-J became mine (~22 pts). (c) Endgame
+  G2/F2/F1, B5 hane + B4 solid + A4. Count at move 38 with count.py: 46+7 vs 35.
+  Key idea: when Black's wall is on row 5, the 4 rows above it are big enough to
+  invade and LIVE on — invade at once, play solid shape (connect when 2 libs).
+
+- Game 39: vs 12k, Black. DRAW (both passed, move 91; 44 vs 37+7). Best Black result
+  vs 12k so far (was 0-all).
+  Moves (B first): C3 G7 G3 D7 E5 E3 D3 F4 F3 E4 F5 D4 D5 C4 C5 B3 C2 E2 B4 B5 B2 A4(capt)
+  D2 C6 G4 B7 G6 F7 E6 E7 H7 H1 F2 F1 D1 A2 E1 G1 B4(capt 6!) C4(capt) H2 H8 H6 H5 H4 J5
+  J6 F6 G5 J3 J4(capt 2) J2 H3 J8 D4 B4 D6 C8 J7 F8 A1?? B1(capt) C1 A3 A1(capt) B6 B1
+  F4 E4(capt) pass G9 G8 D8 D9 J1 J2 J3 pass G2 C7 J1(capt 4) F9 pass J5 H5 E2 E3 E8 pass pass.
+  What worked: (a) vs W's E3 wedge between C3/G3: D3 attach, F3 cut, F5/D5/C5 sealed the
+  wedge chain (C4-F4,E3,E2) from the top -> it had only libs at B4/E1; when W played
+  G1 to save F1, my E1 (double atari: chain + F1) left the chain in atari -> B4 captured 6.
+  ALWAYS recount the libs of a big enemy chain after each of its moves: it went to 1 lib.
+  (b) Killed W's bottom-right invasion H1/F1/G1 with F2, H2, H3 and H5/J5 with H4, J6, G5.
+  What went wrong: (a) the wedge fight left my C3 corner at 2-3 libs for many moves (W B3
+  hane) -> W got the whole left edge A2-A4/B3-B5 + top (rows 6-9). (b) A1 at move 61 was
+  a SELF-ATARI (A1's only lib B1) — the libs check must include the stone I play.
+  (c) Final: W top = rows 7-9 + left col A-B; I had rows 1-5. Draw exactly. Need one
+  more row: my F5/E6 line came too late; W got F6/F7 wall. G6 (move 27) was good.
+
+- Game 40: vs 12k, White. LOST (resigned move 40, behind ~15; invasion group died).
+  Moves (B first): E5 C4 E3 C6 C3 B3 D4 C5 B2 B4 D2 E7 F6 F7 G7 F8 D6 D7 G8 G3 H2 H3
+  H5 G2 H1 G1 H4 J2 G4 J1(capt 2) F2 J4 J5 D5 E6 G6 H6 F5 E4 resign.
+  What went wrong: (a) OPENING too small: C4/C6 + B3/B4/C5 (3 gote moves vs Black's
+  C3 attach + D4 hane) gave me only cols A-C (~30 area). Black C3 under C4 then D4 =
+  I spent B3, C5, B4 just to stay connected. Better: answer C3 attach with D3 hane?
+  or simply ignore-ish (take D7/E7 top first). E7 (move 12) was OK but F6/G7/G8 took
+  the right top.  (b) G3 invasion at move 20: after H2 undercut, H3 + G2 + G1 + J2/J1
+  captured 2 but the group got only ONE eye (H1/H2 = 2 adjacent points = 1 eye). The
+  second eye at J3 needed J4, and J4 could be put in atari forever by J5 (black H4/J5
+  wall) = unwinnable "ko". Black F2 removed the F1/F2 eye. The invasion needed to go
+  UP (H4/H5 toward the open right side) at move 24 instead of G2 capture on the
+  edge: edge-only eye space 1 row high never makes two eyes.
+  (c) Count at move 20 showed -15 already: the opening was the problem again.
+
+- Game 41: vs 12k, Black. LOST (resigned move 41, behind ~16, both invasions dead).
+  Moves (B first): C3 C6 G3 E7 E5 G6 G5 H6 C5 H4 G4 H5 H3 B5 C4 B4 B3 E6 G8 G7 H8 F8
+  H7 J3 F9 E9 J2 J4 C8 C7 D8 E8 D7 D6 B7 B6 B8 D9 B9 A7 resign.
+  What went wrong: (a) White took row 6 (C6, E7->E6, G6, H6) while I played row 5
+  (E5, G5, C5) = I got rows 1-5 minus the right edge (H4/H5/J4 came in) = ~36 vs 45+7.
+  With White's stones on row 6-7 EARLY (move 4: C6+E7), C3/G3/E5 is too small:
+  a row-5 line gives only 45 even if perfect. Need a stone on row 6-7 myself early
+  (e.g. move 5 at G7/F7 instead of E5, taking the right top before White's G6).
+  (b) Contact G5 under G6 just made White solid (H6, H4, H5): attaching from
+  below = pushing White along the top (lesson -4 again).
+  (c) Invasions: G8/H8/H7 then F9 hane -> White E9 put F9 in atari at once (F9 had
+  2 libs: E9, G9). Top-left C8/D8/D7/B7/B8/B9 got only one eye (C9 false: next to
+  white D9). Invading a 3-row strip under a solid row-6/7 wall doesn't live vs 12k.
+
+- Game 42: vs 12k, White. LOST B+12 (both passed, move 62) although my own count
+  said W 46 vs B 41 (W+5). THE ENGINE SCORED MY LIVING TOP GROUP AS DEAD.
+  Moves (B first): E5 C4 F7 G3 D3 E3 D4 C3 E2 F2 C2 B2 C5 B3 B5 B4 G5 C7 D7 D8 E7 E8
+  F8 C6 D6 B6 A5 B1 C1 B8 A6 B7 D5 F4 F5 G4 H4 H3 H5 F9 G9 E9 H8 C8 J3 J2 J4 H2 H7
+  E1 D2 E4 A4 A2 A7 A8 D1 F1 G6 pass pass.
+  Final top group: A8 B6-B8 C6-C8 D8 E8 E9 F9 with interior A9 B9 C9 D9 (a straight
+  four on the edge, alive in theory) -> scored dead (15 pts swing = exactly the loss).
+  LESSON -18: before passing, every group must have TWO SEPARATE, ALREADY-FORMED eyes
+  (e.g. play B9 or C9 inside a straight four so the eyes are A9 + C9/D9). Under area
+  scoring filling my own interior costs 0 points, so ALWAYS finish the eyes before
+  passing. Same for the corner (A1/A3 eyes were explicit and counted fine).
+  Opening notes: E5 C4 F7 G3 then D3 wedge -> E3, C3, F2 vs E2 hane, B2/B3/B4/B1 =
+  corner alive; Black got a long wall. Invaded top-left C7 at move 18 (good, lived).
+  Overall ~+5 at the end by count; fine game except the pass.
+
+- Game 43: vs 14k, Black. LOST W+8 (both passed, move 61). No group died; territory.
+  Moves (B first): C3 C7 G7 G3 E5 C5 D4 C4 D3 E7 D6 C6 D7 D8 E6 F7 F6 G5 F8 E8 G8 F2
+  G6 H6 H7 J6 E2 H5 F4 G4 E9 D9 F9 C8 F3 G2 B4 B5 B3 A4 A3 A5 B7 B8 B6 A7(B6B7 dead)
+  F1 G1 E1 J7 J8 J4 J3 H3 D5 A6 F5 J2 pass pass.  Final 40 vs 41+7.
+  What went wrong: (a) diagonal opening C3/G7 vs W C7/G3 gave White TWO sides (left
+  cols A-C and bottom-right); my stones made a diagonal center band D3-E5-G7 = again
+  a "center" shape, ~38 area at move 31 (count said -11). (b) Moves 7-9 D4/D3 were
+  gote defence of C3 after W C5/C4 pressed it; White took E7 for free. Better move 7:
+  attack G3 (e.g. E3/F3 extension from C3 toward G3), since C3 can live small.
+  (c) Late B7/B6 invasion in W's top-left died (white answered B8, A7 correctly);
+  bottom-right J3 too. No 2nd-eye kill available: both W groups had 2 eye regions.
+  Good: D7 cut + E6 solid + F6/F8 atari chain won the top-right; F3 sente, B4/B3/A3.
+
+- Game 44: vs 12k, White. LOST (resigned move 42; left group had only ONE real eye).
+  Moves (B first): E5 C4 F3 G7 E7 G5 C3 B3 C2 B2 D4 C5 C6 B4 B6 B5 B1 A4 C1 A2 D5 F6
+  H4 G4 G3 H5 H3 E6 D6 F7 E8 F8 J5 J6 J4 C8 D7 B7 A6 D3 D2 resign.
+  What went wrong: (a) answered Black's C3 attach under C4 with B3/B2/C5/B4/B5 = 5
+  gote moves; Black got C6/B6 on top AND C1/B1 under -> left group sealed in cols A-C
+  rows 1-5 (~11 pts) = game 40 mistake AGAIN. (b) I counted A5 as an eye, but an
+  edge eye whose outside neighbour (A6) is EMPTY is not an eye: Black A6 (connected to
+  B6) made A5 fillable. Should have played A6 myself (move 36-40) — that one move was
+  life. With A5 gone, only A3 remained; Black's corner group (B1-C3) had 4 libs and
+  connects to D4 via D3, so the race was hopeless.
+  (c) Count at move 36: 31+7 vs 50. Opening C4+G7 split was OK but the left collapsed.
+  NEW RULE: vs a 3-3 attach (C3) under my C4, play D3 hane-on-top or simply take a big
+  point; never 5 crawling connects. And: an eye point on the edge must have ALL its
+  neighbours mine (A6 too), else play that neighbour first.
+
+- Game 45: vs 14k, Black. WON B+16 (both passed, move 82). As Black now 5-14-1.
+  Moves (B first): C3 F7 G3 C6 E5 B4 C4 C5 B3 A4 D5 G5 G4 F5 F4 H5 E6 E7 F6 G6 D6 D7
+  H4 J4 J3 J5 G7 H7 G8 F8 J6 H6 H8 J7 J8 G9 J6(capt 9) H2 H3 G2 F2 E2 E3 F1 F3 D2 D3
+  C2 B2 J2 H1 B1 E1 D1 A1 A2 A3 A6 A1(capt) H9 C1(capt) C8 E1(capt 4) F9 G1(capt)
+  H6 H7 G6 H5 J9 G5(capt 2) pass J1(capt 3) D2 E2 pass C2 pass D1 pass pass.
+  What worked: (a) C3/G3/E5, solid answers: C4 vs B4 approach, B3 corner shape,
+  G4 vs G5 press (lesson -15 applied), F4 under F5. (b) E6 + F6 CUT of White's
+  row-5 chain (F5-H5) from its F7 wall; then G7 (key point: cut + took its last
+  escape), J6 atari, H8, J8 -> chain had 2 libs vs my 3, J6 captured 9.
+  Before G7 the count was -12; the capture won the game. Look for a WHITE chain
+  wedged between my stones with <=4 libs and cut it off from its wall.
+  (c) Killing the bottom invasion (C2-E2, F1, G2-J2, B1): every white group had
+  2 libs; E1 throw-in (atari F1, forced D1), then A1 (atari B1) -> A3, A1 capture,
+  C1 capture, E1 capture 4, G1 capture. Throw-ins that put a stone in atari force
+  replies; read which white group runs out of libs first. My H1 placement stopped
+  the right-side eyes.
+  Careful: my top group G7-J8 dropped to ONE lib (J7) after White J9 - G5 capture
+  saved it. Check libs of the cutting group after each enemy move.
+
+- Game 46: vs 12k, White. LOST (resigned move 56; my 10-stone LEFT group captured).
+  Moves (B first): E5 C3 E3 G7 G5 D6 C7 C6 D7 E7 E6 F7 B6 C5 B5 C4 B4 B3 B8 G3 G2 H2
+  F2 G4 H4 H3 H6 J4 H5 H7 F4 D8 C8 E8 D2 C2 F6 D3 J5 J7 C1 B1 D1 G6 H1 J6 J3 D5 E4
+  D4 J2 D9 A3 A2?? B2(captures 10).
+  What went wrong: (a) THE BLUNDER: after black A3, my left group (B3-D6) had ONE
+  liberty (B2). I blocked at A2 "for territory" without counting -> captured.
+  libs.py at move 44 showed the group with 4 libs [A3 B2 D4 D5]; I then filled D5,
+  D4 myself and black took A3 -> 1 lib. Every move I fill MY OWN liberties
+  (D4/D5 boundary moves) must be followed by a recount. RUN libs.py EVERY MOVE.
+  (b) Opening: G7 (move 4) vs E5+E3 got pushed; black C7 invasion + B6/B5/B4
+  crawled down column B = my left group was a C-column wall with NO eye space
+  (only A1-B2). Lesson -16/-10 again: wall with libs only on 1st line.
+  (c) G3 invasion died (black G2 undercut, H4, J5, H1, J3, J2): 1-row edge strip.
+
+- Game 47: vs 14k, Black. WON B+16 (both passed, move 49). As Black now 6-14-1.
+  Moves (B first): C3 G7 G3 E5 C7 C5 D4 D6 D7 E7 B5 G4 H3 H4 F3 E8 D8 E9 E4 F4 C6 D5
+  C4 J3 J2 D9 C8 J4 H2 C9 B8 B9 B6 A8 A7 A9 F5 E6 G5 H6 H5 G6 J5(capt 5) F6 B4 J6 pass pass.
+  What worked: (a) C3/G3 + C7 (top-left corner on row 7, lesson from game 41), D4 vs
+  W's C5 split, C6 cut point, C4 solid. (b) Count at move 37 said ~-2 -> ran libs.py
+  and found W's center group C5-E5 at 2 libs (E6, F5) AND W's row-4 chain F4-J4 at 4
+  libs under my wall. F5 (atari + touching the chain), G5, H5 -> chain had 1 lib
+  while my running stones had 3; J5 captured 5 = game won. RUN libs.py ON WHITE
+  GROUPS TOO when the count is close: an enemy chain squeezed between my walls with
+  few libs is the winning target (same as games 37/45).
+  Solid choices that mattered: C8 (protect top group's libs) over capturing J3;
+  H2 connect; B6 before W cut B5 off.
+
+- Game 48: vs 12k, White. LOST (resigned move 52; 11-stone right invasion group died).
+  Moves (B first): E5 C3 F3 C6 F7 E7 E6 D7 D3 D4 E4 D5 E8 D8 E9 H5 G5 H3 H6 H4 G4 G3
+  G2 H2 G1 H1 E2 D6 C2 C4 B3 B4 A3 A4 B2 G8 F8 G7 H7 H8 G6 D9 J5 J4 J2 J6(capt J5)
+  J7 J3 J5(capt J6, ko) J1(capt J2) J2(captures 10) resign.
+  At move 36 the count was EVEN (44 vs 44) with my H-column group "alive" with interior
+  J1-J5 (a 5-point line along the edge, top end J6 OPEN). Then I spent G8/G7/H8 on a
+  hopeless top-right invasion (died, black G6 sealed it) and D9, while the right group
+  had NO formed eyes. Black J5 (hane on the open end) + J2 (vital point) killed it.
+  LESSON -21: an edge line of eye space whose END is open (J6 empty) is NOT a straight
+  five: the opponent's hane at the end (J5) shrinks it to 3 + vital point. As soon as
+  the group's interior is a single line, play the eye-splitting move (J2 or J3/J4)
+  OR block the open end (J5/J6) IMMEDIATELY — before any endgame or 2nd invasion.
+  Also: H5 invasion against E5/F3/F7 worked (got 11 stones of shape) but black G2/G1
+  undercut left only a 1-column strip (lesson -17 again: should have played G2 myself
+  at move 24 instead of G3, giving eye space in two directions).
+
+- Game 49: vs 14k, Black. LOST (resigned move 53, behind ~20 by count.py at move 45).
+  Moves (B first): C3 G7 G3 C7 E5 B5 C4 E7 G5 H6 H5 A3 B4 A4 B3 J5 J4 J6 C5 B6 A2 A5
+  D6 D7 F6 B2 C2 A1(capt A2) B1 C1(capt B1) D1 H4 H3 J3 G4 J4 E6 H2 G2 H1 G1 J2 G6 F7
+  H8 H7 F8 G8 E8 D8 B7 C6 resign.
+  What went wrong: (a) symmetric C3/G3 vs C7/G7: White got the row-7 wall = rows 7-9
+  (27 pts) FREE, plus it invaded BOTH my side edges: A3/A4/B5 on the left and
+  J5/J4->H4/J3/H2/H1/J2 on the right. My row-5 line meant I owned only cols B-H of
+  rows 1-5 = ~33. (b) J4 (move 17) blocking J5 was a 2-lib stone -> H4 cut it off
+  and White walked under my H3/G2 along the edge (lesson -4/-14 again). Should have
+  played H4 myself (solid, connected to H5). (c) A2 atari (move 21) also got cut off
+  by B2 -> lost the corner A1/A2/B1. Ataris from the outside that leave a 1-2 lib stone
+  on the 1st/2nd line just give White sente edge moves. (d) Top invasion F8/E8/H8 under
+  a complete row-7 wall: dead immediately (lesson -11).
+  Fix: vs C7/G7 (White on row 7) my 4th stone should be on ROW 6 (E6/D6) or take an
+  edge stone first (C7-side approach). Row-5 vs row-7 = 45-ish area for White before
+  edge invasions. Block edge crawls with SOLID connected stones (H4, B2-type), never
+  lone 1st/2nd-line ataris.
+
+- Game 50: vs 12k, White. LOST (resigned move 76, behind ~15). vs 12k as White 7-10-2.
+  Moves (B first): E5 C3 G3 G7 G6 F7 F6 D6 D5 C5 C4 B4 C6 D4(capt C4) D7 C7 B6 B7 B5 C4
+  D8 A5 E6 A6 D6 E8 E7 F8 H7 H8 H6 C8 D9 E9 J8 G9 C9 B8 B9 A7 E3 D3 D2 C2 E2 H9 A9 A4
+  A8 H4 H3 E4 F4 G4 F3 J3 A2 B2 A3 C1 D1 B1 H2 G5 F5 J4 B3?(B self-atari) A1(capt 3) A3
+  J9 J7 H5 J2 G2 J5(capt 7) resign.
+  What went wrong: (a) G7 (move 4) got attached at G6 and Black pushed F6/D5/C6/D7/E7/
+  H7/H6 = Black built a ROW-6 WALL right across the board; my stones ended on rows 7-9
+  (top) + a left group. D6 (move 8) got cut off and died. The top was only ~20 pts.
+  (b) MY 19-STONE LEFT GROUP HAD NO EYES: it was a ring wall (A4-A7, B7-C8, C2-E4)
+  whose only interior was the A1-B3 corner. Black A2/A3/D1 placements turned it into a
+  SEKI (2 shared libs) — I played B3/C1 type moves that left it at 2 libs. Count EYES
+  of the big group by move ~40: a group spanning the whole edge with no interior is
+  NOT alive. Should have made B2+B3 / A2 shape (eye points) early instead of E4/H4.
+  (c) H4 invasion under a complete row-6 wall + G3/E3: died (2-row strip, lesson -11).
+  Opening idea for next time vs E5 G3: C3 then C6/C7 (same side, games 12/22 recipe),
+  NOT G7 — the 2nd corner on the far side just gets pressed into a row-7 strip.
+
+- Game 51: vs 14k, Black. LOST (resigned move 77, behind ~16). As Black 6-16-1.
+  Moves (B first): C3 F6 G3 C7 E5 F4 F5 G5 E4 F3 G4 H4 E3 F2 G2 E2 D2 D1 F1 E6 E1(capt 4)
+  H6 H3 J4 C5 D6 C6 B7 B6 D5 D4 D7 G7 G6 E8 F8 G8 F7 H7 J7 J8 H9 J6(capt) J3 G9 F9 J7
+  J5 D8 A6 B5 A5 A4 A7 C4 J2 H2 H1 G1 H5 J1(capt) A3 B4 H1(ko) B3 J1 C8 B8 B9 H8 J9(capt 2)
+  H9 E9 C9 D9 H8(capt 8) resign.
+  What worked: vs W's F4 wedge between E5/G3: F5 cut, E4 solid, G4 cut, E3, G2, D2, F1
+  -> captured 4 (game 23/37 pattern again). Count at move 32 was ~-4.
+  What lost it: (a) top-right invasion G7/E8/G8/H7/J8/J6/G9/J7 ended as a SEKI
+  (my 7 stones + white H9 sharing libs H8, J9). Then White played H8 (self-atari), I
+  had to capture with J9 -> my eye space was H8+H9 = 2 adjacent points = ONE eye ->
+  White H9 again and the group (8 stones) died. A seki where the shared libs are
+  INSIDE my eye space is not stable: the opponent can sacrifice into it. J7 (move 47)
+  created that; I had no better shape though -> the invasion was too small anyway.
+  (b) Then White's 25-stone chain had only 3 libs (A8 E7 E9) but capturing my dead
+  group gave it 5 new libs instantly. Attack the big chain BEFORE the opponent can
+  capture something next to it, or it escapes by capturing.
+  (c) Earlier: after E5 F6 C7, White got the whole top rows 6-9; my row-5 line again
+  ~40 points max. Same story as games 41/49: vs White F6+C7 (row 6-7) I should
+  play move 5 on row 6 (e.g. D6/E6) or C6 approaching C7, not E5.
+
+- Game 52: vs 12k, White. LOST (resigned move 38; 8-stone top-left group captured).
+  Moves (B first): E5 C3 G7 C6 D7 C7 D6 E3 G4 F3 G3 G2 H2 D8 E8 C8 D9 C9 E9 E4 F5 D4
+  C5 D5 B5 B6 A6 A7 A5 B4 A8 B7 B9?? (my group C6-C9,B6,B7,A7,D8 had ONE lib: B8,
+  and B8 was suicide for me) A4 B8(capt 8) C7 B7 resign.
+  At move 20 count was W 41+7 vs B 40 = AHEAD. Opening C3/C6/C7/E3/F3/G2 + D8/C8/C9
+  was good. THE LOSS: my top-left group was a 1-column-wide wall (B6-B7-C6..C9-D8)
+  with libs only on B-column; black's chain B5/C5 + A6 + A8 + B9 filled them from
+  outside. B7 (move 33, connecting A7 in atari) left the group at 1 lib + B8 suicide.
+  Better move 31/33: B8 myself (eye shape, libs A9/B9 area) or let A7 go and play B8.
+  Also move 31 B4 (attacking the black chain) was wrong order: black's chain had 4
+  libs while my top group had 4 too — I should have secured the group's eye space
+  (B8/A9 shape) first. RUN libs.py BEFORE every move once groups touch: never done
+  this game, and a liberty count would have shown 2 libs after A8.
+
+- Game 53: vs 14k, Black. WON B+10 (both passed, move 70). As Black now 7-16-1.
+  Moves (B first): C3 C6 G6 G3 E3 G5 F5 F4 E4 E5 F6 E6 F3 G4 E7 D8 D5 D6 C5 H6 G7 H7
+  G8 H8 E8 E9 F9 D9 D7 C7 C8 B6 C9(capt 3) B5 C4 B4 B3 B8 B9 A8 A7 B7 A4 A5 A3 F2 A9 E2
+  A6(capt 12!) D2 C2 D3 D4 C1 B1 D1 G9 H9 B2 G2 E5 pass F8 pass D8 H5 A5 pass pass.
+  What worked: (a) C3 + G6 (3-4 point on the other half's top) vs W C6/G3; E3 extension
+  attacking G3; F5 hane, E4/F3 pressing, E7 hane at the head -> W's center chain
+  C6-E6 was squeezed between my walls. (b) libs.py on WHITE: D8-D9-E9 had 2 libs ->
+  C8 double threat captured 3 (C9). (c) W's 8-stone left chain (B4-B6,C6,C7,D6,E5,E6)
+  had only A-column eye space: B9 (deny top), A7 placement, A4, A3 (save A4), A9 ->
+  only one lib left -> A6 captured 12. One-column edge strips have no two eyes; kill
+  them by placing at the ends and taking shared libs from the SAFE side first.
+  Before the kill, the count was -5; after it +10. Again (games 37/45/47): hunting a
+  white chain squeezed between my groups wins games as Black.
+
+- Game 54: vs 12k, White. LOST (resigned move 62, behind ~12; top invasion died).
+  Moves (B first): E5 C3 G7 G3 C7 C5 F4 E3 F3 F2 G4 H3 D5 D4 C6 B5 B6 H4 H5 E7 D7 F8
+  G8 F7 E4 F6 G5 G6 H6 D8 C8 E9 C9 D9 A5 G9 H9 H8 F9(capt G9) H7 E8(capt 3!) G9(capt 2)
+  G8(capt) G7 G9 E9 D9 B4 A4 A3 A6 J9 J8 J7 E2 J9 E9 D3 G2 H2 F1 resign.
+  What went wrong: (a) after E5 G7 my C3+G3 bottom vs Black's C7+G7 top: Black's F4/F3
+  wedge between E3/G3 and D5/C6 presses left me only rows 1-4 (~35+7 vs 46). Black
+  owned the row-5 line; my E3 (move 8) let F3 wedge in. Better move 8: F3 myself? or
+  E4 (keep the E-F line).  (b) Top invasion E7/F8/F7/F6/G6/D8/E9/D9 had no eye space:
+  black C8/C9 made D9 false. (c) BLUNDER move 40: H7 (good semeai move) ignored that my
+  D8-D9-E9 string had ONE lib (E8) after Black F9 -> E8 captured 3 and the eyes vanished.
+  Lesson -20 again: run libs.py EVERY move once groups touch — I skipped it at move 40.
+
+- Game 55: vs 14k, Black. LOST W+4 (both passed, move 61). No group of mine died;
+  this was a territory loss. As Black: 7-17-1.
+  Moves (B first): C3 G7 G3 C7 E6 E7 C6 B7 G6 H6 G5 H5 H4 F7 B6 F6 F5 D6 E5 D7 D5 A6
+  B5 A5 A4 A7 J5 J6 J4 B4(atari A4 + B5-C6 at 1 lib!) C5 H7 B3 A3 C4 A4 B2 A2 B1 A1
+  E8 F8 D8 C8 H8 H9 J8 G9 G8 F9 E3 D9 E2 E9 E1 J9 E4 J7 pass pass.
+  The row-6 plan (E6, C6, G6 vs W's row-7 wall) worked: I got rows 1-5 + B6/C6/E6/G6.
+  But W's F6/D6 wedges forced F5/E5/D5 (gote), then W crawled down the LEFT EDGE:
+  A6, A5, B4 (put A4 in atari AND my B5-B6-C6 group at 1 lib), A3, A2, A1 = W got
+  the whole A column + B4 (~7 points). That was the 4-point loss.
+  (a) A4 at move 25 was a lone 1st-line block that B4 cut off at once; lesson -14/-49
+  AGAIN. Better: B4 solid (connected to B5) — keeps A4/A3 mine and makes no cut.
+  (b) Count at move 39 said 42 vs 39+7 = -4; W's top (rows 8-9, 2 rows deep behind a
+  complete row-7 wall) was unkillable; probes E8/D8/H8/J8/G8 all died (free, no gain).
+  Row-6 vs row-7 = W gets 27 + edges; I need EVERY edge point (A/J columns) to win.
+  Next as Black: 14k again; same C3/G3/E6 idea but block edge crawls one line IN
+  (B4/H4) and solidly; maybe answer W's hane H6 with H5 not G5.
+
+- Game 56: vs 12k, White. LOST (resigned move 44; 12-stone right invasion died).
+  Moves (B first): G7 C3 F3 C6 E5 D7 E6 D6 D2 C2 D3 D5 D4 C4 E8 E7 F7 D8 E9 H4 H2 H3
+  F2 G5 G6 H6 H7 H5 F5 J2 H1 G3 G2 J7 J8 J6 H8 J4 J1 F4 E4 G4 J3(capt J2) resign.
+  (a) Opening C3/C6/D7/D6/C2/D5/C4 + E7 cut/D8 = solid left (~33), but Black's
+  G7/F3/E5/E6/D2-D4 got everything else -> invasion needed by move 20 (correct).
+  (b) H4 invasion: Black H2 UNDERCUT at once. Then H2 could never be captured
+  (connects via G2 to F2), so every bottom eye (J3, J1) was FALSE: J2 stone always
+  atari-able by J1. The only other eye area G4 had two black diagonals (F3, F5) =
+  false. The group had exactly ONE real eye (J5). Upper end got sealed by H7/J8.
+  LESSON -26: when invading between stones, after the opponent's undercut (H2 under
+  H3/H4), count REAL eye points immediately: if the 2nd-line enemy stone can't be
+  killed, the edge eyes next to it are false. Then the invasion needs eyes UPWARD
+  (2 rows wide, e.g. G5+H6+J7 shape early, before H7). Better choice at move 20:
+  invade at the 3-3 under the LONE stone with most room (G3/H3 corner under F3
+  before H2 exists, i.e. H3 directly, or G8/H8 under G7) so the corner itself is mine.
+  Also: moves 24-28 (G5, H6, H5) were slow shape moves while Black took H2/F2/F5.
+
+- Game 57: vs 14k, Black. LOST (resigned move 55, count 37 vs 44+7). As Black 7-18-1.
+  Moves (B first): C3 F6 G3 C6 E4 G5 G4 B4 C4 C5 B3 A5 D5 F5 E5 D6 H4 F4 F3 E3 E2 E6
+  D3(capt) H5 H7 G7 H6 G6 J5 H8 J4 J7 J6 J8 C8 B7 E8 F8 E7 B8 C7 A3 D7 A2 D9 F9 B2 B9
+  A1 A4 B1 B6 E9 C9 resign.
+  (a) vs W F6+C6 (row 6) I played E4 (row 4, per lesson -13): safe, but W then took
+  ALL of row 5 too (G5, C5, F5, H5, D6/E6) -> I had rows 1-4 only = ~37. Row 4 is too
+  low; row 5 is cut. => vs two row-6 stones, Black must get a row-6/7 stone FIRST
+  (move 3 at G7/C7-type corner on the top, not G3), i.e. C3 F6 -> play the top
+  corner the White stone doesn't cover (C7? G7?) and decide the bottom later.
+  (b) H7 invasion connected out (H6, J5, J4, J6) = small gain only; C8 invasion (top
+  left, 6x3 under a row-6 wall + B7/B8 W) died: one eye D8, C9 taken by W. Same as
+  lessons -11/-41: 3-row strips under a full wall don't live vs 14k.
+  (c) W's 11-stone chain had only 4-5 libs at move 43 but escaped by connecting to
+  its top-right group (G8) - check escape connections before planning a race.
+
+- Game 58: vs 12k, White. WON W+8 (both passed, move 60). vs 12k as White 8-12-2.
+  Moves (B first): E5 C3 F3 C6 F7 E7 E6 D7 E8 D8 E9 D4 E2 D2 E4 H5 G6 H3 G4 H4 J2 H2
+  G5 G3 F1 H6 H7 J6 J7 J3 G2 H1 D1 D3 C1 C2 B2 B3 A2 A3 B1 D6 D5 C5 D9 C8 C9 B8 B9 A8
+  A9 G1 F2 E3 F4 J1(capt J2) F8 pass pass.
+  What worked: (a) C3+C6+E7/D7/D8/D4/D2 = left side (~37 incl. stones); count said
+  invasion needed -> (b) invaded H5 at move 16 (EARLY, right side still empty), H3,
+  H4 solid connect, H2 (killed J2 undercut), G3 base, H6 + J6 (blocked the open top
+  end at once, lesson -21), J3 (split eye J4/J5 from bottom), H1 (made J2 dead
+  without ko) = two real eyes J4J5 + J1/J2. (c) Endgame all SOLID per lessons -9/-14:
+  D3 (fixed D2 2-lib cut point), C5, C8 not C9, B8 not B9, A8 not A9 (each hane
+  would have been a 1-lib stone). Ran libs.py/count.py at moves 34, 42, 58.
+
+- Game 59: vs 14k, Black. WON B+2 (both passed, move 43). As Black now 8-18-1.
+  Moves (B first): C3 E5 G3 E7 G6 C4 D3 D4 F4 E4 E3 F5 G5 F6 G7 B3 C2 B2 B1 B4 F8 E8
+  F7 A2 F9 E9 C1 E6 A1 pass G4 pass C7 B7 C5 B6 C6 C8 D8 D7 pass pass.  Final 45 vs 36+7.
+  Clean, no weak group; White (vertical E5-E7 line) got cols A-E, I got F-J + bottom.
+  (a) vs C3 E5 G3 E7: G6 (claim the right side) was good; D3 solid vs C4 attach,
+  F4/E3/G5/G7/F8/F7 = solid boundary. (b) MY MID-GAME ESTIMATE WAS WRONG: I guessed
+  +16 at move 25 but count.py said only +2 at the end. White's left region (A5-D9) was
+  bigger than I thought. Use count.py with a filled-in guess board, not mental math.
+  (c) Late C7 probe in W's top-left died (free, no gain). Margin was thin: E9/F9 top
+  edge (W got E9) and B3/B2 left-corner hanes gave White 2-4 points. Next time vs
+  B3 hane try B2 block (more points) when my group is strong.
+
+- Game 60: vs 12k, White. LOST (resigned move 56, count.py -14). vs 12k as White 8-13-2.
+  Moves (B first): G7 C3 G3 D6 C7 D7 C6 C5 D8 E7 E8 F5 G5 F3 F4 E4 G4 E5 F7 E3 B6 B5
+  A5 B4 A4 A3 A6 C8 B8 G6 F6 E6 H6 H3 G2 H4 H2 H5 J6 F2 F1 E1 G1 F8 G8 D9 F9 J2 D1
+  H1 G6 E2 J1(ko) D2 C9 resign.
+  What went wrong: (a) Black invaded my top-left at C7 (move 5) right after G7 G3 C3 D6;
+  my D7 contact + E7 let Black get C6/C7/B6 AND D8/E8 = whole top + left top. My D6 was
+  too loose (D6 between C7-invasion and the top). (b) F5/F3 toward Black's G-column got
+  F4 wedge -> E4/E5/E3 = 3 gote moves; Black kept G-column wall + right side. Count at
+  move 28 was -10 with no invasion room (right strip only 2 columns wide: H3 group died).
+  (c) C8 cut (move 28) failed: Black's B8 atari and later C9 capture always gave libs.
+  Fix vs G7+G3 (Black owns right): play C3 + C6/C7 (cover the top-left 3-3 area so no
+  C7 invasion), then E-column; or invade the right EARLY (H5 at move 6-8) while it is
+  open, as in game 58.
+
+- Game 61: vs 14k, Black. WON B+4 (both passed, move 60). As Black now 9-18-1
+  (2 in a row vs 14k).
+  Moves (B first): C3 C7 G7 E5 G3 C4 D3 B4 D4 D5 F5 F7 F6 E6 E4 B3 B2 F8 G8 G9 H9 F9
+  E7 E8 D7 D8 H8 A2 B1 A3 C2 C5 A1 D6(capt 2) H5 F3 F4 G2 F2 E2 E3(capt) F1 F3 H2 H3
+  J3 J4 J2 D2 E1 D1 pass G1(capt 3) pass H1 C8 J1(capt 4) pass pass.
+  What worked: (a) vs W C7 (row 7) I took the OTHER top corner G7 (lesson from game
+  57), then G3 = three corners; W tengen + C4 attach -> D3 solid, D4 hane at the head
+  of two stones, F5 block, F6 (cut F7 off from E5), E4 solid connect = whole right
+  half + bottom. Count at move 23: ~+6. (b) Killed W's bottom invasion F3/G2/E2/H2/J3:
+  F4 connect, F2 split (wedge between the two invaders), E3 capture, H3/J4 seal,
+  D2/D1 ataris, G1/H1/J1 captures. Splitting invaders with a connected stone works.
+  Mistake: E7 probe (move 23) into the shared lib of two white groups looked good but
+  W E8 put it in atari at once (E7 had only 2 libs) -> lost E7/D7, cost a tempo and
+  ~2 pts. Lesson -14 again: a cutting stone with 2 libs gets atari'd; read W's
+  atari-from-the-strong-side reply first.
+
+- Game 62: vs 12k, White. LOST (resigned move 64; 16-stone LEFT group captured).
+  Moves (B first): E5 C3 G7 C6 C7 D6 D7 G3 E6 D5 D4 C5 C4 B4 B6 B5 B7 D3 E4 B3 E3 E2
+  F2 F3 D2 C2 E1(capt E2) F4 F5 G5 G6 H5 H6 G2 G1 H1 F1 J6 J7 J5 A5 A4 A6 C1 A2 B2
+  H2 H3 J1(capt H1) J2?? J3(capt) J4 H1 J2(capt) E2 J3 A1 A3 D1 B1(capt 2) A2 A1(capt)
+  A2(captures 16) resign.
+  Count at move 44 was ~-3 (close). What went wrong:
+  (a) Opening: C6 got attached at C7 and D6/D5/C5/B4/B5/B3 were 6 gote moves to keep
+  the C3/C6 group alive (black D4/C4 wedge between C3 and C6 left C6-D6 at 2 libs).
+  vs E5 G7, C3 + C6 leaves the C4/D4 wedge; maybe C3 + C5/D5 instead, or answer C7
+  attach with B7/D7 hane after checking libs.
+  (b) J2 (move 51) was a SELF-ATARI (1 lib J3) — again didn't check own stone's libs.
+  (c) THE LOSS: my left group's eye space was only the corner A1-B1-A3 with black A2
+  inside, and black D1 removed the last outside lib. Black's A2 throw-in then A2
+  RE-throw-in after my A1 capture took 16 stones (no ko: it captures many). I played
+  J3 (1-2 pts) at move 56 instead of D1 — D1 was the life-and-death point.
+  LESSON -27: a big group with NO outside libs and a 3-point corner interior (A1,A2/A3,
+  B1) containing an enemy stone is DEAD SHAPE unless I keep an outside lib. Count the
+  group's libs after the opponent's best move (D1) BEFORE any endgame move elsewhere;
+  libs.py showed libs=3 [A3 B1 D1] at move 56 — 3 libs, all shrinkable = urgent.
+
+- Game 63: vs 12k, Black. DRAW (both passed, move 49; 44-44 by area). As Black vs 12k:
+  0 wins, 2 draws (games 39, 63).
+  Moves (B first): C3 G7 C7 G3 E5 F4 E4 E6 D6 F5 E7 F6 E3 E8 D8 F7 D7 E9 F3 F2 E2 G2
+  D9 F8 H5 G4 H7 H6 J6 G6 H8 H4 G8 J4 J7 G5 F1 G1 E1 J2 G9 J9 J8 J5 H2 H3 pass pass.
+  (a) C3 + C7 (left side) vs W's mirrored G7/G3, then E5/E4/D6/E7/E3/D8/D7 = column E
+  dividing line, F3 hane + E2 + D9 + F1/E1 = cols A-D + E column + F1/F3 = 44. No weak
+  group all game. Count at move 25: -2 -> needed an invasion.
+  (b) H5 invasion (move 25) into W's right side (G7/G3 + F-wall) died: W G4, H6, H4, J4,
+  G5 sealed it; top-right part (H7 H8 G8 J6 J7) had only one eye (corner J9 bent three).
+  It cost nothing, but gained nothing either. W wasted J2 (slack) — still a draw.
+  (c) What would give the extra point: the opening is EVEN when both sides take one
+  half; W's E6 attach + E8/E9 got the top E column and F2/G2 the bottom. Next time try
+  F7/E8-type top moves earlier (e.g. D8->E8 myself at move 15) or answer E6 with F6?
+  Alternative: invade the right EARLIER (move ~11-15) before W's F-column wall is done.
+
+- Game 64: vs 12k, White. LOST (resigned move 44; 6-stone right invasion captured).
+  Moves (B first): E5 C3 G6 C6 F3 E7 F7 E6 F6 D5 E4 D4 D3 D2 E8 E3(capt D3) D7 D6 C7
+  B7 D8 H3 G3 H5 H2 H7 E2 D3 F2 H4 H6 G4 F4 G5 F5 J6 G8 H8 J3 J4?? J5(capt 6) J7 H5 resign.
+  Opening was fine (D2 undercut + E3 captured D3). Count at move 22: ~-10 -> invaded H3.
+  THE LOSS: at move 41 my 6-stone group G4-G5-H3-H4-H5 had libs J3(black now), J4, J5.
+  I played J4 "to make an eye at J5" WITHOUT running libs.py -> group had ONE lib (J5),
+  Black J5 captured 6. Correct was J5?? no — correct: run libs.py; group had 2 libs
+  (J4, J5) after black J3, it was already a lost semeai, OR earlier (move 35) G5 let
+  Black F5 connect everything and my group was left with 3 libs and no eye space.
+  LESSON -28: "make an eye" moves INSIDE a group with <=3 libs fill a liberty. Before
+  ANY move, run libs.py on the board AFTER the move. I skipped libs.py from move 36 on.
+  Also: invasion H3 + H5 + H7 = three separate stones; black H2/H6 split them.
+
+- Game 65: vs 12k, Black. LOST W+4 (both passed, move 94). As Black vs 12k: 0-?-2.
+  Moves (B first): C3 D7 G7 F3 E5 C5 D4 D2 E3 E2 D3 F5 F4 G4 E4 G2 F6 G5 G6 E8 H5 H4
+  H6 C2 E6 B3 E7 F8 G8 G9 H9 F9 D6 C7 C6 B6 F7 C8 H3 J3 J4 J5 J6 J4 D9 C9 B8 H8 H7 J9
+  J8?? J7(capt, ko) B7 B4 J8(capt J7) H9 B9! J7(capt J8) D8(capt 4) A7 E9 A8 J8(capt 8)
+  A6 J2 G3 H2 H1 G1 F1 C4 B5 D5 J1 A9 B2 H2 J2 C8 H3 D7 F9 F8 H9 G9 H8 J9 H9 H8 pass
+  C1 D1 pass pass.
+  (a) Opening: W's D7/F3 diagonal + C5 + D2 undercut + F5/G4/G2 gave White the WHOLE
+  bottom (rows 1-3) AND the left; my stones became a center wall (D3-F4-E5-G6) again.
+  At move 39 count.py said 29 vs 52+7 = -30. E3 (move 9) cutting D2/F3 was fine, but
+  then I answered every W move with a solid center move while W took edges (lesson -2/-4).
+  (b) COMEBACK: W's top stones E8/F8/F9/G9 had only 2 libs (D8, E9) and C7-C9-D7 had
+  2 libs (B9, D8). B9 (filling the C-group's OTHER lib from outside) made D8 a capture;
+  D8 took 4, E9 + J8 took 8 more -> from -30 to -4. Look for two adjacent enemy groups
+  that share a liberty (D8): take each group's private lib first, then the shared one.
+  (c) BLUNDERS: J8 (move 51) was a 1-lib self-atari (no libs.py run). After W B4 my
+  20-stone wall had only 2 libs (C4, D5) — libs.py caught it. H3/J4/J2/H2/G1 probes in
+  W's bottom-right all died (free under area, but no gain).
+  Next as Black: 14k again (12k as Black still winless); vs a diagonal W answer, take
+  a 3rd-line EDGE point on the bottom (e.g. E3/F3 area) before W does.
+
+- Game 66: vs 12k, White. DRAW (both passed, move 44; 37+7 vs 44). 8-15-3 vs 12k as W.
+  Moves (B first): E5 C3 G7 C6 D7 F3 G4 G3 F4 D4 C7 D6 E6 D5 B6 B5 B7 H3 E4 E3 A5 B4
+  A4 A3 A6 H4 H5 H7 H8 H6 J5 J4 G6 E7 E8 C8 F7 B8 D8 D9 E9 pass pass.
+  Solid, no weak group, no blunder (D6 hane at head of C7 attach, D5 connect, B5/B4
+  solid blocks, A3, E3 vs E4 cut, H3/H4). Count at move 26 was already EVEN (37 vs 44)
+  and nothing was left: probes H7/H6 (lost semeai by 1 tempo: black J5 + G6),
+  E7, C8/B8/D9 all died for free. The point was lost in the OPENING: black's G4 +
+  F4 + E4 kept the bottom-right to rows 1-3 only, and black's C7/B6/B7/A5 crawl took
+  A4-A6 from my left. Next time vs E5 G7: after C3 C6 D7, maybe play C7/B7 myself
+  (top-left edge) before F3, or after G4 answer with H3 corner (not G3 contact)
+  and invade the right side H5/H6 EARLY (move ~12) before G6/J5 seal it.
+
+- Game 67: vs 14k, Black. LOST W+4 (both passed, move 55). As Black 9-19-1.
+  Moves (B first): C3 F7 G3 C6 E5 G6 G5 H5 H4 H6 C5 B6 E6 F5(wedge, G5 in atari) G4 F6
+  F4 E7 D6 D7 D5 B5 B4 A4 A3 A5 J5 J6 J4 pass H8 G8 H7 H9 J8 C7 B8 A7 C8 A8 D8 B9 C9
+  A9 E8 F9 F8 E9 G7 G9 D9 B7(capt 7) pass pass.  Final 42 vs 39+7.
+  No group of mine was ever weak; boundary settled at move 30 with White passing =
+  pure territory loss of 4. (a) G5 contact under G6 (move 7) + H4 let White take
+  H5/H6/J6 and wedge F5 (G5 instantly in atari -> G4 gote). (b) Again rows 1-5 vs
+  White rows 6-9: ~42 max. Same as games 41/49/51/55/57: vs W F7+C6 (rows 6-7)
+  my E5 row-5 line loses by ~4. NEXT TRY: after C3 F7 G3 C6, play move 5 on the TOP
+  (e.g. D7/E6 row 6-7 between C6 and F7, or G7-ish approach) BEFORE White's G6.
+  (c) Both late invasions (H8/H7/J8 and B8-F8) lost a semeai by exactly one tempo;
+  14k answered every move correctly. They cost nothing, but don't expect them to work.
+
+- Game 68: vs 12k, White. LOST (resigned move 44; 15-stone left group had ONE eye).
+  Moves (B first): F5 C3 C5 E7 F7 E6 F6 E5 F4 E4 C6 D7 C7 C4 C8 H3 F3 H5 E3 D3 B4 B3
+  B5 H4 H6 G2 F8 E8 D2 C2 E1 D8 D5 D4 E9 B2 C1 B1 D1 B7 D9 B6 B8 resign.
+  What went wrong: (a) vs F5, C3 then E7 left a gap at C5; Black's C5-C8 column lived
+  INSIDE my left side, so my stones became a ring (B3-C4-E4..E8-D8) around a black
+  group = a wall with no interior. Its only eye space was the A1-A3/B1 corner.
+  (b) Black's D2 undercut + E1 + C1 + D1 took the corner's bottom: C1/D1/D2/E1 chain
+  always escaped through E2 (connection to E3), so it could never be captured.
+  Corner shrank to A1-A3 = one eye. Black D5, D9 filled the other libs.
+  LESSON -29: when Black lands a stone INSIDE my side (C5 here, between C3 and E7),
+  deal with it at once, from the edge side: the group I build around it has
+  NO eyes of its own. Better at move 4: C5-side answer (C6/D5 attach, or D6) so the
+  left stays one piece, not E7. Also D2 should have been my move (C2/D2 base) before
+  Black's D2 undercut: make the corner group's eye space BEFORE taking D8/E8.
+  (c) The H3/H5/H4/G2 invasion of the right was fine, but the game was decided on the left.
+
+- Game 69: vs 14k, Black. DRAW (both passed, move 68; 44-44 by count.py). As Black 9-19-2.
+  Moves (B first): C3 F6 C7 F3 E5 D6 E6(cut) E7 D5 D7 C6 F5 E4 E3 D3 D2 C2 D1 F4 G4
+  E2?? F2 D8 E8 C8 G6 H7 G7 G8 F7 F8 H6 H8 D9 C9 E9 F9 E1(capt E2) H9 J7 J8 J6
+  H3 G3 H4 H2 H5 G5 J2 H1 C1 J1 G1 J3 G2 F1 D4 A8 B7 pass B8 J5 A7 pass A9 pass pass.
+  (a) C3 + C7 (both left corners on 3rd line, per game-57 note) vs W F6/F3 = even
+  opening; E5/E6 cut + D5/C6/E4/D3/C2 gave cols A-D + E4-E6. (b) E2 (move 21) was a
+  1-lib blunder-ish: W F2 put it in atari at once (lesson -14 again) - cost the
+  bottom E/F points. F4 cut before it was good (stopped W F4 atari on my 2-lib group).
+  (c) Top-right invasion H7/G8/F8/H8 LIVED: key was F9 (block the open end next to
+  W E9), then vs W J7 hane: J8 atari, W J6, H9 = straight-three middle -> eyes G9+J9.
+  (d) Count at move 43 (after life) = exactly 44-44. Bottom-right H3 invasion died
+  (W G3/H2/G5 sealed; race vs 20-stone chain with 4 libs E2/F1/G2/J5 unwinnable since
+  F1/G2 were self-atari points). Nothing else to gain -> draw.
+  Next as Black: same C3+C7 opening was fine; avoid E2-type 2-lib wedges; find 1 more
+  point in the opening (e.g. D8 earlier, or F4 cut at move 13 instead of E4?).
+
+- Game 70: vs 12k, White. LOST (resigned move 56; 9-stone top-right invasion died in a ko).
+  As White vs 12k: 8-17-3.
+  Moves (B first): E5 C3 G3 C6 E7 E3 E4 D4 D5 C5 C8 C7 D8 G7 G6 H6 G5 F7 F6 H7 F8 G8
+  F9 G9 J8 H8 J9 J7 H5 H9(capt 2) B7 J5 J4 B6 A7 A6 F3 E2 F2 B8 E1 D2 D1 C1 F1 D3
+  J6(ko) E9(threat) E8 J5(retake) B9(threat) H4?? J6(capt) J3 J5 resign.
+  Left side was fine (C3/C6/C5/C7/D4/E3/E2/D2/C1/B8 = ~30 + 7). Count with the top-right
+  alive said W+13. The invasion G7 (move 14, early = good) died because its eye space was
+  only the corner: after B's G5 + H5 the bottom was sealed; interior = J8,J9 (one 2-pt eye)
+  + J6 (needed J5 AND J4 to be real). B's J8/J9 placement + H5 + J4 made it a ko I could
+  not win (no ko threats; B had B9/A8/D9).
+  LESSON -30: invasion at G7 with B stones at E7/G6: the second eye must come from the
+  SIDE (H5/J5 area). When B played G5 (move 17), H5 myself (or at move 21 instead of H7)
+  was the life move; H7/G8/G9/H8 all made eye space only in the 2x3 corner. Rule: an
+  invasion group needs eye space in two directions BEFORE the opponent seals one; after
+  each opponent move, list the group's interior points — if <6 and the open end is
+  about to close, play the open end first. Also: a ko for a whole group = lost if I have
+  no threats; remove the opponent's threats is too slow — avoid the ko shape entirely.
+
+- Game 71: vs 14k, Black. WON B+2 (both passed, move 64). As Black now 10-19-2.
+  Moves (B first): C3 E5 G3 D7 G6 C4 D3 E3 F3 E4 E2 G5 G4 H6 F6 F5 H7 H4 H3 J5 F7 E7
+  F8 E8 D4 D5 B4 C5 B5 B6 B3 F9 G9 E9 G8 J3 J2 J4 E6 D6 J6?? J7(capt) J8 H5 J6(capt)
+  H2 G2 J1 J7 A5 A4 A6 H1 F4 J2(capt 2) C8 B8 B7 D9 C9 H9 D8 pass pass.
+  What worked: (a) C3/G3 + G6 (top-right 3-4) vs W E5/D7; F3 block vs E3 wedge, E2
+  underneath (took base), G4 solid vs G5 wedge, F6/F7/F8/G9/G8 = top-right mine.
+  (b) D4 cut + B4 atari + B5 hane + B3 solid = left-bottom grew to row 5.
+  (c) J2 atari then J8 atari -> captured J7 and later 2 stones at J2 (W didn't connect).
+  Mistakes: J6 (move 41) was a 1-lib stone (only lib J7) — W captured at once;
+  I'd read "W must answer H5" but forgot W can just capture. Lesson -14 AGAIN: count
+  the libs of the stone I play, not only the enemy's. G2 before J7 was right (my F3
+  chain would have dropped to 2 libs). count.py at move 57 said +2 = final result.
+
+- Game 72: vs 12k, White. WON W+34 (both passed, move 54). Biggest win so far.
+  Moves (B first): E5 C3 C2 D2 B2 B3 A3 A4 B4 A2(capt A3) C4 D3 E4 G3 D4 G7 F7 G5 E6 F4
+  E7 G6 F8 G8 E8 F5 F9 G9 E9 E3 D9 F6 D6 A5 B6 C1 C6 B5 D5 A3 D7 A6 D8 A7 B7 C5 A8
+  B1(capt 2) C7 F3 B9 pass pass.
+  What worked: (a) vs Black's C2 attach under C3: D2 hane, B3 block, A4, then A2
+  CAPTURED A3 (it was in atari) -> Black's B2C2 left with 2 libs = dead; D3 solid
+  connect when B3C3 had 2 libs. (b) Black walled row 4 (B4-E4) facing up, so I took
+  the open RIGHT side early: G3 (move 14) then G7 + G5 + G6 (solid G-column,
+  connected to F4/F5) = whole cols F/G-J. Black only got A-E rows 5-9 (~27).
+  (c) Endgame solid: G8/G9 blocks, E3, F6, then A5/A6/A7/B5 pushes up the A column.
+  Key idea: when Black builds a wall facing an empty side, claim that side at once
+  with a connected line of stones (G3-G5-G7 then fill G6), not a lone invasion.
+
+- Game 73: vs 14k, Black. LOST (resigned move 49). As Black 10-20-2. I took over at
+  move 23 (earlier session's moves unknown). White's row-5 chain A5-D5-D4 cut my left
+  side in two; my bottom-left group (B2-B4,C1,C3,C4,D1-D3) had eye space only B1/C2,
+  and the white A2-A5 chain next to it made B1 FALSE (W A1 kills; best I had was a
+  ko). Then W F7/E8/G8/F9 cut the top apart: F8 got captured, and my G7-H7-J7 right-top
+  group had 1 lib after W J5 + H9. Mistakes I made after taking over: H3 invasion (move 39)
+  was a tempo spent while the top boundary still had cut points (E8, G8); J6 (move 45)
+  was a 2-lib hane that W J5 put in atari. Before invading, fix the cutting points
+  of my own boundary (lesson -9).
+  NOTE: always write the move list into this file during the game (game 30 lesson) —
+  this session could not reconstruct moves 1-22.
+
+- Game 74: vs 12k, White. LOST (resigned move 42; right-side invasion died). vs 12k as W 8-18-3.
+  Moves (B first): G7 C3 F5 C6 C7 D6 D7 E4 G3 F4 G4 E6 E7 F6 G6 F3 B6 B5 A6 E5 G5 F7 F8
+  H3 G2 H5 F2 E2 E1 D2 D1 C1 F1 H2 H4 H6 J5 H7 H8 J7 J8 resign.
+  (a) Opening: G7 + F5 (center) + C7 attach on my C6. D6 solid then Black D7/E7 took the
+  whole top; my E4/F4 pushes UNDER F5/G4 gave Black a G-column wall facing the right =
+  Black got top rows 7-9 AND cols G-J. At move 22 I was ~-8 to -12 (area ~30+7 vs ~49).
+  (b) The F4/F3/E5/F6 moves were all from the "inside" pushing Black outward to the
+  empty right side (lesson -4 in reverse: I pushed Black INTO the open area).
+  (c) Invasion H3/H5 (move 24) between G3-G7 wall: only a 2-column strip; Black G2, H4
+  (connected to G4!), J5, H8 killed both halves. A strip 2 columns wide next to a full
+  wall never lives. I misread H4 as self-atari — it touched G4.
+  Fix next time vs G7+F5: answer F5 by taking the bottom-right corner G3/F3 side
+  myself EARLY (move 4: e.g. G3 or F3) instead of C6, since C3 already holds the left;
+  the empty side next to Black's center stone is the big point.
+
+- Game 75: vs 14k, Black. LOST W+8 (passed out, move ~62; count.py 40 vs 41+7).
+  Moves (B first): C3 G7 C7 G3 E5 D3 D4 E3 E4 F3 F6 G6 F7 F8 E8 G8 G5 H5 G4 H4 F4 C2
+  B3 B2 A3 A2 F9 G9 E9 B5 C4 B7 C6 pass H7 H6 H8 J7 E2 F2 D2 D1 B6 E7 E6 H9 D7(capt)
+  J8 E7 E1(capt 2) B8 C1 A7(capt) H3 C5 pass B4 pass A5(capt) pass.
+  No blunder, no weak group; pure territory loss decided by move 27 (count -10).
+  (a) W's D3 attach on C3 + E3/F3 = White got a row-3 chain D3-G3 and the WHOLE
+  bottom rows 1-2 (incl. under my C3: C2/B2/A2). My D4/E4 "hane on top" built a row-4
+  wall = lesson -4 AGAIN (blocking from the center side while W takes the edge).
+  Better at move 7: D2 undercut / C2 (keep the corner's base) or E3 myself blocking
+  W's extension toward G3, so W's D3 is the weak stone.
+  (b) Top-right: F6/F7/E8 vs G6/F8/G8 split the top at column F; fine. G5/G4 good.
+  (c) Probes H7/H8 (2-wide strip) and E2/D2 (under a row-3 chain) died - free, no gain.
+  Next as Black: vs W's D3-type attach on C3, answer UNDERNEATH (D2) or C2 hane; keep
+  rows 1-2. C3+C7 left side is OK, but I must also get part of the bottom edge.
+
+- Game 76: vs 12k, White. LOST B+2 (both passed, move 52). vs 12k as White 8-19-3.
+  Moves (B first): E5 C3 G7 C6 G4 E3 D7 C7 F3 E4 F4 D5 E6 D6 D8 C8 C9 B8 F7 B9 E2 D2
+  F1 D9(capt C9) E8 H3 H4 G2 F2 G3 E9 J2 H1 G1 J4 C9 F5 H7 H8 H5 H6 D4 J7(capt H7)
+  D1 E1 G6 G5 J6?? J5(capt 2) pass pass.  Final 36+7 vs 45.
+  (a) Left side (C3 C6 C7 C8 B8 B9 D5 D6 D9 E3 E4 D2 D1) solid, no weak group; count at
+  move 26 = -2 and it stayed exactly -2. Opening was ~1-2 points short again vs E5 G7.
+  (b) Black ignored my B9 atari to play E2 (my E3E4 at 2 libs) -> D2 was right.
+  (c) H3 invasion under G4 (move 26) was too late/small: H4, F2, H1 placement, J4
+  = one eye only (H1/H2/J1 corner region adjacent points). Corner 3-3 invasions need
+  the 2nd eye from the side, which black's J4 took. Would have needed H3 by ~move 12.
+  (d) H7/H5 probes died; J6 "capture" was a misread: H6 had H7 as a liberty (H7 had
+  just been captured = empty). After any capture, re-run libs.py before the next move.
+  Idea for next time vs E5 G7: after C3 C6, Black G4 makes the right side whole;
+  play E3/E7 earlier or invade H3/H5 BEFORE black's G4-F3-F4 wall exists (move ~6-8).
+
+- Game 77: vs 14k, Black. LOST (resigned move 39; 6-stone center group captured).
+  As Black 10-22-2.
+  Moves (B first): C3 C7 G7 F4 E5 D3 D4 E3 E4 B5 D2 E2 C2 C4 D5 F5 E6 F6 F7 E7 D6 D7
+  F3 F2 G3 G4 G2 C6 F1 C5(capt 6) G5 G6 H5 H3 H2 H4 H6 E1 resign.
+  What went wrong: my center group D4-E6 (built by D4 hane, E4, D5, E6, D6 = all
+  "solid" pushes) was SURROUNDED: White C4 (cut between C3 and D4) + F4/F5/F6 + E7/D7
+  left it with 2 libs (C5, C6) and BOTH were White-friendly points (next to B5/C4/C7).
+  It had no eye space at all — a 6-stone blob walled on 3 sides. libs.py at move 21
+  showed 2 libs but by then nothing worked.
+  LESSON -31: A center group must head for OPEN space or an edge, not just connect.
+  Each push (E6 vs F6, D6 vs D7) gave White a stone on the outside = a lib gone.
+  When White's C4 cut came (move 14), my D5 was too slow: C5 atari (gaining C5/C6
+  liberties for my group, C4 had 2 libs) or connecting under to C3 (D... ) mattered.
+  Better at move 17/19: instead of E6/F7, play D6/C5-side to link the center to the
+  LEFT (C5 captures C4 eventually) so the group has the left side as eye space.
+  Also F3 (move 23) was a 2-lib cut that just got atari'd (lesson -14 AGAIN).
+  The C3/C7 + G7 + E5 opening vs F4 led to fighting everywhere; vs W F4 (diagonal),
+  a calmer move 5 (e.g. G3/G4 approach under F4 or C5 linking left) may be better.
+
+- Game 78: vs 12k, White. LOST (resigned move 58; H3 invasion group died in a ko).
+  vs 12k as White 8-20-3.
+  Moves (B first): E5 C3 E3 C6 F7 E7 E6 D7 G4 F8 G7 G8 H8 E8 G9 F9 H9 D5 D4 C4 D6 C5
+  D3 C7 C2 B3 B2 A2 B1 A3 H7 H3 G2 H4 H2 H5 G5 H6 G6 A1 D2 J2 J6 J5 J7 H1 G3 D8 G1
+  F5 F4 E9 F6 D9 J1(ko, I had NO ko threats) E2 J3 resign.
+  (a) Opening was solid, no weak group on the left: C3/C6/E7/D7/F8/G8/E8/F9 top + C4/C5/
+  B3/A2/A3 bottom-left. But count.py at move 40: 32+7 vs 48 = -9. Black's E-column
+  wall E3-E6 + F7/G7 gave Black the whole right (cols F-J rows 1-6). Again too small.
+  (b) H3 invasion (move 32) came too late (Black already had G4/H7/G7): G2+H2 undercut,
+  G5/G6 sealed, J6/J7 sealed the top. Best shape was eyes J1 + J3/J4 with H1 stone,
+  but H1 was atari-able by G1 -> a ko that Black started with J1, and I had zero ko
+  threats (all my stones were inside safe areas). Corner eyes needing a 1st-line
+  stone next to two enemy stones (G1/H2) = ko at best.
+  (c) Fix: vs E5 E3 (Black vertical line), C3+C6 alone is ~33 area. The right half
+  must be contested BY MOVE 6-10 (e.g. G3/G6 directly instead of F8/G8 top expansion
+  or D5). At move 10 Black played slack G4: that was the moment to approach the right
+  side (G6/H6 area or H3) while it was empty.
+
+- Game 79: vs 14k, Black. LOST (resigned move 57, count.py ~-20). As Black 10-23-2.
+  Moves (B first): C3 C6 G6 E7 E5 C4 D4 B4 B3 G7 H7 F7 H8 E3 D3 F4 E4(cut) G3 F5 H4
+  E2 F2 F3(capt E3) G4 E3 H2 G5 H5 H6 G1 D6 D7 E6 A3 B2 B7 C5 B5 D5 G8 G9 F9 H9 J6 J7
+  J5 J3 A2 H3 J2 C8 C7 D8 E8 B8 A8 resign.
+  The fighting went fine (E4 cut, captured E3, no group of mine was ever weak), but
+  W got the WHOLE bottom-right (F2-J6, rows 1-5 cols F-J) as a living group AND the
+  whole top-left (rows 7-9 + A/B columns). Me = a center band C3-H8 again (~33 area).
+  (a) After E4 cut, W G3 + H4 + F2/G1/H2 built a base under my G6/F5. My F5, G5, H6
+  were all center-side blocks = lesson -4 AGAIN. At move 19 (after W G3) the right
+  move was probably H3/G2-side (take the base: undercut at H3 or G2) instead of F5,
+  or at move 13 play G3/H3 myself (bottom-right corner was EMPTY while I played H8).
+  (b) H7/H8 at the top got only the right edge (J-col); W F7/G8/F9 kept the top.
+  (c) Probes J3/H3 (bottom-right) and C8/D8/B8 (top-left) died: 14k answered right.
+  Takeaway: C3 + G6 leaves the bottom-right 3-3 area (G3/H3) open; with W on C6/E7
+  I must take G3 by move ~7-9 (game 53 did: C3 C6 G6 G3 by W...). Corners before H8.
+
+- Game 80: vs 12k, White. LOST (resigned move 38; three weak groups, top-left dead).
+  Moves (B first): E5 C3 G4 G7 F7 G6 F6 C6 D3 D4 E3 D2 D5 C4 E2 C2 C5 D6 B6 B7 B4 B3
+  A7 C7 D8 D7 F8 C8 A8 B8 E8 E6 F5 D9 A3 B2 H5 resign.
+  What went wrong: (a) G7 (move 4) got attached at F7; G6 + F6 left a tiny right
+  group and Black's F-column wall. Then C6 + D4/D2 hane fight vs the D3 attach: Black's
+  D5/C5 CUT C6 away from C4 -> I had THREE separate groups (bottom-left, top-left,
+  right) each enclosed by one connected black chain = lesson 0 again.
+  (b) Top-left C6-D7-C8-B8 group: Black A7/A8 inside + D8/E8 seal -> only one eye
+  region (B9/C9); dead by move 34.
+  Fix: as White vs E5 G4, play C3 + C6/C5 FIRST (keep the left one piece, block the
+  C5 cut by playing C5/D5-side myself), and don't start a far-side corner (G7) that
+  gets attached. After the D3 attach, D4 hane with C6 at distance leaves the C5/D5
+  cut — prefer C4 solid or D2 underneath only.
+
+- Game 81: vs 14k, Black. WON B+2 (both passed, move 41). As Black now 11-23-2.
+  Moves (B first): C3 E5 G3 C6 G6 F6 F7 E7 G7 D3 E3 D4 D2 B3 C2 C4 F4 E4 E2 B2 F5 E6
+  F8 E8 B1 B5 E9 D9 F9 C8 G5 A2 C1 A1 H3 pass B4(free probe) A4 pass pass.
+  Clean game, no weak group: (a) vs W F6 attach on G6: F7 hane, G7 solid (F7 had 2
+  libs). (b) vs W D3 attach on C3: E3 (block toward G3), D2 underneath, C2 solid, F4
+  diagonal, E2 connect = whole bottom. (c) F5 atari (forced W E6) then F8, E9 hane +
+  F9 connect = top-right edge. count.py at move 35 said +2 = final. W was slack
+  (B5, C8) but I couldn't find more; margin still thin -> next time look for 1-2 more
+  points in the opening (maybe E4 instead of F4 at move 17, read carefully).
+
+- Game 82: vs 12k, White. LOST (resigned move 44, behind ~25). vs 12k as White 8-21-3.
+  Moves (B first): E5 C3 D3 C4 C7 G3 G7 E3 D4 E4 D5 F5 G5 G4 H5 H4 F6 F4 E2 F2 C2 B2
+  B5 B4 C5 B3 D2 C1 D1 B1 A4 A2 J4 J3 J5 E7 E6 D8 D7 E8 F8 C8 B8 resign.
+  (a) vs E5 + D3 attach on my C3, C4 (solid up) then G3 + E3 pinch + E4/F5/G4/H4
+  hane-at-head gave me a ROW-4 wall with Black on row 5 = Black got rows 5-9 (45+)
+  AND undercut my corner with C2/E2/D2/D1 (black's D3 stone became the anchor).
+  (b) Corner C3/C4/B2-B4/C1/B1 ended with interior A1,A2,A3 and black A4 hane:
+  dead shape (black A5 kills; A3 false). Corner groups need eye space made by move ~20.
+  (c) E7 invasion under black's row-5/6 wall: no room, dead in 5 moves.
+  Root cause: after the D3 attach I should have answered UNDERNEATH (D2) or hane
+  D4, not C4; and G3 left the left corner thin. Also E3 pinch made Black D4 strong.
+
+- Game 83: vs 14k, Black. WON B+2 (both passed, move 64). As Black now 12-23-2
+  (2 in a row vs 14k: games 81, 83).
+  Moves (B first): C3 C6 G6 F4 G4 F3 G3 E5 E7 G2 H2 F2 F6 C8 E3 D6 E4 F5 G5 E6 D4 E2
+  D2 E8 F7 D7 F8 E9 C4 B5 B4 F9 G8 G9 H8 D1 C1 E1 C2 A4 A3 A5 H9 H1 H3 B2 B3 J2 J3 J1
+  G1(capt 3) C5 B1 F1 H1 D5 A2(capt B2) D8 B7(probe) B8 B6 A7 pass pass.
+  What worked: (a) C3 + G6 vs W C6, then G4/G3 vs W's F4/F3 wedge = whole right side;
+  H2 block vs G2 hane. (b) E3 + E4 cut gave the C3 corner a base; D4 (group had 3
+  libs), D2, C4, B4 solid; F6/F7/F8/G8/H8/H9 solid top boundary (G8/H8 instead of
+  2-lib G9/H9 hanes). (c) count.py at move 28 said +10, at move 58 said +2 (final).
+  (d) J3 atari -> W J1 -> G1 captured 3. A2 captured B2 to give the left group 3 eyes.
+  Where points leaked: W got E8/E9/F9/G9 top edge and the D1/E1/F1 bottom edge; my
+  left group ended with only 1-pt eyes. Next time block F9/E8 area earlier.
+
+- Game 84: vs 12k, White. LOST (resigned move 54, count.py -10). vs 12k as W 8-22-3.
+  Moves (B first): E5 C3 G7 G3 C5 G5 E7 F4 D3 E3 D2 C2 E2 E4 D4 F2 F6 C4 B4 B3 B5 C7
+  A3 A2 A4 B1 D8 C6 D6 B6 B8 C8 C9 B7 A8 G6 H6 H5 J6 J5 H7 F5 F1 G1 E1 C1 D5 D1 D7
+  H8 G8 J8 H9 resign.
+  (a) C3 + G3 (both bottom corners) vs E5 G7: Black's C5 made a row-5 wall -> I had
+  only rows 1-4 (~32 area + 7 = 39 vs ~49). Same as game 54: C3+G3 is TOO SMALL vs
+  E5 G7. Don't repeat; the bottom-only plan is capped at ~36.
+  (b) Black's D3 attach between C3/E3-side: E3 + C2 + E4 + F2 + C4 + B3 + A2 + B1 =
+  many gote moves to keep the corner alive (corner had only 2 libs at move 23!).
+  (c) C7 invasion of the top-left (move 22) died: Black B8 placement + C9 + A8 gave
+  the group only A6/A7 libs. The space A6-D9 was ~12 points with black C5/B5 below,
+  E7/D8 beside = too small (lesson -11 again). H8 top-right probe died at once.
+  Next vs E5 G7 as White: try C6/C5 + C3 left side AND then fight for the top-left
+  (C7) myself early, or G3 then... honestly all tried options are ~-2 to -10;
+  a new idea: answer E5 G7 with D3/C4 then D6 (row 6 on the left) to take a row-6
+  line on the left instead of row-4 at the bottom.
+
+- Game 85: vs 12k, Black. LOST (resigned move 43, behind ~12, both invasions dead).
+  As Black vs 12k still 0 wins.
+  Moves (B first): C3 G7 C7 G3 E5 E3 D3 D7 D6 D8 C8 E6 D5 F6 E4 F3 F4 G4 F5 G5 E2 F2
+  D2 C9 B9 D9 F8 E7 G8 H8 H7 H6 E8 J7(capt H7) H3 H2 H4 H5 E9 H9 F7 G6 resign.
+  (a) Same C3/C7/E5 vs G7/G3 as game 63, but W played E3 (attack under E5) + D7
+  attach on C7: my D3, D6, D5, E4, F4, F5 were all gote center moves; W got E6/F6
+  top wall + E3-G5 bottom wall = I had cols A-D + E4/F4 only (~38 vs 43+7).
+  The D6 hane (move 9) got cut by E6 -> D5 forced. Better vs D7 attach: D6 is ok
+  only if E6 cut is fine; maybe C6/B8-side calm block and use tempo for E3 attack.
+  (b) Top invasion F8/G8: H7 cut was a 2-lib stone -> W H6 atari (lesson -14 AGAIN).
+  W's D7-C9 chain had only 3 libs (E7 E8 E9) but always connected out via G6.
+  (c) H3 invasion under the G3-G5 wall died at once (H2 undercut, H5).
+  Idea for next Black game: go back to 14k (wins there with C3/G3/G6), or vs 12k try
+  C3 then G3 (same edge), and after W's E3-type wedge use the game-23/37 F4-shoulder +
+  E4 cut pattern.
+
+- Game 86: vs 12k, White. WON W+2 (both passed, move 38). vs 12k as White 9-22-3.
+  Moves (B first): F5 C4 E3 E7 F7 E6 F6 F8 G8 E8 H7 E5 F4 E4 C3 D4 D3 B3 G3 C2 D2 B2
+  C1 B1 D1 B4 F9 E9 G9 H4 H3 H5 H6 G6 G7 pass pass.
+  What worked: vs Black F5 (center-right), C4 + E7 then a SOLID column-E wall
+  (E6 stand vs F7 attach, F8 hane + E8 connect for the cut, E5, E4 blocking E3 from F4)
+  = whole left cols A-D + column E. vs C3 attach under C4: D4 (keep C4-E4 one group),
+  B3 hane, C2 hane + B2 connect, B1 atari (sente), B4 fixes the cut point. E9 atari vs
+  F9. count.py at move 36: 38+7 vs 43 = W+2. H4/H5/G6 probe in black's right died (free).
+  Margin thin again: the right side G-J was all Black's. Maybe F8->G9-side or an
+  earlier right-side approach (move ~8-12) would add points.
+
+- Game 87: vs 14k, Black. WON B+20 (both passed, move 74). Biggest Black win. As Black 13-23-2.
+  Moves (B first): C3 D4 F6 D6 E3 D3 D2 E4 F4 F3 E2 F5 G4 G3 G5 E5 H3 G2 H2 C2 F2 C4
+  G1(capt 3) B3 E7 G7 G6 F8 F7 H7 H6 E8 D7 D8 C7 C6 C8 C9 B9 D9 H8 G8 J7 B8 B7 B6
+  A8(capt) A6 G9 J8 J9(capt) E9 F9(capt 9!) A7 E6 D1 E1 C1 G2 D9 D8 E9 E8 J4 H4 J5 H5
+  J6 J3(capt 3) D5 C9(capt 2) pass pass.
+  What worked: (a) vs W D4 shoulder on C3: F6 (big point), E3 (3rd line) then D2
+  UNDER W's D3 wedge -> W's F3/G3/G2 chain inside my bottom had no base; G5 (atari F5
+  + saves F4G4), H3, H2, F2 atari, G1 captured 3. Gave up C3 (small) for the capture.
+  (b) Top: W G7/F8/E8 invasion: G6 solid, F7 + D7 CUT (connected to my big group),
+  C7/C8 sealed the left -> W's row-8 strip had no base. H8 + J7 + G9 (from my side,
+  W H9 would be self-atari) took its libs; F9 captured 9. Strip groups on rows 8-9
+  under my connected row-7 wall die if I cut them off from both sides first.
+
+- Game 88: vs 12k, White. LOST (resigned move 42; 9-stone top group died). vs 12k as W 9-23-3.
+  Moves (B first): G7 C3 G3 C7 E5 E3 D4 D3 F3 E4 D5 C5 C4 B4 C6 B5 B6 D6 B7 D7 C8 E6
+  F5 F6 G6 F4 G5 B8?? A8 D8 B9 F7 F8 E8 F9 D9 C9 G8 H8 G9 H9 resign.
+  (a) C3 + C7 (two 3rd-line stones 4 apart) + E3 let Black cut through at C4/C6/B6:
+  my C7 became a SEPARATE top group. D6/E6/F6/F4 attacks were fine tactically (black
+  had to answer G5) but my top group (C7-F7, D8, E8) never had eye space: black C8 +
+  B-column stones on the left, G7/F8/F9 on the right = only E7 + the D9/E9 edge.
+  (b) B8 (move 28) was a 2-lib wedge between black stones -> A8 put it in atari and
+  black got B9/C9 = the top-left edge that was my second eye. LESSON -14 AGAIN.
+  Better move 28: E8/F8 (enclose the top for eyes: interior D9-F9, E7) — life first.
+  (c) A group with one real eye (E7) + a 2-point edge space bordered by enemy stones
+  at BOTH ends (C9, F9) has only one eye: black fills E9 (connected to F9) then E7.
+  Opening note: vs G7 G3 the C3+C7 pair is too thin once Black E5/D4 arrive; prefer
+  C3 + C6 (game 12/22 recipe) or D6 (game 26), and answer D4 with C5/C4 first.
+
+- Game 89: vs 12k, Black. LOST W+8 (both passed, move 61). As Black 13-24-2; vs 12k
+  as Black still 0 wins. No group of mine died; I lost on territory.
+  Moves (B first): C3 G7 G3 C6 E6 C4 D4 D5 E5 D3 E4(D4 was in atari) B3 E3 C2(capt C3)
+  D2 C3 D6 C5 D7 G5 G4 H4 H3 J4 C7 B7 C8 E7 E8 F8 F7(capt E7) F6 E7 H8 F5 G6 B8 A7 F9 G8
+  E2 D1 E1 C1 J3 H5 A8 A5 J6(probe, died) J7 E9 H6 B6(probe) A6 G9 H9 J8 J9 pass pass.
+  (a) THE OPENING LOSS: W's C4 attached on top of my C3. My D4 hane plus E5 (shape) let W
+  play D3, which cut, and B3: C3 died (atari from both sides). W got the whole left
+  (cols A-C) plus D1/D3/D5. Better at move 7: B4 or D3 myself (keep the corner
+  connected), or answer C4 with D3 solid. A hane on top (D4) with the corner stone left
+  at 2 libs (B3, D3 open) = lose the corner. (b) count.py at move 25 said -14; the top
+  fight (C7, C8, E8, F7 capture, F5, F9) got back to -8, and the game stayed there.
+  (c) The J6 probe in W's right and the B6 probe in W's left both died, at no cost.
+  Next as Black: go back to 14k (C3/G3/G6 wins there). vs 12k the C3 corner keeps
+  getting attached and lost (games 75, 89): answer an attach on C3 by protecting the
+  corner's base FIRST (D3/B4 solid), then fight.
+
+- Game 90: vs 12k, White. WON W+8 (both passed, move 54). vs 12k as White 10-23-3.
+  Moves (B first): E5 C3 D3 D4 E4 C4 E3 D5 D7 D6 E6 C7 E8 G5 G6 G3 H5 H4 H6 F4 F5 G4
+  F2 G2 H2 H3 G1 J2 J4 H1(capt H2) F1 J3 J5 D8 E7 C8 C2 B2 C1 B3 F3 C6 D9 C9 E9 B1 D2
+  G8(probe) H8 G7 H7 pass pass.
+  What worked: (a) vs D3 attach on C3: D4 hane on top, C4 solid, D5, D6, C7 hane =
+  solid left cols A-D (game-24 recipe again). (b) Invaded the empty right side at
+  move 14 (G5, then G3 base, H4, G4 connect when G5 was in atari, G2 undercut-block).
+  (c) Life in the corner: when Black H2/G1 got inside, J2 (atari H2), H1 capture,
+  then J3 (connects J2, ataris J4) = two real eyes H2 + J1. libs.py showed the group
+  at 3 libs [F3 J3 J4] at move 29 -> eyes before anything else. (d) Then solid:
+  C8 (cut point), B2/B3 vs C2 attach, C6, C9, B1. count.py at move 41: 42+7 vs 39.
+  RECIPE vs E5 + D3 attach: D4, C4, D5, D6, C7; invade right side at G5/G3 by move 14.
+
+- Game 91: vs 14k, Black. LOST (resigned move 39, behind ~20; right invasion dead).
+  As Black 13-24-2.
+  Moves (B first): C3 G7 C7 G3 E5 C4 D3 E3 D4 E4 C5 F5 B4(capt C4) E6 D5 D6 C6 D8 D7 E7
+  C8 E9 H5 H6 H3 H2 H4 G4 G5 G6 J4 C9 J2 G2 B9 D9 F9 E8 resign.
+  (a) Mirror opening C3/C7 vs G7/G3 + E5. W C4 attach, E3 attach: I captured C4 but
+  played ALL defensive/center moves (D3, D4, C5, B4, D5, C6) while W got E3/E4/F5/E6/D6/
+  E7/D8/E9 = a W wall down column D/E that took the D-E columns of the top too.
+  Result at move 22: Black only cols A-C + D3-D5 (~33) vs W ~48. -> the C3+C7 left-side
+  plan vs a mirrored W is capped at ~33-38 when W gets column E. (b) H5 invasion: W H6,
+  H2 undercut, G4 sealed -> the group had only the J column (1-wide strip) = dead.
+  H3 attached to G3 at once got undercut by H2; lesson -17/-26 AGAIN.
+  NEXT as Black vs 14k: go back to C3 + G3 (same edge) + G6/E5, which has the best record
+  (games 45/47/53/61/71/81/83/87 wins). Don't play C3+C7 mirror again.
+
+- Game 92: vs 12k, White. WON W+8 (both passed, move 80). vs 12k as White 11-23-3
+  (2 in a row: games 90, 92).
+  Moves (B first): E5 C3 G7 C6 C7 D7 C8 D8 B6 D6 B5 B4 C5 D5 C4 D4 B3 B2 A4(capt B4) D3
+  A3 C2 D9 E9 C9 G3 F6 G5 G4 F4 F5 H4(capt G4) E8 E7 F8 F7 H8 E6 F9(capt E9) G4 B7 E2
+  J9 E1 H7 E3 H2 H3 G2 F2 J3 J4 D1 J2 pass H1 E9 G1(capt 2) G8 D2 A6 C1(capt) A8 pass
+  H2 G2(capt) B9 pass pass.
+  What worked: (a) vs C7 attach on C6: D7 hane, D8, D6 solid, D5 (key point between
+  black's B5/C5 and E5), D4 = a solid D-column wall; gave up B4 but kept C3 corner
+  (B2, D3, C2). Black got the left edge A-C rows 3-9 but I got everything else below.
+  (b) G3 (move 26) + G5 + F4 atari + H4 capture = whole bottom-right rows 1-5;
+  E4 fixed the cut, H5/J6/J5 solid. count.py at move 40: W+5-7.
+  (c) Endgame: F7/E6 dame-ish points next to black's big group, G4 fill (my right
+  group's last internal lib), E2/E1/E3 split eye space, killed H2/G2/J3 invasion
+  (H3, F2, J4, J2 capture, H1, G1). Captured all dead stones before passing.
+
+- Game 93: vs 14k, Black. WON B+28 (both passed, move 77). Biggest Black win. As Black 14-24-2.
+  Moves (B first): C3 C7 G7 F3 E5 G5 G6 H5 D6 D7 E7 B5 C5 B6 C6 D8 B4 B8 E3 E2 D2 F1
+  E4 F4 F5 H6 H7 F8 F7 E8 G8 J7 J8 J6 H3 H4 G3 G4 G2 F2 J3 G1 H1 J2 J4 D1 C1 J5
+  E1(capt 15!) G9 H9 F9 H2 A4 B3 A3 A2 A5 B2 D4 D5 pass D3 A7 C4(capt) G4 G5 pass
+  F4 E9 H4(capt) D9 J1(capt) C8 pass pass.
+  At move 35 I was ~-12 (White had the whole bottom-right + top-left). H3 invasion
+  under White's F3-G5-H5 wall, then G3/G2/J3: the invasion looked dead, BUT White's
+  whole wall (E2-F1-F4-G5-H6-J7, 13 stones) had only 4 libs (E1, G1, J4, J5) because
+  my strong stones (E3 E4 F5 G6 H7) surrounded it from outside. LIBERTY RACE, not eyes:
+  H1 (took G1-side lib + eye shape), J4 (took lib J4), C1 (atari on D1 = makes E1
+  fillable), then W filled its own J5 and E1 captured 15. Lesson -33: when an invasion
+  looks dead, count the libs of the ENEMY WALL around it: a wall sandwiched between my
+  invasion and my strong groups often has 3-4 libs. Approach-move libs (E1 self-atari
+  until D1/C1 dealt with) count as extra libs for the enemy; fix them with an atari.
+
+- Game 94: vs 10k, White. LOST (resigned move 48; 13-stone right group had no eyes).
+  vs 10k now 1-9.
+  Moves (B first): E5 C3 E3 G6 F7 G4 H7 C6 G2 H3 H5 H4 H6 G5 G7 D7 D8 C8 E8 E7 F6 D6
+  D2 C2 D5 C5 D3 C4 C9 B8 F8 F3 F2 G3 H2 J2 J3 J4(capt) C1 H1 G1 F1 E1(capt F1) D4 E4
+  F5 J5 resign.
+  (a) G6 (move 4, to take the right side early per the game-78 note) got pressed by F7/
+  H7 and undercut by G2. My right group G3-G6/H3/H4 ended up as a wall with black H2
+  UNDER it and black H5-H7 beside it: its only eye was J3, and J3 was FALSE because J2
+  could always be put in atari by J1. Its liberties pointed into Black's E-column, so it
+  could never connect to my left side (F4/E4/D4 all needed).
+  (b) F3/G3 (moves 32-34) made a wall but left H2 open. Black H2/J3/G1/E1 then took the
+  bottom-right corner. Better at move 32: H2 myself (corner eye space), or G3 earlier
+  instead of H3 so the G2 stone dies.
+  (c) H1/F1 corner tricks (moves 40-42) were refuted: E1 captured F1.
+  LESSON -34: a lone stone on row 6 next to Black's center line (G6 vs E5/E3) gets
+  pressed from both sides into a group that has no base. vs E5 E3, invade/approach the
+  right on the 3RD line (G3/G7 3-3 type), which has corner eye space, not G6.
+
+- Game 95: vs 12k, Black. LOST (resigned move 55, count.py -22). As Black vs 12k still 0 wins.
+  Moves (B first): C3 E5 G3 C6 G6 E3 F4 E4 F5 F3 F2 F7 G7 F6 G5 E2 G2 C4 D3 D2 C2 B3
+  B2 A3 A2 B4 F8 E8 G8 D7 D4 D5 E9 D9 F9 F1 G1 E1 C8 D8 C7 E6 B6 B5 B7 B9 C9 B8 A8 A6
+  A9(capt 2) A5 A7 B8 resign.
+  (a) vs W E3 wedge, my F4 shoulder let W play E4 SOLID (no cut possible: E4 was W's).
+  W's E3-E5 wall + F3 hane + E2 then C4 sealed my C3 corner: C3/D3/C2/B2/A2 had only
+  A1-C1 eye space = dead (W B3/A3 under it). Wedge E3 next to my C3 with W E5 above:
+  answer at D3/D2 FIRST (protect the corner's base), not the far-side shoulder.
+  (b) MY MENTAL COUNT WAS WRONG BY ~18: I counted "cols G-J = 36" (it is 27!). count.py
+  said 33 vs 48. Cols G-J = 3 columns = 27 points. Use count.py, never mental math.
+  (c) Top-left probe C8/C7/B6/B7/C9 + A8/A9 capture of B8B9 got only ONE eye (B8/B9);
+  W's A5/A6 group had two "suicide" libs A4/C5 so no semeai. Free, no gain.
+
+- Game 96: vs 12k, White. LOST (resigned move 44, count.py ~-25). vs 12k as White 11-24-3.
+  Moves (B first): E5 C3 G3 C6 G7 E7 C4 D4 E4 D3 C5 D5 D6 D7 E6 B5 C7 B4(capt 2) B6 C5
+  C8 D8 C9 B7 B8 A6(capt B6) F7 E8 F8 E3 H4 H2 H3 F2 G4 G5 G6 H6 F6 H7 H8 H5 J7 resign.
+  (a) The C4-wedge fight went fine: D4, D3, D5, B5, B4 captured 2. BUT my D7/E7 top
+  group got CUT OFF by black D6 (D6 + C7 + C8 + C9 + F7 + F8). It had 3 libs and no
+  eye space. After C9 it was a lost race: black's C7-C9 chain had 3 libs, mine 2-3,
+  and black always moved first. B7 cut (move 24) gained nothing. Better move 14:
+  E6 instead of D7 (atari on D6 from the side away from my group?), OR when black D6
+  cut came, I should have played D8/C8 EARLIER to link the top with the left
+  (C7 was the connection point; black took it at move 17 as an atari on C6).
+  (b) E7 at move 6 was a lone row-7 stone next to black G7/E5: it could be cut
+  from C6 by D6. Lesson -6 again: two stones (C6 + E7) with a cut point between them
+  (D6/D7) = take the link first.
+  (c) H4 invasion into the right (G3/G7/E-wall) died: black H2 undercut + H6 cap + F6
+  = no eye space (J3 false because of H2). Lesson -26 again.
+  Next as White vs E5 G3 G7 (Black takes the right): C3 + C6 + then D6/D7 SOLID
+  (connected shape), never a lone E7.
+
+- Game 97: vs 14k, Black. LOST W+12 (I passed with a left-side seki, W passed). As Black 14-25-2.
+  Moves (B first): C3 C7 G7 G3 E5 C5 E3 E4(wedge) F4 D4 D3 E6 F5 G5 D5 C4 F3 G6 G4 H4
+  G2 H3 H2 H7 F6 G8 F7 D6 E7 D7 F8 E9 E8 D8 F9 D9 G9 H8 H6 H5 H9 J6(capt H6) J8 J7 J9 J2
+  J1?? H1(capt J1) F2 G1 F1 J3 J1(capt 2) H1(capt) G1 J1 B4 B5 B7 B8 B6 A6 B3 A4 A3 A5 pass pass.
+  (a) vs W E4 wedge between E5/E3: F4 atari, D3, F5, D5 = fine (W C4 chain got 3 libs).
+  (b) BUT F3 (move 17, connecting) let W G6 + H4 + H3 + H7/G8 build a whole RIGHT group;
+  my G4/G2/H2 only took the bottom. Count at move 39: -16. The right W group was 3
+  separate pieces (each 3 libs) yet lived: H6 cut stone always captured by J6, then
+  eyes H6 + J4/J5 miai. Cutting stones with 1-2 libs between enemy pieces just get eaten.
+  Better at move 17: G4 (cut G3 off; F3 later) as I first thought, or move 19 H5-side.
+  (c) J1 (move 47) was a 1-lib stone (J2 W, H1 empty) -> lesson -14 for the 20th time.
+  (d) Left-side kill attempt B4/B7/B6 ended in a seki (my B6B7 vs W's 8-stone chain,
+  shared libs A7, C6), W one tempo ahead in every race line.
+  Big picture again: C3/G7 diagonal + mirror W (C7/G3) -> W got two sides. Next as
+  Black: C3 + G3 (same edge), as notes keep saying.
+
+- Game 98: vs 12k, White. LOST (resigned move 46, count.py ~37 vs 51 at move 28).
+  vs 12k as White 11-25-3.
+  Moves (B first): G6 C3 D7 G4 C5 E5 D4 D3 E4 F4 F5 E3 G5 D5 C4 B4 B5 H5 H6 H4 B3 B2
+  A4(capt B4) C2 J5 J4 J6 E6 E7 G8 F7 G7 D6 H7 F8 J7 F6(capt 3) H9 J8 H8 F9 C7 C8 B7 B8 resign.
+  (a) E5 (move 6) was a lone row-5 stone between black C5/D7/G6: Black D4 wedge + E4 +
+  F5 cut it off; D5/E6 extensions only added stones to a 2-lib group that died
+  (lesson -13 AGAIN: I wrote "risky" and played it anyway). Better move 6: D4 or E4
+  (row 4, connected to C3 diagonal) = solid bottom, then think about the top.
+  (b) B4 (move 16) was a 2-lib stone between black stones -> B3/A4 captured it.
+  (c) Top-right invasion G8/G7/H7/J7/H9/H8: eye space G9-J9 + H8/J8 under black F8;
+  black J8 + F9 killed it (G9 never an eye once black owns F9). 5-point corner space
+  under a black wall with an open F9 end is dead vs 12k.
+  Opening vs G6 D7 (Black takes the top): C3 + G4 gave bottom only (~36); a real plan
+  is needed: e.g. C3, then C6/C5 (stop C5) before G4, or attack D7 from the left.
+
+- Game 99: vs 14k, Black. WON B+74 (both passed, move 64). As Black now 15-25-2.
+  Moves (B first): C3 C6 G6 G3 E3 E5 F4 F7 G4 H7 H3 H6 H5 B4 C4 C5 B3 A3 B2 A4 E4 D4
+  D3 D5 G7(cut) G8 F6 E7 E6 D6 F5 A2 D7 D8 B6 B5 H8 F8 J7 H9 J6(capt 2) B1 C1 A1
+  C7 B7 A5(capt 13!) C8 C6 E8 B8 pass A7(capt) pass F3 G2(capt) H7 B7 pass pass.
+  At move 33 count.py said -10. Two hunts won it (games 37/45/47/53/93 pattern again):
+  (a) G7 CUT between W's F7 and H7-H6 (my G6 connected to the big group via G5/F5);
+  then H8 (takes the shared lib) + J7 -> H6H7 had 2 libs, J6 captured 2.
+  (b) libs.py on W's big left chain showed 3 libs (A1 A5 C7). C1 (atari on the B1
+  stone) made W connect at A1, so the chain had 2 libs; C7 put it in atari, and A5
+  captured 13. My probe stones D7/B6 had looked dead but they had taken the chain's libs.
+  Recipe vs 14k: C3, G6 (top 3-4), E3 extension, F4/G4 solid, B3/B2 corner, E4/D3.
+  Then run libs.py on EVERY white chain each move after move ~30.
+
+- Game 100: vs 12k, White. LOST B+20 (both passed, move 60). By count.py it was W+4
+  if the right group lived; the engine scored my 9-stone right group DEAD.
+  Moves (B first): E5 C3 E3 C6 E7 G4 G3 H3 G2 H2 F4 H4 G5 H5 G6 H6 H7 J3 D2 C2 C7 D6
+  D7 B7 B8 B6 H1 J1 G1 J6 J7 D3 E2 A8 C8 D5 E6 D4 E4 D1 E1 C1 G7 A9 B9 A7 B4 B3 A5 B5
+  C4 C5 F2 A4(capt 2) F8 A6(capt) D9 pass pass.
+  (a) Right-side invasion G4 at move 6 (early, good idea) but Black G3 UNDERCUT at once,
+  then G2/H1/G1 took the bottom: my eye at J2 depended on the J1 stone, which had ONE
+  lib (J2) -> a permanent ko that Black could start for free. The top eye J4/J5 was the
+  only real eye. One eye + a ko where I have no threats = DEAD for the scorer, even if
+  Black never takes the ko. (b) Fix: at move 28 (Black H1 hane), or better at move 8-10,
+  play H1/J2 shape EARLY (e.g. H2 then H1 myself before G2/H1), or extend the invasion
+  upward with TWO-row eye space (H6+J7/H8) before Black H7. A 1-column strip (J1-J6)
+  along the edge never gives 2 eyes vs 12k. (c) Left side (C3 C6 D6 B7 B6 D5 D4 D3 C2
+  C1 D1 A8 A9 A7) was solid; killed B4/A5 invasion with B3, B5, C5, A4, A6.
+  LESSON -35: before passing, if any group's life depends on a ko, the scorer counts it
+  dead. Either win/avoid the ko earlier or keep playing to remove it.
+
+- Game 101: vs 14k, Black. LOST W+20 (both passed, move 55). As Black 15-26-2.
+  Moves (B first): C3 F6 C7 F4 E5 E4 D4 E6 D5 D6 C6 D7 C8 E3 D3 D2 C2 E2 H5 G5 H3 H4
+  J4 G4 G3 H6 J5 J6 J3 G2 H2 F2 G1 F1 J1 H1(ko) H7 G7 G1(retake) H8 D8 E8 E9 F9 D9 F8
+  F5 C1 B1 D1 B2 J7(capt H7) pass pass.
+  count.py with my right group alive said B 45 vs W 42 (B+3). The engine scored the
+  right group (G3-J5, 9 stones) DEAD: its 2nd eye was a KO (G1 stone with 1 lib H1,
+  W can capture any time) and I had zero ko threats. Lesson -35 AGAIN, now as Black.
+  (a) Opening C3 C7 + E5/D4/D5/C6/C8/D3/C2 = cols A-C + D column (~33): White's F4/F6
+  + E4/E6/D6/D7/E3/D2/E2 pushes got the whole center; I answered every push solidly
+  (gote) = again a small left side. (b) H5 invasion (move 19) between F4/F6: W G5,
+  H4 wedge split H5/H3; J4 atari let W G4 connect; then the group's eye space was
+  only the 1-row bottom edge (G1-J2): W G2/F2/F1 left one eye + ko. Better at move 23:
+  play G4 myself?? (self-atari) -> no; better move 21: H4 (solid, connected) instead
+  of H3, or invade lower at G3/H3 FIRST (corner) and then H5 side.
+  (c) Before investing in an invasion, check: when the edge row gets sealed, does the
+  group have a second eye area on the SIDE (here J6-J8 was taken by W H6/J6 at once)?
+
+- Game 102: vs 12k, White. WON W+26 (both passed, move 70). vs 12k as White 12-26-3.
+  Moves (B first): E5 C3 F3 C6 F7 E7 D7 D6 E8 E6(E7 was in atari) D8 C7 F6 D5 E4 D4
+  D3 D2 E3 E2 F2 C8 B3 C2(C3 had 2 libs) B4 C4 B2 B5 C9 B9(atari) F8 D9(capt) E1 D1
+  E9 C9 F1 H5 G5 H3 G3 H4 G4 H6 H2 G7 G6 H7 G8 H8 J3 J4 J2 H9 G9 J7 pass A4 A3 A5 B1
+  C1 pass A2 pass A1(capt 5) G2 pass pass.
+  What worked: (a) left side C3/C6/D6/C7/D5/D4 + D2 hane under the D3 wedge, E2, C8,
+  C2/C4 solid connects whenever a stone hit 2 libs, B5 stopped the B-column crawl,
+  B9 atari + D9 capture. (b) count at move 38 = ~-2 -> invaded H5 into the 3-column
+  right strip: H3 (H4 wedge fails: G4 atari, J5, J2 ladder), H4 solid, H6, G7 hane +
+  H7 connect, H8, J4 (atari J3), H9 closed the straight line, J7 split it into two
+  enclosed 2-point eyes J5J6 + J8J9 BEFORE passing (lesson -18 applied). (c) Killed
+  B2-B4 (A4, A5, C1, A2, A1 captured 5) instead of trusting the scorer.
+
+- Game 103: vs 14k, Black. LOST W+4 (both passed, move 53). As Black 15-27-2.
+  Moves (B first): C3 F7 G3 C6 E5 F6 G5 F5 F4 G6 H5 D5 E4 D4 D3 C4 B4 B5 B3 E6 H6 H7
+  C8 B7 E8 D7 D8 B8 F8 G8 B9 F9 E9 G9 H8 J8 A5 A6 A4 A8 J6 H9 J7 C9 D9(capt) A9 E2 C7
+  G2 C9(capt B9) pass pass.
+  No blunder, no group of mine weak; once more the row-5 line vs White's F6/F7/C6 (rows
+  6-7) gave me ~42 area = lost by 4 (exactly game 67 again: C3 F7 G3 C6 E5).
+  (a) After E5, W F6 diagonal + F5 wedge forced F4/E4/D3 (gote); W got D5/D4/C4 too.
+  (b) Top invasion C8/E8/D8/F8 on row 8 under W's row-7 stones: 2-row strip, B9/E9
+  tried for eyes but W B8, G8, F9, A8/A9, C9 = one eye at most. Dead (free, no gain).
+  H8 (cut between G8/H7) was answered by J8 = also dead.
+  NEXT as Black vs C3 F7 G3 C6: do NOT play E5 (lost games 67 and 103 by 4). Try move 5
+  on row 6/7 between C6 and F7 (D7 or E7, 3rd line from the top) BEFORE White's F6/G6,
+  or G6 (attach under F7's side) so the top isn't White's whole. Count at move 12.
+
+- Game 104: vs 12k, White. LOST (resigned move 58; BOTH right-side groups dead).
+  vs 12k as White 12-27-3.
+  Moves (B first): F6 C4 E4 D6 D7 C7 E7 D8 E8 C8 C6(cut) B6 D5 C5(capt C6) E6 C6 D4 G3
+  G4 E3 F3 F2 F4 H3 E2 D3 G2 H2 F1(capt F2) H4 C3 B3 D2(capt D3E3) C2 H5 J4 J5 J2 H1
+  D3(capt C3) E3 C3 C1 B1 D1 H7 G7 H6 G6 J6 G5 H8 G8 J8?? H9 G9 F9 resign.
+  (a) Left side fine (C4 D6 C7 D8 C8, B6 atari + C5 capture of the C6 cut). G3 invasion
+  at move 18 (good timing), but E3 (move 20) to "connect along row 3" was 2 lines from
+  G3: F3 wedge, then E2 + G2 cut it into 3 weak pieces (F2 lost, D3E3 lost).
+  Keep the invasion compact (G3 + H3/G2 base first), don't stretch to connect to the far side.
+  (b) Bottom-right group G3-H4,J4,J2: eye J3 + corner J1. Black H1 (1st-line placement
+  next to G2/F1) made it dead: black G1 then connects everything and J1 is no eye.
+  I should have played H1 myself (instead of J2, or right after G2 appeared).
+  (c) Top-right H7 invasion: after H8, black G8; I played J8 (looked like "vital point")
+  but black H9 PLACEMENT killed it (G9 connects for black). Correct was H9 myself:
+  then eyes J7/J9 area with stones H8+H9. THE 1ST-LINE CORNER POINT (H9/H1) NEXT TO
+  MY 2nd-LINE STONE IS THE VITAL POINT — this is lesson -11 for the 4th time.
+  LESSON -36: in any corner life fight, before each move ask "can black place on the
+  1st line next to my stone (H9/H1) and connect it out (G9/G1)?" If yes, take it NOW.
+
+- Game 105: vs 14k, Black. LOST (resigned move 73; 10-stone bottom-right group died).
+  As Black 15-28-2.
+  Moves (B first): C3 G7 G3 C7 E6 E7 C6 D5 D6 E5 C5 F6 E4 F4 D4 F5 G4 F3 E3 F2 E2 E1
+  G2 G5 H4 B7 B6 D1 D2 C1 C2 H5 B1 F1 D7 D8 E8 F7 C8 F8 D9(capt) F9 B8 E9 D8 B2 B3 A1
+  A7(capt 2) A2 A3 B1 G1 J4 J3 H2 J5(capt) J6 H3 J4(capt J5) J2 H1 J1(capt 2) H2 J5(capt)
+  H6 H1(capt) J4(capt J5, ko) H8 H2(captures 10) H3 G3 resign.
+  At move 53 count.py said B 46 vs W 35+7 = B+4 (top fight D7/E8/C8/D9/B8/A7 won the
+  top-left). THEN the bottom-right group G1-G4,H4 (+J3) died: it was a wall with
+  ALL its libs inside a small 3x4 corner (H1-H3, J1-J4), and W's J4 hane + H2
+  placement turned the corner into one eye (H2) + a ko (J4/J5). Lesson -11/-36 AGAIN.
+  The fix was at move 55-57: after W J4, play H2 MYSELF (or J2/H2 shape) instead of
+  J3 atari; even earlier, H3/J4 at move ~33 instead of B1 or D7. A corner group whose
+  libs are only 1st/2nd-line points with an enemy hane at the edge (J4) = make the eye
+  shape NOW (H2 = 2nd-line vital point under H3/G2).
+  Also: E6/C6 vs W's row-7 wall led to a D5 wedge fight; it went OK (bottom ~ mine).
+
+- Game 106: vs 12k, White. LOST (resigned move 38; 7-stone G3 invasion died). vs 12k
+  as White 12-28-3.
+  Moves (B first): G7 C3 E5 C6 D3 D4 E4 C4 E2 D5 E6 D6 D7 C7 D8 C8 C2 B2 C1 G3 G2 H2
+  F3 G4 G5 H4 H5 J4 H1 J1 J2(capt) H3 F1 J3 G1 J1(capt) J5 resign.
+  (a) Left side (C3 C4 D4 D5 D6 C6 C7 C8) solid but only ~30 area; black's D3/C2/C1
+  undercut took the bottom edge under my C3 and D7/D8 took the top -> invasion forced.
+  (b) G3 invasion at move 20 (between E2/F-side and G7): black G2 UNDERCUT at once,
+  then F3, G5, H5, and the H1 PLACEMENT (lesson -36 for the 3rd time!). My H2 was a
+  1-stone 2nd-line hane; H1 (1st line next to it, connected to G2 via G1) killed the
+  corner eye. Right move at move 28-30: H1 or J2 myself BEFORE black (I played J4
+  instead, thinking "block the open end"). Corner invasions: the 1st-line point
+  diagonal-under my 2nd-line stone comes FIRST, then the open end.
+  (c) Invading at move 20 when black already had G7+E-wall+E2: space F-J rows 1-6
+  minus black's G2/F3 = too small. Better earlier: H3 (3-3 under nothing) at move ~10,
+  or skip C8/B2 gote moves.
+
+- Game 107: vs 14k, Black. LOST W+6 (both passed, move 55). As Black 15-29-2.
+  Moves (B first): C3 G7 G3 C7 E6 D6 E7 D7 D5 C5 E5 F7 G6 H6 F6 H5 H4 H8 C4 G4(cut) G5 F4
+  F3 H3 E4 J4(capt H4) H2 E8 B5 C6 B6 B7 J2 A6 A5 A7 J3 H4 B4 D8 E3 F5 G2 F8 J6 J7 B8 C9
+  J8 J9(capt) B9 A8 pass pass.  No blunder; count.py said -6 from move 31 on.
+  (a) vs C7/G7 mirror, E6 then E7 hane on W's D6 attach got D7 + C5 + F7: my E-column
+  wall stuck between W stones; W got rows 6-9 except E6/E7 (same story as games 49/55).
+  (b) G4 cut: I misread. After G5 atari, F4, F3, E4 the chain F4-G4 still had libs
+  F5 + H4 because White's H3 atari'd my lone H4 and J4 CAPTURED it, which reconnected
+  everything. H4 (move 17) was a lone 2-lib block next to H5 -> lesson -14 AGAIN.
+  Better move 17: G4 solid (connected to G3/G5 side) instead of H4.
+  (c) My main group had only 3 libs (D4 E3 F5) at move 39 and A5-B6 had 2 libs:
+  libs.py caught it (B4 was urgent: W B4 + A3 would have captured 3).
+  (d) Probes J6, J8, B8/B9 all died (free, no gain).
+
+- Game 108: vs 12k, White. LOST B+4 (both passed, move 50; my 9-stone right invasion
+  had one eye and was scored dead). vs 12k as White 12-29-3.
+  Moves (B first): E5 C3 F3 C6 D7 C7 D6 D4 D5 C5 E4 D3 E3 D8 E8 C8 F7 H5 H3 H7 G8 H8
+  H9 J8 G7 G6 H4 G5 J6 J5 G4 J9 G9 H6 F6 E2 F2 D2 E1 D1 F1 E9 F9 D9 J4 E7 E6 pass pass.
+  (a) Left side (C3 C6 C7 D4 C5 D3 D8 C8 + D2/D1/D9/E9) was solid, ~35 area: -4 without
+  the invasion. Invasion was correct and early (H5 at move 18), with H7 for the top.
+  (b) THE LOSS: after H8, Black H9 (1st-line point beside my H8, connected out by G9)
+  took the corner eye = LESSON -36 FOR THE 4TH TIME. Correct move 22: H9 or G8-side
+  block was taken by black, so after black G8 I needed H9 MYSELF (not H8). Rule: when
+  black presses from above at G8 next to my H7, answer H9/J8 area so that the corner
+  eye J9 is enclosed, OR play H8 only if H9 is then covered.
+  (c) Black J6 placement on the side made the H6/J6/J7 region one eye (bent three with
+  black on the vital point J6). And H4 + J4 took the bottom side. The group needed
+  a second eye area I never had: corner (lost to H9) or bottom (lost to H3/H4).
+  An invasion between F3 and F7 has room for exactly two eye areas (top corner,
+  bottom/side): when black takes one (H3 at move 19), the other corner must be made
+  UNCONDITIONAL immediately (H8+H9/J8 shape before black G8/H9).
+
+- Game 109: vs 14k, Black. WON B+12 (both passed, move 74). As Black now 16-29-2.
+  Moves (B first): C3 D4 F6 G7 F7 G6 G5 F8 E8 F9 E3 D6 D7 C7 D8 C8 E6 D5 D3 F5 E5 F4 E4 C4
+  G4 B3 F3(capt 2) H5 H4 J5 B2 A4 E9 H8 J4 H7 C9 B9 E7 D9(capt C9, ko) G9(threat) G8
+  C9(retake) A2 D9 B8 C2 A1 B1 A3 B5 C6 B4 B6 A5(capt 5!) A6 A8 A7 C5 H6 B3 G2 G3 pass
+  H2 H9 F2 A9 G1 pass G2 pass.
+  What worked: (a) vs W D4 shoulder: F6, E3, D3 (row-3 line C3-E3), E5 atari vs F5 wedge,
+  E4 connect (mandatory: W E4 would connect everything), G4 atari, F3 captured 2.
+  (b) count.py at move 37 said -5. libs.py on WHITE groups found W's left was 3 SEPARATE
+  chains with shared libs. B5 (inside, 4 libs) -> W C6 connected the wrong pair ->
+  B4 put chain A1-A4,B3 in atari -> A5 captured 5 = +10. Same hunting pattern again.
+  Mistake: C9 hane (move 37) left my top group (C9-D9-E9-D7) with ONE lib (E7) if I
+  connected D9 -> had to play E7 and fight a ko. Check libs of the WHOLE group behind a
+  1st-line hane, not just the hane stone.
+
+- Game 110: vs 12k, White. LOST (resigned move 42, count.py -12 and the invasion was dead).
+  vs 12k as White 12-30-3.
+  Moves (B first): E5 C3 G5 C6 C7 D7 D6 E7 C5 B6 B7 B5 C4 B4 D3 C2 D2 C8 F7 B8 F8
+  A7(capt 2) E8 D8 G3 E6 D5 H7 F6 G7 G8 H8 J6 H6 H5 J7 J5 F4 E4 F5 F3 resign.
+  (a) Black's E5 + G5 made a row-5 wall facing both edges. C6 then got attached at C7,
+  and the D7 hane let Black play D6, a CROSSCUT. C5 cut put C6 in atari. I had to answer
+  with B6, B5 and B4 in gote, so Black got C4/C5/D3/D2 INSIDE my left side. I captured
+  B7/C7 (good: B8 then A7), but my area was still only cols A-C plus D7-D9 (~31).
+  vs a C7 attach on C6 with a black stone at E5: don't hane at D7 (the D6 crosscut
+  follows). Play B7 (edge side) or D6 solid.
+  (b) H7 invasion at move 28 (between F7/F8 and G5): its eye space ended as only
+  J8/J9/H9/G9 = one eye. Black's G8 + J6 + H5 + J5 sealed it in 4 moves. Too late, too small.
+  (c) F4/F5 trick (cut black's center from its top group): Black answered E4, then
+  F3 put F4F5 in atari. My F5 stone had 2 libs and Black moved first. Lesson -14 AGAIN.
+
+- Game 111: vs 14k, Black. LOST W+6 (both passed, move 53). As Black 16-30-2.
+  Moves (B first): C3 G7 C7 F4 E5 E6 D6 E7 F5 G5 E4 E3 D3 G3 E2 F3 F6 F7 D7 G6 D5 F2
+  D2 D8 C8 D9 H4 G4 H3 H2 H5 H6 J2 G1 J6 J7 C9 F9 E1 J5(capt J6) J3 H1 F1 G2 E8 E9 F8
+  G8 D4 J1 pass pass.
+  No blunder; count.py at move 27 said 40 vs 41+7 = -8, final -6. Again C3+C7 (left
+  side) vs W's G7+F4: W's E6 attach on my E5 and E3 hane made a W wall on column E/F
+  from row 2 to row 9 -> I had cols A-D + E4/E5/F5/F6 only (~40).
+  (a) Every move 7-25 was a forced solid answer (D6, F5, E4, D3, E2, F6, D5, D2, C8)
+  = W chose the dividing line. F6 at move 17 had to be played (my group at 3 libs).
+  (b) H4 invasion (move 27) in W's right (G3/G5/G7 wall): W H2 undercut + H6 cap +
+  J7 + J5 = dead. 2-column strip again (lesson -17/-26). Free but useless.
+  (c) E8 probe forced W E9; F8 follow-up was captured (free under area scoring).
+  C3+C7 as Black: games 63/69 draws, 91/101/111 losses. STOP playing C7 at move 3.
+  NEXT as Black: 14k with C3 then G3 (same bottom edge), as the record says (wins
+  in games 45/47/53/61/71/81/83/87/99/109 mostly used C3+G3/G6).
+
+- Game 112: vs 12k, White. LOST (resigned move 66) from a WON position (count.py at
+  move 38: 48+7 vs 33). vs 12k as White 12-31-3.
+  Moves (B first): E5 C3 E3 C6 G4 G7 E7 G5 F5 G6 F6 F7 E8 H4 G3 H3 H2 D4 J3 J4 J2 H5
+  F8 G8 C7 D6 E6 D7 D8 B7 C8 D5 E4 D3 D2 C2 E2 B8 G9 H8 H9 D1 E1 C1 B5 B6 A8 B9 C9 A7
+  J8 J7 J6 H7 J5 H6(capt J5J6) J5 J6?? (capt J5 -> my 14-stone right group had ONE lib
+  J5) J5(black captures 14) ... resign.
+  Opening was GOOD: C3 C6 + G7/G5/G6/F7 (right top) + H4/H3/J4/H5 + D4/D5/D6/D7/B7
+  (vs C7 attach: D6 solid, D7 separating, B7 atari) + D3/C2/D1/C1 + B8/B9/A7.
+  THE LOSS: my right group (F7-J7, H3-H8) had NO EYES: its interior was only H6/J5/J6,
+  and black J8, J6, J5 throw-ins filled it. libs.py at move 56 showed my group at 1 lib
+  (H6) — I captured with H6 (ok), but then black J5 again, and my J6 "capture" left
+  the group with exactly one lib (J5, the point just emptied) -> black retook J5 and
+  captured 14 (not a ko: it takes many). LESSON -39: after a capture, my group's libs
+  = the captured points only; if that's ONE point, the opponent just plays back there.
+  Should have played H6/J6 shape EARLIER (e.g. J6 at move 51 instead of D1/C1, or J8
+  myself at move 42) so the right group had 2 real eyes (J5-J6 + J8/J9 corner).
+  A group made of a 1-stone-wide line (G5-G8, H3-H8) with its interior only on the
+  J column is NOT alive — lesson -21/-22 again. Check EYES at move ~35 when ahead.
+
+- Game 113: vs 14k, Black. WON B+2 (both passed, move 65). As Black now 17-30-2.
+  Moves (B first): C3 G7 G3 C7 E7(new: split the top) E6 E5 D6 F6 F7 G6 F5(wedge) G5(atari)
+  F4 E4 F3 G4 E3 D4 D3 C4 C2 F2 D2 E2 E8 B2 E1 F1 G2 D1(capt E1) G1 C1(capt 7!) B5 H2
+  H6 H5 J6 C5 J5 J4 H7 B4 B6 C6 A5 B7(probe) B8 A4 A7(capt B7) H1(capt 2) D7 D5 E7
+  pass J3 H4 pass H3 pass J2(capt) C8 pass pass.
+  What worked: vs the C7/G7 mirror, move 5 E7 (between W's top stones) -> W E6 attach,
+  E5 under it, F6/G6 (sacrificed E7). W's F5/F4/F3/E3/D3 wedge chain went INTO my
+  bottom; G5 atari, E4, G4, D4, C4 (connect to C3 = 5 libs) and then F2, E2, B2, F1,
+  D1, C1 shortened its libs from outside -> captured 7 = won game. Same pattern as
+  games 23/37/87: a W chain pushed into my 3rd-line area dies if I keep my stones connected.
+  count.py at the end: 45 vs 36+7. Margin thin again; the top (rows 7-9) was all W's.
+
+- Game 114: vs 12k, White. WON W+12 (both passed, move 55). vs 12k as White 13-31-3.
+  Moves (B first): G7 C3 E5 C6 D7 G3 G4 H4 G5 F4 F5 E4 H5 H3 D6 C5 D5 D4 C7 B6 B7 J5
+  J6 J4 H7 A7 A8 A6 B8 C4 C2 D2 B2 B3 E2 D3 D1 E3 F2 F3 E1 G2 A2 B1(vital) A3 A4 F1 G1
+  pass C1(capt 5) pass A1(capt 4) pass pass.
+  RECIPE vs G7 + E5: C3, C6, then G3 at move 6 (take the open bottom-right corner
+  EARLY, notes from games 74/76). Black G4 attach on top -> H4 hane, F4 hane, E4
+  extend, H3 solid = whole rows 1-4. C5 (keep left one group vs D6 attach), D4
+  connect, B6 solid vs C7 hane, J5 hane + J4, A7 hane + A6. count at move 30: +12.
+  No invasion needed. Killed C2/E2 bottom invasion: D2 block, B3, D3/E3/F3 connected
+  solid stones, G2, B1 = vital point of the corner bent-three (A1/C1 eyes), A4, G1,
+  then captured everything (C1, A1).
+
+- Game 115: vs 14k, Black. LOST W+2 (both passed, move 59). As Black 17-31-2.
+  Moves (B first): C3 F6 C7 F3 E5 D3 D4 E4 D5 E7 D2 E2 E3(capt D3) F4 D3 F1 F5 G5 E6
+  G6 D7 E8 D8 D1 C1 E1 G8 H8 F8 F7 E9 G7 D9 G9 F9 H9 G2 F2 G3 G4 H4 H5 H3 G1 H1 J2
+  J3 J5 H7 J7 J8 H6 H2 J9 J1 J4 pass pass.
+  (a) Opening C3/C7 + E5 vs F6/F3 again; D3 attach -> D4 hane, D5 solid, D2 atari,
+  E3 capture, F5 cut = fine fighting, no weak group. G8/F8/E9/D9/F9 took the top
+  edge F8-F9. count.py at move 37: 43 vs 38+7 = -2 and nothing big left.
+  (b) The G2/G3/H4/H3 invasion of the bottom right made W's 16-stone wall drop to
+  4 libs, but my group only had 3 libs, and the corner (H1-J4, with W's G1) gave
+  no eye: W J2 placement + J5 + J4 won the race by one tempo. The H7/J8 probes
+  died too. All free, but no gain.
+  C3+C7 as Black: now 0 wins in 7 tries (draws 63, 69; losses by 2-8). Lesson: DO NOT
+  play C7 at move 3 again. Use C3 then G3 (or G6/G7 on the far side).
+
+- Game 116: vs 12k, White. WON W+8 (both passed, move 54). vs 12k as White 14-31-3
+  (2 in a row: games 114, 116).
+  Moves (B first): E5 C3 G7 C6 G3 E3 E2 D2 F2 E4 D7 D6 E6 C7 D8 C8 F4 D4 D5 C5 C9 B9
+  D9 H5 H6 H3 H4 J4 G4 J5 G5 H2 J6 J3 G2 E7! F7 E8! F8 E9(capt 4) F9 E1 F1 D1 F3 D3 H1
+  B8 H8 D8 J2(capt my 6) pass pass.
+  (a) C3 C6 E3 (3rd-line extension), D2 block vs E2 undercut, E4 solid, D6 hane, C7,
+  C8, D4, C5 = solid left. (b) H5 invasion of the right died (H6/H4/G5/J6/G2: corner
+  bent-three H1/J1/J2 with G1 open = dead). It cost nothing.
+  (c) THE WINNING MOVE: libs check on BLACK's top chain C9-D9-D8-D7 showed 3 libs
+  (E7 E8 E9), all on the E column. E7 (atari-threat), then black F7; E8 put the chain
+  in atari while my E7E8 had 2 libs (F8, E9) -> E9 captured 4 -> top-left all mine.
+  A black chain that pokes INTO my side along an edge (C9/D9 hane + D7/D8) is often
+  short of libs: count them every move.
+
+- Game 117: vs 14k, Black. WON B+10 (both passed, move 76). As Black now 18-31-2.
+  Moves (B first): C3 F7 G3 D5 F5 E5 E4 F6 G5 G6 D4 C7 H6 C5 C4 H7 H5 B4 B3 A4 J7 J8
+  J6 H8 D8 C8 E7 D7 E8 E6 F8 G8 B6 F9 C6 D9 D6 E9(capt 4) B7 B8 B5 A7 A3 A6 A5(capt 2)
+  A8 B4 F2 F3 D2 E2 E1 E3 G2 H2 C2 B2 B1 G1 H3 H4 J3 J4 D3 J2(capt 2) A2 F1(capt 2) B9
+  D1(capt) F8 C1(capt 3) pass A1(capt 2) pass pass.
+  (a) C3 G3 then F5 (row 5 between W's D5/F7), E4 hane vs E5 attach, G5/H6/H5 solid,
+  D4/C4/B3 solid = rows 1-4 + right. count.py at move 25: -6.
+  (b) The top invasion D8/E7/E8/F8 died (W captured 4), BUT the probes B6, C6, D6 took
+  W's shared libs: then B7 + B5 (key point: the shared lib of my group and W's A4-B4)
+  + A3 atari won the race on the left, A5 captured 2 -> left side became mine: +16 swing.
+  Again the pattern: W chains on the edge next to my wall (A4-B4) are short of libs.
+  (c) Killed the bottom invasion F2/D2/C2/G2/H3 by cutting it into pieces: E2 wedge
+  (between D2 and F2), E3 connect, H2 block, B2, G1 (vital: stops the F1 eye), H4/J4,
+  then captured everything (J2, F1, D1, C1, A1) before passing.
+
+- Game 118: vs 10k, White. LOST (resigned move 46, count.py -14 even with optimistic
+  assumptions). vs 10k now 1-10.
+  Moves (B first): E5 C3 D4 C6 C4 D3 E3 D2 E2 C5 B3 C2 B2 E7 B5 B6 G6 D5 F7 E6 F6 G3
+  H3 H2 H4 G4 G5 F4 E4 G2 F5 J3 H5 F3 E8 J2 A6 A7 A5 D7 B7 C7 A8 B8 A7 resign.
+  (a) Black's D4 SHOULDER HIT on C3 then C4 attach on top: my D3 extension got blocked
+  by E3/E2, then B3/B2 undercut left C3-D3-D2-C2 with 2 libs (C1, D1) = DEAD corner
+  by move 14. A 3-3 stone pressed by D4+C4 has no room on a 9x9: I needed B4 hane or
+  B3 myself at move 6 (secure the corner base B3/B2) instead of D3; D3 only invited E3.
+  (b) G3 invasion (move 22) under black's E-wall + G6: H3 attach, H4/G5/F5 sealed;
+  eye space was a 1-row edge strip with F2 next to black E2 = dead (lesson -17 again).
+  (c) Black ignored my D5 "sente" move to play F7 -> I didn't punish properly.
+  vs 10k: stop moving up as White until I beat 12k 3 in a row; or vs E5 D4 shoulder,
+  play C3 -> B4/B3-side solid answers, never let the corner get sealed from both sides.
+
+- Game 119: vs 14k, Black. LOST W+6 (both passed, move 53). As Black 18-32-2.
+  Moves (B first): C3 F6 G3 C6 G7 E4 F4 G6 H6 D3 D2 C4 E3 D4 B3 B4 F3 F7 H7 F8 G8 F5
+  G5 H5 G4 G9 H4 H8 J5(capt H5) H9 J8 F9 D7 C7 E8 C8 E7 E5 A4 A5 A3 B6 J7 J9 E6 D6
+  B8 E9 B7 A7 pass pass.  count.py at move 39: 41 vs 40+7 = -6 = final.
+  No blunder; the territory loss came from the opening again. (a) W's E4 wedge between
+  C3/G3, plus the D3 attach, forced 5 gote answers (F4, D2, E3, B3, F3). W got the C4-E4
+  row-4 wall plus D3 inside my side, and I had only rows 1-3 on the left.
+  (b) G7 (move 5, top-right 3-3 vs W's row-6 stones) worked: it lived and took the right
+  side via H6/H7/G8/G5/H4/J5. But W's F7/F8/G9/H8/H9 took the top edge.
+  (c) The D7 invasion of the top-left (move 33) died. It was free, but I gained nothing:
+  W C7/C8/E5 removed every eye point (any point next to C8/F-wall is no eye).
+  Takeaway vs C3 F6 G3 C6: the E4 wedge is the problem. Next time try E4 MYSELF at
+  move 5 (row 4 between C3/G3, after which no wedge fits), or answer a W E4 with D4/E3
+  so that D3 can't attach. G7 was a good point but came at the cost of the bottom.
+
+- Game 120: vs 12k, White. LOST B+2 (both passed, move 56). vs 12k as White 14-32-3.
+  Moves (B first): G7 C3 E5 C6 G3 E3 F2 D7 D3(wedge) D4 D2 E2 C2 B2 B3 C4(C3 was in atari)
+  B1 D1 A2(capt B2) E1?(D1 atari after C1 came later) ... exact: A2 E4 F5 B4 A3 A4 C1 E1
+  F1 F3 H2 E6 F6 E7 F8 E8 F7 G4 H4 F4 G5 H6 H5 H7 H8 J8 G8 D5 E9 D9 F9 J3 H3 J6 J5 pass pass.
+  (a) Black's D3 wedge between C3/E3: D4 atari, D2, E2, then B2 "vital point" -> Black B3
+  put C3 in atari (C4 forced), B1 atari on B2, A2 captured it. Black's corner then had
+  TWO EYES (A1 and B2) shared by separate chains = ALIVE (~10 pts). I thought A4 killed
+  it, but a point where all neighbours are black (B2) is an eye even if the chains are
+  separate; I could never play A1/B2 (suicide). Cost: the game.
+  Better at move 14 (after black C2): C4 or B3 solid FIRST (my C3 had only 2 libs),
+  or D1 earlier; my B2 hane between B3/C2 points was a 2-lib stone (lesson -14 AGAIN).
+  (b) Rest was fine: E4 connect, F3 cut-ish, E6/E7/E8 top line, G4/F4 reduction,
+  D5, D9. Count at 40: even; final -2 after E9/F9 went to black (play E9 MYSELF
+  before D5 — 1st-line top edge is worth more than an internal point).
+  (c) H6/H7/J8 and J3/J6 probes in black's right died (free, no gain).
+
+- Game 121: vs 14k, Black. LOST (resigned move 69, count.py -12). As Black 18-33-2.
+  Moves (B first): C3 F7 G3 C6 E6 F6 F5 E7 E5 D3 D4 C4 D2 B4 E3(capt D3) G5 G4 H5 B3 A3
+  B2 A2 B1 H4 H3 J3 J2 J4 A1 A4 C5 B5 D5 D6 B6 B7 A5(capt 6!) A7 B5 H2 G2 J1 H7 G6 G8 F8
+  G7 J6 J7 J2 H6?? G9 J5(capt) H8 J8 H9 F9 E9 D8 C8 D7 C7 G1 H1 E8 D9 A6 J6(ko, no threats).
+  (a) E6 at move 5 (row 6 between C6/F7, per games 67/103 notes) -> W F6 attach, F5 hane,
+  E5 connect: fine, but W still got rows 6-9 everywhere else. D3 attach: D4 hane, D2, E3
+  captured; A1 + C5 + B6 then A5 captured 6 on the left. Still count -10 at move 43:
+  W's top (rows 6-9, ~40) was too big. Row-6 single stone didn't split the top.
+  (b) H7 invasion in the top-right: G8, G7 (cut point), J7, then H6?? atari on J6 —
+  H6 joined my group without adding libs, W IGNORED it and played G9 + H8 placements:
+  my group dropped to 2 libs (J6, J9) with J5 making J6 only a ko. Lost the race by one
+  tempo (F9 approach was suicide). Correct at move 51: H8 (or H9/J8 eye shape) — the
+  group had only 3 libs (H8 J8 G9); LESSON -12/-37 again: an invasion group with <=3
+  libs plays the eye move, never an atari that W can ignore.
+  (c) W's big chain had only 2-4 libs (D7 E8 F9 H1) late, but approach moves (E8, F9)
+  were all self-ataris. Count approach libs before hoping.
+
+- Game 122: vs 12k, White. LOST (resigned move 38; 8-stone top-left group dead).
+  vs 12k as White 14-33-3.
+  Moves (B first): E5 C3 F3 C6 F7 E7 E6 D7 C5(wedge!) C4 B5 B6 D4 B4 A4 D3 E3 A5?
+  A6(capt A5) D6 D5 B3 D2 C2 D1 A3 A5 B1 B7 C7 B8 C8 B9 A2 E8 D8 D9 resign.
+  (a) Same start as game 58, but at move 9 Black wedged C5 between C3 and C6 (lesson -6:
+  the C4/C5 split point). After C4/B6, Black's row-5 chain A5-E5 ran THROUGH my side
+  and left me two weak groups (bottom corner, top C6-E7), with Black's strong wall
+  between them = game 30 again. (b) A5 (move 19) was a 1-lib throw-in that Black simply
+  captured: wasted a tempo. (c) The bottom corner needed B3, C2, A3, B1, A2 (5 gote
+  moves) to live; meanwhile B7/B8/B9/E8/D9 sealed the top group with no eye space.
+  FIX: vs E5 F3 F7 with C3+C6, play C5/C4 (connect the left side) BEFORE E7/D7.
+  And vs a C5 wedge, D5 can't be played, so answer by keeping ONE group: C4 and then
+  B5 myself, or give up C6 lightly. Never end up with two weak groups on one side.
+
+- Game 123: vs 14k, Black. LOST (resigned move 47, count ~34 vs 47+7). As Black 18-34-2.
+  Moves (B first): C3 G7 G3 C7 E7 E5 E3 C5 G5 F6 F5 E6 G6 F7 D4 B4 C4 D5 H7 J8 J7 H8
+  H6 B3 B2 E4 F4 C2 D3(C3-D4 group had ONE lib!) A2 D2 C1 D1 B1(capt B2) G8 G9 F8 E8
+  H9 F9 G8 F8 B6 B7 B5 C6 resign.
+  (a) E7 split (game 113 idea) failed here: W answered E5 (tengen) instead of E6
+  attach, so E7 was cut off at once and died. Then W's row-5 line C5-D5-E5 + F6/F7
+  gave me only rows 1-4 + a small right side (~34). E7 at move 5 works only if W
+  attaches it; vs C3 G7 G3 C7, maybe play E5 myself at move 5 (W stones on row 7
+  are far = row 5 is safe, games 25/29) and use E7 later.
+  (b) B2 (move 25, diagonal block vs B3 crawl) was cut by C2: lost the corner and my
+  C3-C4-D4 group dropped to ONE liberty (D3) unnoticed until I counted. Should have
+  played C2 solid (lesson -25 again).
+  (c) G8 cut into W's H8-J8 (3 libs) group failed: G8 itself had 2 libs, W G9 atari.
+  Then F8/H9/G8 follow-ups just fed stones. Lesson -14 for the Nth time: count MY
+  cutting stone's libs after W's simplest atari before cutting.
+
+- Game 124: vs 12k, White. WON W+2 (both passed, move 64). vs 12k as White 15-33-3.
+  Moves (B first): G7 C3 G4 D6 D3 D4 C4(crosscut) C2 E4 D5 E3 B4 E7 C5(capt C4) E6 D7
+  D8 C8 D9 C9 F8 H3 H4 F3 G3 F2 G2 E2 D2 F4 E5 D1 F5 C1 G1 E1 J3 F1 B7 C7 B6 B8 A7 B5
+  H2 C6 A8 B9 A5 A4 G6 A9 B3 A6(capt 6) B2 C4 B1 A3 pass A2 pass A1(capt 3) pass pass.
+  (a) vs the D3 attach on C3, D4 hane -> Black C4 CROSSCUT. C2 (extend the corner, solid)
+  then D5 and B4 (atari toward my strong side) -> C5 captured C4 = solid left.
+  (b) The H3 invasion died, but F3/F2/E2/F4/D1/C1/E1 cut Black's D2-D3 stones off the
+  bottom: the bottom row D1-F4 became mine (~+6). D1 was the key: after it, black E1/C1
+  were both self-atari, so D1 connected my bottom chain to the left group.
+  (c) Killed the B7/B6/A7/A8/A5 invasion (C7 connect, B8, B5, C6, A4, B9, A9, A6 captured 6),
+  then the B3-B1 one (C4 connect was URGENT: libs.py showed my 15-group at 2 libs [A3 C4],
+  then A3, A2, A1). count.py at move 38 said W+2 = final.
+
+## Lessons (most important first)
+-40. (game 120) An empty point whose 4 neighbours are all enemy stones IS an eye even if
+   those stones are separate chains, unless I can capture one chain by playing there.
+   Before "killing" a corner, check each candidate eye: can I legally play it?
+-39. (game 112) When ahead, at move ~35 list every group's REAL EYES (not libs).
+   The right group bordering the edge had 3 empty interior points and no eyes; spend
+   one move (J6/J8) to make 2 eyes before any 1-2 point endgame (D1, C1). Also: run
+   libs.py on the board AFTER my capture: a capture that leaves 1 lib = recapture of
+   the whole group.
+-38. (game 106) INVASION CHECKLIST each move: (1) libs of every invasion chain,
+   (2) can black place on row 1 next to my row-2 stone and connect it out (H1 via G1)?
+   If yes, play that point NOW. (3) Then block the open end. Order matters.
+-37. (game 105) Before EVERY move after move 30, list each of my groups' libs AND
+   their interior. If a group's interior is a corner of <=8 points with an enemy
+   stone poking in (J4/H2), the 2nd-line vital point (H2) is the only move.
+-36. (game 104) Corner life: the 1st-line point adjacent to my 2nd-line stone and to
+   a black outside stone (H1 next to G2, H9 next to G8) is THE vital point. Take it
+   before the "inside" vital point (J2/J8). Both my groups died to this in one game.
+-33. (game 93) See game 93: an enemy wall between my invasion and my outside groups
+   can be short of libs. Run libs.py on the ENEMY wall before giving up an invasion.
+-32. (game 88) A top/bottom group squeezed between two enemy corners must take the
+   EDGE eye space (row 8-9 enclosure like E8+F8) BEFORE any attacking wedge elsewhere.
+-31. (game 77) Every few moves list each group's libs AND which side of the board it
+   can run to. A group touching enemy stones on 3 sides with <=3 libs is in danger
+   NOW — fix it before the opponent's second stone arrives (here: C5 capture of C4).
+-28. (game 64) MANDATORY: paste the board into libs.py BEFORE EVERY MOVE from the
+   first contact fight on, including the board after my planned move. 4 of the last
+   ~10 losses came from one unchecked move (games 46, 52, 54, 64).
+-27. (game 62) After every libs.py run, any group of mine with <=3 libs and no
+   2 formed eyes is the ONLY move. Take the outside liberty (D1) first; inside
+   liberties (A1/A2/B1) can be throw-in'd and recaptured repeatedly.
+-25. (game 55) When the opponent's hane on the edge (A6/A5) comes down, block with a
+   stone CONNECTED to my wall (B4 next to B5), not a 1st-line stone (A4) with 2 libs.
+   Before such a block, run libs.py: my B5-C6 group dropped to ONE lib after W B4.
+-24. (game 52) A semeai/press next to my own wall: before attacking a black chain,
+   count MY adjacent group's libs too. A wall along the edge column (C6-C9) whose
+   libs are all 1st/2nd-column points is the weaker side. A connecting move that
+   leaves a group with 1 lib whose remaining lib is suicide for me = dead group.
+-23. (game 51) Seki inside an invasion: if the shared libs (H8, J9) sit in MY eye
+   space and the opponent's stone (H9) can be sacrificed, the opponent throws in,
+   I capture, and my "eye" is 2 adjacent points = dead. Count it as dead from the start.
+-22. (game 50) Before move ~40, list each big group's INTERIOR (empty points it fully
+   surrounds). If a big group's only interior is one corner (A1-B3), secure 2 eyes there
+   NOW (B2/A2 shape); opponent placements A2/A3 can make it seki/dead, and seki =
+   scored dead.
+-21. (game 48) Invasion group along the edge: list its interior; if it's ONE line
+   (J1-J5) with an open end, it is NOT alive. Make an eye-splitting move (J3) at once.
+   "Alive with correct responses" is not good enough vs KataGo — it finds the hane+vital.
+-20. (game 46) Before EVERY move, even an "obvious" block, count libs of every
+   group the opponent's last stone touches. A3 touched my 10-stone group; it had 1
+   lib left. Corner groups shrink when I fill boundary points (D4, D5) myself.
+-19. (game 44) An edge "eye" (A5) with an empty outside neighbour (A6) is NOT an eye
+   until I occupy A6. Check every eye: all 2-3 neighbours must be my stones.
+-18. (game 42) NEVER PASS until every group has two separate eyes ALREADY
+   formed (fill the inside of a straight-four/bent-four so the eyes are split).
+   The engine scored my straight-four group as dead = lost a won game.
+-17. (game 40) Eye counting: 2 adjacent empty points = ONE eye. An eye whose wall
+   stone sits in atari forever (J4 between black H4/J5) is not an eye. When invading,
+   aim for eye space in TWO directions (edge + side), not a 1-row strip along row 1-2.
+-16. (game 33) When two of my groups each drop to 2-3 libs at once (C3C4 and E3E4
+   after White D4), the move that CONNECTS them (D3) beats any capture elsewhere.
+   A 3-3 corner stone attached underneath (B3) needs B2+C2-type eye shape, not a
+   C-column wall.
+-15. (game 31) When the opponent presses my 3rd-line corner stone from above (W G5
+   vs my G3), answer SOLIDLY next to my stone (G4 hane on top or H3 under), never a
+   diagonal/knight jump (H4) that the opponent can cut through. Losing a corner =
+   ~10 points on 9x9 = the game.
+-14. (game 28) Before ANY hane, count the hane stone's libs after the opponent's
+   simplest reply (extend/hane back). H5 and B6 in game 28 each became 1-lib
+   stones immediately. If <=2 libs and a cut exists, play the solid move instead.
+-13. (game 27) Before playing a dividing-line stone, check if it TOUCHES/diagonals
+   enemy stones. If the opponent can wedge + cut and my stones end with 2 libs, play
+   one line lower and connected (E4 not E5 vs row-6 wall). When a group of mine is
+   cut and has 2 libs with the opponent to move, SACRIFICE it immediately; don't
+   add stones.
+-12. (game 21) An invasion group with <=3 libs must NOT cut or fight; play the
+   corner/edge eye move (2nd line, e.g. H2/J3) first. Run libs.py at every move of
+   an invasion — I didn't, and my group sat on 2-3 libs for 6 moves.
+-11. (game 20) An invasion group that wins its fight still needs TWO EYES. Every
+   "connecting" move inside its own space (G5, H5) destroys an eye. Before each
+   move on such a group, list its empty interior points; if fewer than ~6 or
+   they form a line, play the edge/eye move (H9/J8 corner, 2nd-line) FIRST.
+   1st-line placements next to my edge stones (black H9 next to H8) kill — take
+   that point myself early.
+-10. (game 19) A wall group (row 3) with my territory under it is NOT alive if the
+   opponent has a stone touching that territory (D3). Count EYES of every group,
+   not just libs: zero real eyes + opponent stones nearby = defend first.
+-9. (game 18) After every edge block/hane (D9, E8 type), list my stones with <=2 libs
+   and the empty cutting points next to them. A 1-lib stone on the edge + an empty
+   diagonal cut = Black cuts with atari. Spend one move to make it solid when ahead.
+-8. (game 16) SEKI = DEAD for this engine's scoring. Make two real eyes, or if the
+   group can only make seki, keep playing (e.g. find other gains) — don't pass into it.
+-7. (game 15) When the opponent invades UNDER my 4th-line stones (E3 between C4/G4),
+   take away the base: play underneath/beside on rows 2-3 (D2, F2, or the knight-move
+   undercut), not the cap on top. A capped 3rd-line stone just crawls and lives.
+-6. (game 14) When I have two stones on one side (C3 + D7) and the opponent can play
+   between them (C5), that split point is the most urgent point — take it or a move
+   that makes it fail BEFORE extending elsewhere (E7 was too slow).
+-5. (game 13) Before playing a cap/attachment next to enemy stones, check my new
+   stone's libs after the opponent's obvious cut (G4 in game 13 had 1 lib after G5).
+   Wedged stones between two enemy groups die; play solid (connect) instead.
+-4. (games 5, 7) After every exchange ask: "who got the EDGE out of this?" If White
+   gets row 1-2 and I get a row-4 wall, I lost ~2 points per stone exchanged.
+   Blocking from the center side is wrong when the opponent is the one on the edge.
+-3. (game 6) Invasion life: an L-shaped group on rows 7-8 needs F9-type edge moves
+   AND the vital point of its eyespace. Bulky-five/pyramid shapes: occupy the vital
+   point yourself. Before each life move, run libs.py on the board AFTER the move
+   and after the opponent's most annoying reply (atari / throw-in).
+-2. (game 5) Center walls make no points on 9x9. Territory lives on rows 1-3 and
+   7-9. Each move ask: "which EDGE does this secure?" If White has stones on both
+   my top and bottom edges, I am losing even with a fine-looking center.
+-1. (game 4, CATASTROPHIC) BEFORE EVERY MOVE, also before "capturing dead stones",
+   count the liberties of my BIGGEST group, using the shell if needed. A huge group
+   is not automatically alive: it needs two separate eyes. Never fill a point that
+   reduces my own group to 1-2 libs; when capturing enemy stones inside my area,
+   make sure the capturing move doesn't fill my last liberty (J5 in game 4 did).
+   Write a tiny shell liberty-counter script (inspection only) and run it each move
+   in the endgame.
+0. (game 3) DON'T start a contact fight that leaves 3+ weak groups. After E5 / White
+   C5, prefer a calm move (e.g. C3/C7 approach from the far side, or G-side
+   extension). Each move, list every one of my groups with <=3 libs; if more than one,
+   play solid connecting moves (e.g. D5 connecting, not hane).
+0b. A wall needs liberties on the open side; before White can play contact moves on
+   its outside (F3/F5 in game 3), add a solid move there.
+1. **Count liberties of MY OWN groups before every move**, especially edge groups
+   like a chain along row 1-2. In game 1 my bottom chain B1-F2 had only 2 libs
+   (F1, F2-side); white invaded F3/E3 then G2 and the chain died in atari. Before
+   answering an invasion, list libs of every adjacent black group.
+2. **Count the score early (around move 20)**. Area count = stones + surrounded
+   empty. In game 1 I thought I was ahead after the opening but was actually
+   behind ~6: White's two 3rd-line stones (C3, C6) + solid left side were worth
+   more than my right side, and komi is 7.
+3. Opening: E5 then G4 let White take the whole left side cheaply (C3, C6).
+   Consider responding closer / blocking white's second stone (e.g. approach
+   between them early) instead of a slow extension.
+4. Cutting moves deep in the opponent's area (C5 cut, C7 cut, B4) mostly just
+   lost stones vs 8k — the engine answers locally correctly. Don't count on
+   blunders; 8k KataGo reads short tactics fine.
+5. Hane at the 1st/2nd line (D1, F9) created weaknesses that White exploited
+   (F9 stone captured, F8 push). Be careful with hanes that leave cutting points.
+
+6. Game 1 move record (B first): E5 C3 G4 C6 D4 C4 D6 D7 E7 D8 C5 B5 D5 B6 D3 D2
+   E2 C2 E8 E9 F9 D9 D1 F8 F7 G8 G7 H8 H7 J7 J6 J8 C7 C8 B8 B7 C1 H6 H5 J5 J4 J6
+   G6 B2 B1 A2 E1 A1 B9 G9 B4 A4 H4 F3 G3 E3 F2?? G2 (my chain B1-F2 in atari, resigned).
+   At move 59 the right answer was probably F4/E4-type moves *after* first checking
+   my own chain's libs; F2 filled my own liberty situation badly.
+
+## Opponent ladder plan
+- 8k was too strong for my game-1 play. Try 10k-12k next game; move up after a win.
+- Won vs 12k in game 2 comfortably (+14). Next: try 8k or 10k (suggest 8k again,
+  applying the "count at move 20, invade if behind" habit).
+- Game 3: lost to 10k with fighting style. Next: play 12k again (or 10k) with
+  SOLID style: connect rather than hane, keep one strong group, count libs each move.
+  Move up only after winning.
+- Game 4: lost to 12k (behind in opening, then self-atari of whole group). Next:
+  12k again. As White vs a G7/F3-type opening, take a corner/side for territory
+  (e.g. C3/C7 area) instead of splitting into the middle; a center wall = no points.
+
+- Game 5: lost to 12k as Black by 20 (opening/direction problem, not tactics).
+  Next: 12k again. Focus purely on opening direction: secure edges (3rd line),
+  count at move 15-20.
+
+- Game 6: won vs 12k as White (+4). Record vs 12k: W, L, L, W (as White 2-1). Next:
+  try 10k (as Black or White). If Black: E5 then take a 3rd-line edge point early.
+
+- Game 7: lost to 10k as Black (-25+). Record: vs 12k W L L W, vs 10k L L, vs 8k L.
+  As Black I have lost every game (1,3,5,7) — all by the same "center wall, no edges"
+  problem. Next: 12k again; if Black, try a different opening, e.g. first move
+  C3/G7-type 3-3/3-4 corner point or E5 followed by an immediate 3rd-line move that
+  ATTACHES/blocks White's corner stone from the edge side. Count at move 15.
+
+- Game 8: won vs 12k as White (+18). Record vs 12k: W L L W W (as White 3-1).
+  Next: move up to 10k. As White use the game-8 recipe: corner 3-4 point on the side
+  away from Black's first stone + 2nd stone on the same side (C4/D7), block approaches
+  from the EDGE side, count at move 20, invade at the 3-3/H3 point if even or behind.
+  As Black: still winless; try a 3-4 corner first move (e.g. C3/G7) instead of E5.
+
+- Game 9: lost to 12k as Black (C4 opening). As Black 0-5, as White 3-1 vs 12k.
+  Next: 12k again. If Black, try TENGEN E5 + after White's corner move, approach/attach
+  that corner stone from the edge side right away (don't build a second separate
+  corner). Key idea: 9x9 is about one dividing line; count at move ~15 and make
+  sure the line gives me >= 44 points of area.
+
+- Game 10: lost to 10k as White (crosscut fight in the opening). Record vs 10k: 0-4.
+  Next: 12k again until I win 2 in a row, THEN 10k. As White vs a 3-3 opening (G7),
+  play C4/C3 corner and if Black attaches (C3 under C4), play the SIMPLE block on
+  the side that keeps my stones connected; never allow a crosscut with 2-lib stones.
+  Run libs.py from move ~15 (not 30): all key mistakes this game were 2-lib stones.
+
+- Game 11: lost to 12k as Black (E5 opening, direction). As Black 0-6. As White 3-1 vs
+  12k. Next: 12k again. If Black, test a NEW first move: C3/G7-ish don't work, E5 doesn't
+  work for me — try E5 then answer White's side stone with a SHOULDER HIT / contact on
+  top of it (e.g. vs C5: D6 then D4 pressing it low on the 3rd/2nd line) so White gets
+  only ~3 columns. Count at move 15 (here at move 27 it was already -8).
+
+- Game 12: won vs 12k as White (+8). As White vs 12k: 4-1. Next game: if White,
+  try 10k with the game-12 recipe (C3 3-3 + D7, hane on top of attach, own column E).
+  If Black, 12k again with the game-11 plan (shoulder hit vs side stone).
+
+- Game 13: lost to 12k as Black again (0-7 as Black). Next: if White, 10k with the
+  game-12 recipe. If Black, try 14k (to rebuild) with a corner opening (C4 then G4/C7),
+  NOT tengen; count at move 15.
+
+- Game 14: lost to 10k as White (B+8). Record vs 10k: 0-5. As White vs 12k: 4-1.
+  Next: if White, 12k again (win 2 in a row before 10k) but fix the opening: after
+  E5 C3 G3, play D7 then if Black plays C5-ish, consider C5 myself next time FIRST
+  (e.g. E5 C3 G3 C6 — a solid left side at C3+C6 like game 1's White), then D7/E7 later.
+  If Black, 14k with corner opening (see game 13 note).
+
+- Game 15: lost to 14k as Black (W+16). Next: if Black, 14k again with 3rd-line
+  corner moves (C3 then G3 or C7), kill invasions from the edge side. If White,
+  12k with game-12 recipe.
+
+- Game 16: draw vs 12k as White. As White vs 12k: 4-1-1. Next: if White, 12k again
+  (same C4+C6 left-side opening vs E5 worked well: solid, no weak groups); invade
+  earlier if count is even and make sure the invasion gets real eyes (take outside
+  liberty points like G6 early). If Black, 14k with 3rd-line corner moves.
+
+- Game 17: draw vs 14k as Black (0-8-1 as Black). Next: if Black, 14k again with C3
+  opening (it gave a good center line); protect the C3 corner group's eye space early.
+  If White, 12k with C4+C6 left-side opening.
+- Game 18: lost to 12k as White (was ahead at move 24, D8 cut blunder). As White vs
+  12k: 4-2-1. Next: if White, 12k again; same opening (C4, D6, B3 block, D4 hane) was
+  good. Once ahead, play SOLID (protect cutting points), run libs.py from move ~18.
+  If Black, 14k with C3 opening.
+- Game 19: lost to 14k as Black (0-9-1 as Black). Next: if Black, try 16k for a
+  first Black win; open C3 then C7 (same side, 3rd line both) so no wedge fits;
+  answer a wedge (E4-type) by blocking on the EDGE side and keep it OUT of row 3.
+  If White, 12k with C4+C6/D6 opening.
+- Game 20: lost to 12k as White (4-3-1 as White vs 12k). Opening C4/C6 vs E5 E3 E7
+  was fine; early G4 invasion fine; lost purely on eyes of the invasion group.
+  Next: 12k again as White. Invade earlier at a 3-3-type point (G3/G7) that has
+  natural edge eye space rather than G4 (4th line), and secure eyes before big moves.
+- Game 21: lost to 16k as Black (0-10-1 as Black). Next: if Black, 16k or 18k again.
+  Opening idea: C3 then G3 (both 3rd line, bottom) or C3 then G7 diagonal — C3/C7
+  on one side gave White the whole right half via the F column. Aim for the
+  dividing line on column F, not D/E. If White, 12k with C4+C6.
+- Game 22: won vs 12k as White (W+10). As White vs 12k: 5-3-1. Next: if White, try
+  10k (or 12k once more to get 2 in a row) with the same recipe: C3+C6, block approaches
+  on the edge side, invade the opponent's biggest side at move ~18 at a 2-from-their-stone
+  point on row 4 (H4) and build an ENCLOSED straight-four/2-eye edge shape quickly.
+  If Black, 16k/18k with C3 then G3.
+- Game 23: WON vs 16k as Black (B+6). Next: if Black, 14k with C3/G7/G3 opening
+  (cut a wedge stone off its support when my cutting stone connects to a strong
+  stone). If White, 10k or 12k with the game-22 recipe.
+- Game 24: WON vs 12k as White (W+8), 2 in a row. As White vs 12k: 6-3-1.
+  Next: if White, move up to 10k (record 0-5 there; use: solid left side, count at
+  move ~16, invade early at 3-3 points G7/G3 and secure 2 eyes before anything else).
+  If Black, 14k with C3/G7/G3 opening.
+- Game 25: WON vs 14k as Black (B+4). Next: if Black, try 12k with C3, G3, E5
+  (cut off any wedge stone, then take its base from underneath). If White, 10k.
+- Game 26: WON vs 10k as White (W+6). Next: if White, 10k again (want 2 in a row
+  before 8k) with the same plan: corner 3-3 away from Black + D6/D4 on the same side,
+  hane on top of every push to own column E, solid connects when libs <= 3.
+  If Black, 12k with C3, G3, E5.
+- Game 27: lost to 12k as Black (row-5 stones cut apart). Next: if Black, 14k
+  again (2-0 vs 14k/16k with C3/G3) and after C3/G3 play the middle point on the
+  4th row (E4) unless White's stones are far away. If White, 10k (game-26 plan).
+- Game 28: lost to 10k as White by 2 (vs 10k now 1-6). Next: if White, 10k again;
+  vs E5 C4 C6 try F3/G3 bottom, then E4/D5/C5 shape was good — just avoid the H5/B6
+  hanes (play H4 / B5 solid instead). If Black, 14k with C3/G3/E4.
+- Game 29: WON vs 14k as Black (B+14). Next: if Black, move up to 12k with C3, G3,
+  then E5 if White's stones are on rows 6-7 (E4 if they're on row 5/6 nearby).
+  If White, 10k (game-26 plan).
+- Game 30: lost to 10k as White (inherited a lost position at move 40). vs 10k now
+  1-7. Next: if White, 10k again with the game-26 plan; if Black, 12k with C3/G3.
+- Game 31: lost to 12k as Black (W+22). vs 12k as Black now 0-? (all losses). Next: if
+  Black, go back to 14k (3-0 with C3/G3/E5 there) and answer any press on G3/C3 with a
+  solid contact move. If White, 10k (game-26 plan).
+- Game 32: lost to 10k as White (left side too small, two invasions died). Next: if
+  White, 12k (6-3-1 there, want stable wins) with C4+C6 left-side opening and an
+  EARLY invasion (move ~16) of the open side; vs 10k only after 2 more wins at 12k.
+  If Black, 14k with C3/G3/E5.
+- Game 33: lost to 14k as Black (corner died). Next: if Black, 14k again with
+  C3/G3/E5 (or C3 G7); after any attach on my C3 corner, secure the corner's eye
+  shape (D3/C2 connection) before attacking. If White, 12k with C4+C6.
+- Game 34: draw vs 12k as White (G7/G3 opening by Black; C3+D6 for me). As White vs
+  12k: 6-3-2. Next: if White, 12k again; vs a G7+G3 Black opening my left side alone
+  = 44 incl. komi = draw, so I need +1-2 more: hane on top of black's pushes towards
+  the edges (bottom E2/E1 before Black gets them), and invade the right side at the
+  3-3 (H2/H8) by move ~14. If Black, 14k with C3/G3/E5.
+- Game 35: lost to 14k as Black by 2. Next: if Black, 14k again. vs a W D4 shoulder
+  on C3, consider answering D3/C4 contact on the corner side first (keep C3's base),
+  then the far corner. If White, 12k with C4+C6.
+- Game 36: lost to 12k as White (6-4-2 vs 12k as White). Next: if White, 12k again;
+  when Black's first two stones are on one side (G6+F4), my side alone is too small:
+  invade that side by move ~10 at the 3-3 point (G3/G7) BEFORE Black adds a 3rd stone,
+  and in any top/bottom invasion take the 1st-line corner vital point (H9/H1-type) early.
+  If Black, 14k with C3/G3/E5.
+- Game 37: WON vs 14k as Black (B+16; 4-0 vs 14k/16k when the C3/G3 wedge gets cut).
+  Next: if Black, try 12k again with C3, G3 (vs a wedge: shoulder F4 + cut E4 + undercut
+  E2/D3). If White, 12k with C4+C6 and early invasion.
+- Game 38: WON vs 12k as White (W+18). As White vs 12k: 7-4-2. Next: if White, 12k
+  once more (want 2 in a row) or 10k; same plan (C4, solid wall, early invasion of the
+  side Black's wall faces). If Black, 12k with C3/G3 (or 14k).
+- Game 39: DRAW vs 12k as Black (first non-loss as Black vs 12k). Next: if Black, 12k
+  again with C3/G3/E5; vs an E3 wedge: D3 attach + F3 cut + seal from above (F5, D5, C5)
+  worked, but strengthen the C3 corner (B2/C2 shape) BEFORE W hanes at B3. If White,
+  12k (7-4-2) or 10k with C4 + solid wall + early invasion.
+- Game 40: lost to 12k as White (7-5-2 vs 12k as White). Next: if White, 12k again
+  but vs E5+E3 (Black's vertical line) take TWO corners/sides early: e.g. C4 then G7
+  (other side) instead of C6, so Black can't own both top-right and bottom. Avoid
+  answering an attach (C3) with 3 gote connecting moves. If Black, 12k with C3/G3/E5.
+- Game 41: lost to 12k as Black (C3 C6 G3 E7 E5: White row 6-7 framework won).
+  As Black vs 12k: 0 wins. Next: if Black, go to 14k (4-1-? there with C3/G3) OR vs
+  12k try C3 then, after W's C6-type reply, G7 (the OTHER half's top corner, 3rd
+  line) so White can't own the top; then E5/E4 between. Count at move ~12, not 19.
+  If White, 12k with C4 + solid wall + early invasion.
+- Game 43: lost to 14k as Black by 8 (C3, G7 diagonal opening -> White got two
+  sides). Next: if Black, 14k with C3 + G3 (SAME edge, 3rd line; record 4-1 there
+  when White wedges) and E5/E4 between; if White's 2nd stone sits on my side, attack
+  it with an extension from my corner rather than defending my corner in gote.
+  If White, 12k with C4 + solid wall + early invasion.
+- Game 44: lost to 12k as White (7-7-2 vs 12k as White). Next: if White, 12k again;
+  vs E5 F3 try C3 (3-3, no attach-under possible, game-12 recipe) + C6/D7; if Black
+  attaches, hane on top. If Black, 14k with C3/G3/E5.
+- Game 45: WON vs 14k as Black (B+16). Black vs 14k/16k now 5-1-ish with C3/G3/E5.
+  Next: if Black, try 12k again with C3/G3/E5 + solid answers to presses + cut
+  white's row-5 chains off their walls (game 45). If White, 12k with C3 3-3 + C6/D7.
+- Game 46: lost to 12k as White (7-8-2 vs 12k as White), self-inflicted capture.
+  Next: if White, 12k again. vs E5+E3 the G7 + D6 plan got invaded at C7; prefer the
+  game-12/22 recipe C3 + C6 (same side) then block on the EDGE side. Workflow fix:
+  paste every board into libs.py BEFORE choosing the move (not every ~10 moves).
+  If Black, 14k with C3/G3/E5.
+- Game 47: WON vs 14k as Black (B+16). Next: if Black, try 12k with C3, G3, then a
+  row-7 corner (C7/G7 side White left open) and hunt white chains with libs.py.
+  If White, 12k with C3 3-3 + C6 same side, edge-side blocks.
+- Game 48: lost to 12k as White (7-9-2 vs 12k as White). Opening C3 + C6 + E7/D7 +
+  D4/D5 hane vs E5 F3 F7 was even at move 36. Next: if White, 12k again; same opening,
+  invade the open side early (fine), but FINISH TWO EYES of the invasion group before
+  anything else (eye-splitting move inside the edge line). If Black, 14k with C3/G3/E5.
+- Game 49: lost to 14k as Black (6-15-1 as Black). White mirrored C7/G7 and built
+  a row-7 wall. Next: if Black, 14k again with C3/G3, but if White answers on row 7
+  (C7+G7), play move 5 at E6 or D6 (row 6, not E5) and answer edge pokes (A3, J5)
+  with solid connected blocks one line in from the edge (B4/H4-type), not ataris.
+  If White, 12k with C3 3-3 + C6, finishing the invasion group's eyes first.
+- Game 50: lost to 12k as White (G7 2nd corner got pressed under a row-6 wall). Next:
+  if White, 12k with C3 + C6 (same side), edge-side blocks, and make the left group's
+  corner eyes explicit early. If Black, 14k with C3/G3 (E6 vs a row-7 White answer).
+- Game 51: lost to 14k as Black (W F6+C7 took rows 6-9; invasion became seki then died).
+  Next: if Black, 14k again with C3/G3 but move 5 on ROW 6 (D6/E6) when White's
+  first stones are on rows 6-7; invade the top by move ~20 at a 3-3 point with room
+  for two eyes, or don't invade at all. If White, 12k with C3 + C6.
+- Game 52: lost to 12k as White (7-10-2 vs 12k as White) from an AHEAD position by
+  not counting libs. Next: if White, 12k again with the same opening (C3, C6, C7 block,
+  E3/F3/G2 bottom, D8/C8/C9 top) — it gave +8 at move 20. Then: run libs.py on EVERY
+  board from move ~20, both colours, before choosing. If Black, 14k with C3/G3.
+- Game 53: WON vs 14k as Black (B+10). Next: if Black, try 12k with C3 then a 3-4
+  point on the far side's TOP (G6/G7) when White takes C6/C7, and look for white
+  chains with <=4 libs to kill. If White, 12k with C3 + C6, eyes first, libs.py every move.
+- Game 54: lost to 12k as White (7-11-2 vs 12k as White). vs E5 G7, C3+G3 (both on
+  the bottom) was too small. Next: if White, 12k with C3 + C6 (game-12/22 recipe,
+  same LEFT side) and run libs.py on EVERY board during fights, no exceptions.
+  If Black, 14k with C3/G3.
+- Game 55: lost to 14k as Black by 4 (row-6 plan vs row-7 wall nearly worked).
+  Next: if Black, 14k with C3/G3/E6; solid connected edge blocks (B4/H4).
+  If White, 12k with C3 + C6, libs.py every move.
+- Game 56: lost to 12k as White (7-12-2 vs 12k as White). Invasion died (false eyes).
+  Next: if White, 12k. vs G7+F3 (Black on the right): left C3+C6 is only ~33, so
+  invade at move ~8-12 already (e.g. H3 3-3 under F3/G7 gap, or approach G3) while
+  the right is still open; an invasion at move 20 between 3 black stones fails.
+  If Black, 14k with C3/G3/E6.
+- Game 57: lost to 14k as Black (C3 F6 G3 C6: White took rows 5-9). Next: if Black,
+  14k; after C3 F6 try a TOP corner next (C7 or G7 3rd-line from top) so White's
+  row-6 stones can't own the whole top; E4-type row-4 moves only after the top is split.
+  If White, 12k with C3 + C6.
+- Game 58: WON vs 12k as White (W+8). Next: if White, 12k once more (want 2 in a row)
+  or 10k, same recipe: C3+C6 vs E5, E7/D7 top, invade the open side at move ~16 at its
+  middle (H5) then base (H3/H4/H2/G3) and block the open end immediately. If Black, 14k
+  with C3/G3 and a top-corner move if White goes high (game 57 note).
+- Game 59: WON vs 14k as Black (B+2). Next: if Black, 14k once more (want 2 in a row
+  before 12k) with C3/G3 then G6 if White builds a vertical E-line; if White, 12k
+  with C3+C6 recipe. Run count.py at move ~20 on a guessed final board.
+- Game 60: lost to 12k as White. Next: if White, 12k again; vs G7+G3 play C3 then C7
+  (or C6) at once so Black can't invade the top-left, and invade the right side by
+  move ~8. If Black, 14k with C3/G3.
+- Game 61: WON vs 14k as Black (B+4), 2 in a row at 14k. Next: if Black, try 12k with
+  C3, then the top corner White's reply leaves open (G7 vs C7), then G3; hane at the
+  head (D4) and solid connects. If White, 12k with C3 + C6/C7 recipe, invade early.
+- Game 62: lost to 12k as White (8-14-2 vs 12k as White). Next: if White, 12k again;
+  vs E5 G7 try C4 + C7-ish or C3 + D5 to avoid the C4/D4 wedge; run libs.py EVERY
+  move from move 10 and fix any own group <=3 libs before endgame moves.
+  If Black, try 12k with C3 / G7 / G3 (game-61 plan).
+- Game 63: draw vs 12k as Black (C3, C7, E5 vs W G7/G3 mirror). Next: if Black, 12k
+  again with C3 + C7 + E5 (solid, even game) but look for ONE more point: hane on top
+  of W's E6 attach (F6) or take E8 before W; invade the open side at move ~12, not 25.
+  If White, 12k with C3 + C6 recipe, libs.py every move.
+- Game 64: lost to 12k as White (8-15-2 vs 12k as White). Next: if White, 12k; vs
+  E5 G6 F3 (Black on right) the C3/C6/E7 left side was ~37 incl komi -> invade the
+  right EARLIER (move ~8, e.g. H4/H3 before F3 support grows) and keep invasion
+  stones CONNECTED (H3-H4 solid, not H3/H5/H7 jumps). libs.py every move.
+  If Black, 12k with C3 + C7 + E5.
+- Game 65: lost to 12k as Black by 4 (was -30, recovered with B9/D8 capture). Next:
+  if Black, 14k with C3/G3/E5 (or E6 vs row-7 W); count at move 15. If White, 12k
+  with C3 + C6, libs.py every move.
+- Game 66: draw vs 12k as White (solid but too small). Next: if White, 12k; same solid
+  style but grab one more edge early (C7/B7 top-left or an early right-side invasion).
+  If Black, 14k with C3/G3/E5.
+- Game 67: lost to 14k as Black by 4 (row-5 line vs White's row-6/7 stones again).
+  Next: if Black, 14k; C3 then if W answers high (F7/C6), contest the top EARLY
+  (move 3 or 5 on row 6-7), not G3+E5. If White, 12k with C3 + C6, libs.py every move.
+- Game 68: lost to 12k as White (8-16-3 vs 12k as White). Next: if White, 12k; vs
+  Black F5 (center-right first move) try C4 + answer a C5/C6 approach by blocking so
+  the left stays ONE solid group with corner eye shape (C2/D2 early). If Black, 14k.
+- Game 69: draw vs 14k as Black (C3, C7, E5 vs W F6/F3). Next: if Black, 14k again
+  with C3 + C7 + E5/E6; if White, 12k with C3 + C6, libs.py every move.
+- Game 70: lost to 12k as White (invasion died in ko). Next: if White, 12k; same left
+  opening (C3, C6, C5, C7 solid) was ok; invade the open side early but extend the
+  invasion toward the SIDE (2 directions) right away, not just the corner. If Black, 14k.
+- Game 71: WON vs 14k as Black (B+2). Next: if Black, 14k once more (want 2 in a
+  row) with C3, G3, then a top 3-4 (G6/G7) on the side White leaves open; then 12k.
+  If White, 12k with C3 + C6, libs.py every move.
+- Game 72: WON vs 12k as White (W+34). Next: if White, 12k once more (2 in a row
+  -> then 10k) with C3 3-3; vs an attach under it, hane D2 + block B3 and capture
+  any stone left in atari. If Black, 14k with C3/G3 + top 3-4.
+- Game 74: lost to 12k as White. Next: if White, 12k; vs G7 + a center 2nd stone (F5),
+  take the OPEN bottom-right (G3/F3) by move 4 rather than a second left stone; don't
+  push from underneath toward an empty side. If Black, 14k with C3/G3 + top 3-4.
+- Game 75: lost to 14k as Black by 8 (as Black 10-21-2). Next: if Black, 14k again;
+  C3 + C7 then vs a W attach on C3 (D3/C4-type) answer on the EDGE side (D2/C2) to keep
+  the bottom; count at move ~15. If White, 12k with C3 + C6, libs.py every move.
+- Game 76: lost to 12k as White by 2. Next: if White, 12k; vs E5 G7 try C3 then
+  an early right-side move (G3/H3 at move 4, before Black's G4), left side later.
+  If Black, 14k with C3 + C7, answer attaches on the edge side.
+- Game 77: lost to 14k as Black (center group captured). Next: if Black, 14k again
+  with C3 + G3 (same edge, 3rd line; best record) and E5/E4 between; run libs.py from
+  the FIRST contact. If White, 12k with C3 + C6, libs.py every move.
+- Game 78: lost to 12k as White (invasion died in ko). Next: if White, 12k; vs E5 E3
+  play C3 then the RIGHT side early (G6/G3 at move 4-6), not C6 + top expansion;
+  invade by move ~10 at the latest. If Black, 14k with C3 + G3.
+- Game 79: lost to 14k as Black (W lived in the empty bottom-right corner). Next: if
+  Black, 14k with C3 + G3 (BOTH bottom corners first, best record), then the top.
+  If W invades between/under, undercut from the edge side (H3/G2), never center blocks.
+  If White, 12k with C3 + C6, libs.py every move.
+- Game 80: lost to 12k as White (3 weak groups). Next: if White, 12k; C3 + C6 and
+  then C5/D5 area to keep the left ONE group before going elsewhere; never 3 groups.
+  If Black, 14k with C3 + G3.
+- Game 81: WON vs 14k as Black (B+2). Next: if Black, 14k once more (want 2 in a row,
+  then 12k) with C3, G3, G6 (top 3-4 on the open side) + solid answers to attaches.
+  If White, 12k with C3 + C6/C5, libs.py every move.
+- Game 82: lost to 12k as White (C3 got attached at D3; C4 + right-side play was too
+  passive). Next: if White, 12k; vs E5 + D3 attach try D2 hane underneath (keep the
+  bottom) or play C6/C5 next to keep the left one strong group with eye space; don't
+  build a row-4 wall under Black's row-5 line. If Black, 14k with C3/G3/G6.
+- Game 83: WON vs 14k as Black (B+2), 2 in a row at 14k. Next: if Black, try 12k
+  with C3 + G6 (top 3-4 on the far side), block wedges solidly (G4/G3), libs.py at
+  every contact. If White, 12k with C3 + C6/C5, libs.py every move.
+- Game 84: lost to 12k as White (C3+G3 bottom-only too small vs E5 G7). Next: if
+  White, 12k; vs E5 G7 do NOT play C3+G3; try C4/C3 + D6/C6 (left side up to row 6-7)
+  and keep the corner's eye shape solid from the start. If Black, 14k with C3/G3/G6.
+- Game 85: lost to 12k as Black (C3 C7 E5 vs G7 G3 + E3/D7 attaches). Next: if
+  Black, 14k with C3/G3/G6 (want a steady record before 12k again). If White, 12k
+  with C3 + C6/C5, libs.py every move.
+- Game 86: WON vs 12k as White (W+2). Next: if White, 12k again (want 2 in a row);
+  vs F5-type center opening: C4 + E7, solid E-column wall, D4/B3/C2/B2/B1/B4 corner.
+  If Black, 14k with C3/G3/G6.
+- Game 87: WON vs 14k as Black (B+20). Next: if Black, try 12k with C3 and the
+  same ideas (undercut wedge stones at D2-type points, cut invaders off with stones
+  CONNECTED to my big group). If White, 12k (want 2 in a row after game 86).
+- Game 88: lost to 12k as White (top group died). Next: if White, 12k; vs G7 G3 use
+  C3 + C6 (not C7), keep the left one group; libs.py before every contact move.
+  If Black, 12k with C3/G6 (game 87 ideas) or 14k.
+- Game 90: WON vs 12k as White (W+8). Next: if White, 12k again (want 2 in a row ->
+  then 10k) with the game-90 recipe. If Black, 14k with C3/G3/G6 (or 12k with game-87 ideas).
+- Game 91: lost to 14k as Black (C3/C7 mirror -> too small). Next: if Black, 14k with
+  C3 + G3 then G6 (NOT C7); if White, 12k with the game-90 recipe.
+- Game 92: WON vs 12k as White (W+8), 2 in a row. Next: if White, try 10k with the
+  game-90/92 recipe (C3, C6, hane on top of attaches, D-column wall, take the open
+  bottom-right at G3/G5 by move ~26). If Black, 14k with C3 + G3 + G6.
+- Game 93: WON vs 14k as Black (B+28), opening C3 C7(W) G7 F3(W) E5. Next: if Black,
+  try 12k again (C3, then the far top corner G7 vs a W C7, E5, solid blocks; hunt
+  short-lib white walls). If White, 10k with the game-90/92 recipe.
+- Game 94: lost to 10k as White (G6 right-side group had no base). Next: if White,
+  go back to 12k (11-23-3, 2 wins in a row before this) with the game-90/92 recipe; vs
+  E5 E3 play C3 + C6 and invade the right at a 3-3 point (G3/G7) early. If Black, 12k
+  with C3/G7/E5 (game-93 ideas) or 14k.
+- Game 95: lost to 12k as Black (C3 G3 G6 vs E5 C6 E3: C3 corner died). Next: if
+  Black, 14k (record there is good) with C3 + G3; vs an E3 wedge supported by E5, take
+  D3/E4-side first so the C3 corner keeps a base. If White, 12k with the game-90/92 recipe.
+- Game 96: lost to 12k as White (top group cut off at D6). Next: if White, 12k with
+  C3 + C6 then a connected move (D6/D5) before any row-7 extension; if Black, 14k
+  with C3 + G3.
+- Game 97: lost to 14k as Black (C3 C7 G7 G3 E5 diagonal again). Next: if Black, 14k
+  with C3 then G3 (SAME bottom edge) no matter what W plays at move 2; then G6/E5.
+  If White, 12k with C3 + C6 + connected D6/D5.
+- Game 98: lost to 12k as White (lone E5 stone cut off). Next: if White, 12k with
+  C3 + C6/C5 (same side) and ONLY connected row-4 moves in the center; if Black, 14k
+  with C3 + G3.
+- Game 99: WON vs 14k as Black (B+74). Next: if Black, try 12k with C3/G6/E3 and
+  hunt W chains with libs.py (still 0 wins vs 12k as Black). If White, 12k with
+  C3 + C6/C5 and only connected moves.
+- Game 100: lost to 12k as White (invasion = 1 eye + ko, scored dead). vs 12k as White
+  11-26-3. Next: if White, 12k; vs E5 E3 the C3+C6 left side was fine; invade the right
+  at the 3-3 (G3/H3) directly instead of G4, so the corner itself is mine and Black can't
+  undercut. If Black, 12k with C3/G6/E3 or 14k.
+- Game 101: lost to 14k as Black (C3+C7 vs F6/F4 too small; invasion = ko = scored dead).
+  Next: if Black, 14k with C3 + G3 (SAME bottom edge, best record) — stop trying C7.
+  If White, 12k with C3 + C6 + connected moves; invade at a 3-3 directly.
+- Game 102: WON vs 12k as White (W+26). Next: if White, 12k once more (want 2 in a
+  row, then 10k) with the same recipe: C3, C6, connected D-column, invade the open side
+  by move ~20 with CONNECTED stones (H5-H4-H3, H6-H7) and close + split the eye line.
+  If Black, 14k with C3 + G3.
+- Game 103: lost to 14k as Black by 4 (C3 F7 G3 C6 E5 again too small). Next: if Black,
+  14k with C3 + G3, but vs a high White reply (F7 + C6) play move 5 at D7/E7 (top),
+  not E5. If White, 12k with the game-102 recipe.
+- Game 104: lost to 12k as White (both invasions died to 1st-line placements H1/H9).
+  Next: if White, 12k; vs F6 the C4 D6 C7 D8 C8 left side was fine; invade the
+  bottom-right at G3 then H3/G2 compactly (no E3 stretch); take H1/H9-type points early.
+  If Black, 14k with C3 + G3.
+- Game 105: lost to 14k as Black (was B+4 at move 53, corner group died). Next: if
+  Black, 14k with C3 + G3; when ahead, make every corner group's 2 eyes explicit
+  (H2/B2-type 2nd-line points) before any other move. If White, 12k (game-102 recipe).
+- Game 106: lost to 12k as White (G3 invasion killed by H1 placement). Next: if White,
+  12k; vs G7 E5 D3-attach the D4/C4/D5/D6/C7/C8 left was ~30: invade the right side
+  EARLIER (move ~10-12) and take the 1st-line vital point (H1-type) before anything.
+  If Black, 14k with C3 + G3.
+- Game 107: lost to 14k as Black by 6 (C3 G7 G3 C7 mirror again). Next: if Black,
+  14k; vs a G7 reply at move 2, take the OTHER top corner myself at move 3 (C7, game
+  93/61 style: C3 + C7/G7-diagonal won when W left a top corner open) rather than
+  G3 which lets W mirror to C7. If White, 12k with the game-102 recipe.
+- Game 108: lost to 12k as White by 4 (invasion corner eye lost to black H9). Next: if
+  White, 12k with the same left side (C3 C6 C7 D4 C5 D3 was solid), invade at H5 by
+  move 18 again but after black takes one corner, make the OTHER corner's eye with a
+  1st-line point (H9/H1) at once. If Black, 14k with C3 + C7 corner on top (game 107 note).
+- Game 109: WON vs 14k as Black (16-29-2). Next: if Black, 14k again or try 12k with
+  C3 + F6 (vs D4 shoulder) and libs.py on white chains. If White, 12k (game-102 recipe).
+- Game 110: lost to 12k as White (C6 attached at C7, D7 hane -> D6 crosscut). Next: if
+  White, 12k; vs E5 G5 (row-5 wall), C3 then take the TOP or BOTTOM edge directly on the
+  3rd line (e.g. E7/E3-type or G7/G3 3-3) before C6; vs a C7-type attach answer on the
+  edge side (B7) or solidly. If Black, 14k with C3 + G3.
+- Game 111: lost to 14k as Black by 6 (C3 + C7 again too small). Next: if Black,
+  14k with C3 + G3 (NOT C7), then G6/E5. If White, 12k (game-102 recipe).
+- Game 112: lost to 12k as White from a +22 position (right group had no eyes).
+  Next: if White, 12k with the SAME opening (C3, C6, G7 vs E5 E3 G4 worked great);
+  at move ~35 make every group's 2 eyes explicit before endgame. If Black, 14k C3+G3.
+- Game 113: WON vs 14k as Black (B+2) with C3 G3 then E7 vs the C7/G7 mirror. Next: if
+  Black, 14k again (want 2 in a row, then 12k) with the same E7 split idea; if White,
+  12k with the game-102/112 recipe + make eyes explicit at move ~35.
+- Game 114: WON vs 12k as White (W+12). Next: if White, 12k once more (want 2 in a
+  row, then 10k); vs G7/E5-type openings use C3 + C6 + EARLY G3 (game 114 recipe).
+  If Black, 14k with C3 + G3 (+E7 split vs the C7/G7 mirror, game 113).
+- Game 115: lost to 14k as Black by 2 (C3 F6 C7 again). Next: if Black, 14k with
+  C3 then G3 or G7 at move 3 (NOT C7), whatever White plays. If White, 12k (game-114 recipe).
+- Game 116: WON vs 12k as White (W+8), 2 in a row. Next: if White, try 10k (1-9 there)
+  with C3 + C6 + E3, solid connects, and libs counts on EVERY black chain touching my
+  side. If Black, 14k with C3 + G3 (not C7).
+- Game 117: WON vs 14k as Black (B+10) with C3 G3 F5. Next: if Black, 14k once more
+  (want 2 in a row, then 12k) with C3 + G3; if behind, probe W's area NEXT TO W's
+  short-lib chains (take shared libs). If White, try 10k (game-116 note).
+- Game 118: lost to 10k as White (C3 corner sealed by D4 shoulder + C4/E3/B3). Next:
+  if White, back to 12k (game-114/116 recipe); if Black, 14k with C3 + G3.
+- Game 119: lost to 14k as Black by 6 (C3 F6 G3 C6 G7, then the E4 wedge). Next: if
+  Black, 14k with C3 + G3, but take E4 (or E5 if W is far away) at move 5 so the
+  bottom is closed BEFORE taking a top corner. If White, 12k (game-114/116 recipe).
+- Game 120: lost to 12k as White by 2 (black corner lived with A1+B2 eyes). Next: if
+  White, 12k with C3 + C6; vs G3 + E5 avoid E3 (lets D3 wedge) — try D7/E7 top first
+  or C4-solid shape; answer wedges with solid connects. If Black, 14k with C3 + G3.
+- Game 121: lost to 14k as Black (C3 F7 G3 C6 E6: W top still too big; invasion
+  died by one tempo). Next: if Black, 14k; vs C3 F7 G3 C6 maybe try move 3 at G7/C7-side
+  differently: e.g. answer F7 with G6/G7 contact at move 3 (before G3) to deny the top-right.
+  If White, 12k (game-114/116 recipe).
+- Game 122: lost to 12k as White (C5 wedge split C3/C6). Next: if White, 12k; after
+  C3 + C6 play C4/C5 (close the split) as move 6 unless Black's move forces otherwise.
+  If Black, 14k with C3 + G3.
+- Game 123: lost to 14k as Black (E7 split cut off by W E5). Next: if Black, 14k with
+  C3 + G3, then E5 when W's stones are on row 7 (C7/G7); answer edge crawls with
+  SOLID connected blocks (C2 not B2). If White, 12k (game-114/116 recipe).
+- Game 124: WON vs 12k as White (W+2). Next: if White, 12k again (want 2 in a row)
+  with C3 + D6, and vs a D3 attach play D4 hane; vs the C4 crosscut, extend the corner (C2).
+  Margin thin: invade earlier or take the top edge (D8) before Black. If Black, 14k with C3 + G3.
+- Endgame note: when the score is exactly level, probes inside the opponent's area
+  are free under area scoring but rarely work; look for a real 1-point gain earlier
+  (e.g. dame/boundary moves) before both sides seal everything.
+
+## Practical habits that worked (game 2)
+- Area scoring: dame points count, so fill neutral points (e.g. F4) at the end
+  as long as my group keeps two real eyes.
+- Before passing, capture any dead enemy stones inside my area outright.
+- Quick count method: my stones + empty points I surround; add 7 komi when White.
+
+## Tools
+- libs.py (in workdir): paste the board() rows into stdin -> lists every group's
+  liberties and flags groups with <=2 libs. RUN IT EVERY MOVE from move ~30 on, and
+  check the board you would get after your planned move, not just the current one.
+- Board coordinates: columns A-J skipping I; rows 1-9 bottom to top.
+- Can use shell to count liberties / area (allowed: inspection only).
+- Game 42: lost to 12k as White (engine judged my alive top group dead). As White
+  vs 12k: 7-6-2. Next: if White, 12k again (opening C4 + G3 vs E5 F7 was OK);
+  before passing, run libs.py and make sure every group has 2 split single-point eyes.
+  If Black, 14k with C3/G3/E5.

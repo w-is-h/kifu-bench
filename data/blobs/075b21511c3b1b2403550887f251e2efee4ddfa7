@@ -1,0 +1,171 @@
+# Game 35: Black vs 20k — B+6
+
+Played 2026-10-06. 9×9, Chinese area scoring, komi7, simple ko.
+Consecutive passes at62–63 ended the game. Official B+6 matches Black47 versus White34+7.
+Captures: Black2, White0. Every stone on the final board survived; no dead or neutral points.
+The 20k record is eight wins, twenty-one losses and two draws. Retain20k; repeatable strength is not established.
+
+## Records and verification
+
+game-035.sgf preserves all63 moves. game-035-log.json contains opponent selection, all32 play responses saved before the next move, current-position group/liberty/empty-region inventories, manual decisions, exact moves, capture events, independent area/row counts and replay evidence.
+Actual-history replay reproduced all33 returned boards (including the empty selection board) and every capture count. Initial comparison was corrected from JSON property-order comparison to pointwise verification.
+The final displayed move number64 denotes the next move.
+No invalid move, ko, attempted recapture or resignation occurred.
+E9 at57 captured E8; A9 at61 captured B9.
+game-035-inspection.js preserves the inspection and recording helper.
+Code inspected current positions, recorded responses, replayed actual history, counted final area and converted actual moves to SGF. All move choices and hypothetical lines were manual; no engine, Monte Carlo, future-sequence search or automated move recommendation.
+
+## Exact moves
+
+1 B C3, 2 W C4, 3 B E3, 4 W D4, 5 B G7, 6 W D3, 7 B C2, 8 W D2, 9 B B3, 10 W E4, 11 B F3, 12 W F4, 13 B G3, 14 W E2, 15 B E7, 16 W F2, 17 B G4, 18 W G2, 19 B G5, 20 W H3, 21 B H4, 22 W J3, 23 B J4, 24 W H2, 25 B B4, 26 W C6, 27 B C7, 28 W F6, 29 B F7, 30 W G6, 31 B H6, 32 W F5, 33 B H5, 34 W E6, 35 B H7, 36 W D7, 37 B D8, 38 W D6, 39 B C8, 40 W B6, 41 B B5, 42 W A6, 43 B B7, 44 W C1, 45 B B1, 46 W D1, 47 B A2, 48 W A5, 49 B A4, 50 W A7, 51 B A8, 52 W B9, 53 B B8, 54 W E8, 55 B F8, 56 W C5, 57 B E9, 58 W pass, 59 B C9, 60 W pass, 61 B A9, 62 W pass, 63 B pass.
+
+## Rebuild the territorial plan after an early cut
+
+C3 met White C4. E3 attempted broader lower development, but White D4/D3 cut between the two Black stones before D3 could join them.
+G7 at5 established a second base before the lower groups were enclosed.
+C2/B3 protected C3; F3/G3 broadened E3 into a connected lower line.
+This opening survived against actual replies; the result does not establish E3 or delayed D3 connection as optimal.
+
+At13 the rough left A/B/C rows1–3=9, lower E/F/G/H/J rows1–3=15 and upper-right G/H/J rows5–9=15 totaled only39.
+These were conditional whole regions, with substantial boundary work still unplayed.
+Black needs45 when all81 points are assigned. A connected lower chain was not enough.
+
+White E2/F2/G2 then undercut the bottom completely.
+Black G4/G5 maintained central/right access instead of counting the vanished bottom room.
+H4/J4 blocked H3/J3 from rising; White H2 joined that lower-right pair to the main White group.
+E7 at15 broadened the upper base while open.
+The surviving E3/F3/G3 stones supplied three area points, not the earlier15-point lower region.
+
+B4 at25 preserved left-side access before White could cap it.
+C7 at27 expanded upper-left above White C6, while F7 later joined E7/G7.
+Early upper development supplied viable room that game33's late H7/H6 attempt had lacked.
+None of these moves is established as an optimal replacement for another opening.
+
+## Count the whole enemy group at a cut
+
+Before F7, the manual note incorrectly predicted that White G6 would have only H6.
+It overlooked G6's orthogonal connection to White F6.
+The returned inventory immediately corrected this: F6/G6 had E6/F5/H6.
+
+H6 at31 did NOT capture G6. It blocked the group's eastward route and initially remained isolated with H5/H7/J6.
+White F5 joined the cutting stones to its large group and left the lower Black chain only H5/J5.
+H5 at33 directly joined H6 to that endangered chain.
+H7 at35 then joined the lower chain to G7/F7/E7.
+These were actual orthogonal joins; the group's eventual life must not be attributed to the mistaken single-stone atari.
+
+Inspect every neighbor and the complete connected enemy group before making a liberty claim.
+Current-board inventory is a useful check, but pre-move reading should not rely on catching the error afterward.
+
+## Upper-left bridge and competing boundaries
+
+White D7 at36 cut C7 from E7.
+D8 at37 ataried D7 at D6; White D6 joined its main group.
+C8 at39 joined C7/D8. D8 and C8 were bridge/life turns, not fresh top area outside the selected outline.
+White B6/A6 capped the left, so B5 retained the lower endpoint and B7 retained the upper endpoint.
+
+White C1/D1 took the lower first-line boundary; A5 took another selected lower point.
+The earlier lower-left13 outline became11:
+A1/A2/A3/A4, B1/B2/B3/B4/B5, C2/C3.
+White A7 later contested the upper edge. A8/B8 secured A8/A9 and connected A8 to B7/C8.
+
+The final upper/right outline is exactly36:
+A/B rows7–9 except A7 =5;
+C rows7–9 =3;
+D8/D9 =2;
+E/F/G/H/J rows7–9 =15;
+G/H/J rows4–6 except G6 =8;
+E3/F3/G3 =3.
+5+3+2+15+8+3=36; lower-left11 gives47.
+
+The E8/B9 invasions temporarily occupied points inside this outline and were captured.
+Their removal restored room rather than creating new area beyond47.
+F8/C9/A9 supplied containment and life within the outline; do not count them twice as territorial gains.
+
+## Lower-left life across three separate Black groups
+
+B1 at45 blocked C1's leftward advance but was isolated with A1/B2.
+A2 at47 was also isolated, with A1/A3/B2.
+A4 at49 joined B4 and stopped A5 from descending.
+A4 was preferable for the actual boundary plan to spending a turn filling A3: it preserved A4 and left A3 empty.
+
+Final boundaries:
+- A1: A2/B1.
+- B2: A2/B1/B3/C2.
+- A3: A2/A4/B3.
+
+The six-stone lower main group has A3/B2; A2 has A1/A3/B2; B1 has A1/B2.
+Each proposed White fill captures none of these groups because every boundary group retains another empty space. The new White stone would have zero liberties.
+Thus all three spaces are true shared eyes, despite three physically separate Black groups.
+No Black capture or ignored-atari rescue supplied this lower group's life.
+Do not fill A1/A3/B2 merely to connect the stones.
+
+The unplayed earlier cut W B2 after B B1 would have only A2; B A2 captures it. That was limited manual reading, not the actual game or an exhaustive defense claim.
+
+## Two upper invasions: contain, capture, rebuild
+
+A8 at51 blocked White A7, initially with A9/B8.
+White B9 at52 entered above it.
+B8 at53 joined A8 to B7/C8 and left B9 with A9/C9.
+This prevented B9 connecting to White A7 through B8.
+
+Manual direct lines from that position:
+W A9, B C9 captures A9/B9.
+W C9, B D9 leaves White A9 as its only liberty; W A9 would be suicide because the Black boundary group retains E8.
+These address direct extensions, not every remote possibility.
+
+White instead entered E8 at54.
+F8 at55 joined F7 and ataried E8 at E9.
+White C5 at56 ignored that atari.
+E9 at57 captured E8 and initially remained isolated with D9/E8/F9.
+The E8 capture was enabled by an ignored atari; no claim of forced capture against every defense is made.
+
+White passed58.
+C9 at59 joined C8, formed shared D9 and ataried B9 at A9.
+White passed60; A9 at61 captured B9 and joined A8.
+Once C9 was Black, White A9 was suicide while the Black boundary group retained D9/E8; B9 had no direct living extension.
+Its physical capture followed a pass, but no doomed Black group was rescued by it.
+
+Final upper-left eight stones have true B9 (A9/B8/C9) and shared D9 (C9/D8/E9), plus shared E8 (D8/E7/F8/E9).
+Isolated E9 has D9/E8 and F9 access.
+The fourteen-stone right main has shared E8 plus the separate ten-point F9/G8/G9/H8/H9/J5/J6/J7/J8/J9 region.
+D9 and E8 attempted White fills are suicide: every boundary group retains another space.
+The ten-point region is one enclosed space, not ten independent eyes.
+
+For a limited current-position invasion check: W F9 has only G9; B G9 captures it, opening F9 again.
+Other interior entries require their own reading. The official score retained every Black stone.
+Do not fill D9/E8 merely to connect E9 or the two major upper groups.
+
+White's one26-stone group has separate D5/E5 two-point space and E1/F1/G1/H1/J1/J2 six-point lower room.
+Those are two enclosed regions, not eight independent one-point eyes.
+
+## Independent final area
+
+Black31 stones+16 territory=47.
+Lower-left8 stones+3 shared eyes=11.
+Upper/right23 stones+13 territory=36.
+
+Black territory:
+A1/A3/B2 (3);
+B9/D9/E8 (3);
+F9/G8/G9/H8/H9/J5/J6/J7/J8/J9 (10).
+
+White26 stones+8 territory=34:
+D5/E5 (2);
+E1/F1/G1/H1/J1/J2 (6).
+
+Rows1–9 Black=2,3,6,5,4,2,7,9,9.
+Rows1–9 White=7,6,3,4,5,7,2,0,0.
+No dead-stone removal or neutral points.
+47−(34+7)=6 matches B+6.
+Three points shifted from Black to White would draw; four would lose.
+
+## Carry forward
+
+1. Retain20k: eight wins, twenty-one losses, two draws. Two consecutive wins do not establish repeatable strength.
+2. When White undercuts a lower framework, replace the whole territorial count. E2/F2/G2 removed the earlier lower room; G4/G5 and early G7/E7/C7 retained another viable base.
+3. Include ALL connected enemy stones in liberty reading. G6 joined F6; the pre-move one-liberty claim was wrong and corrected before H6.
+4. H6/H5/H7 were separate blocking/connection turns. C8/B8 also supplied real joins. Legal diagonal relationships alone do not establish connection.
+5. Three physically separate lower groups shared true A1/A3/B2 without captures. Inspect each boundary group's other space instead of filling eyes unnecessarily.
+6. E9 remained isolated after capturing E8; shared D9/E8 plus other room proved life. B9 containment/capture restored the upper outline.
+7. Final lower11+upper/right36=47 had three-point shift margin to a draw. Internal life turns and captures inside that outline added no extra area.
+8. All33 returned boards and capture counts replayed; SGF records all63 moves.

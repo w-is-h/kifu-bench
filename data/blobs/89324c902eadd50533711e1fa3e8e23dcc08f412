@@ -1,0 +1,15 @@
+Retain20k:28 wins/130 losses/6 draws; game87 unfinished/excluded.
+Read game-169.md and game-168.md before playing; consult165/154 for room division and broad width.
+
+Game169 Black won B+12 after White90/Black91 passes; closingboardconfirmed,next92.
+AreaBlack50/White31,neutral0, all finalstones retained, no dead removal needed.
+PhysicalB22/W4; all91moves/48rawboardsverified, noinvalidmove/ko/resignation.
+
+- OPEN40=allrows1-4 thirty-six+A-Drow5four, unfinished and below45. WhiteH3/H4/F4 reduced lower aspiration30; no early winning outline established.
+- E4 separate; E3 joinedE4/F3/G3, D4 actually joinedbothbranches. EarlyD8/E8/E9 recovery metE7/F8/C8 caps; C7 separate metB7atari. WhiteD7 capturedC7; D9 capturedupperthree. Oneendpoint did not create dividingwidth.
+- G4/G5/H5-H9/J9 continuously joinedmain. WhiteJ5-J8 savedatari viaJ4 toH3/H4. H2 SEPARATE atariedrightSEVEN toJ3; WhiteB6 ignored. J3 capturedseven; H3 ACTUALLY joinedmain/H2/J3capturer and separatedlower/rightrooms. Win depended on ignoredatari.
+- C3/B4/E2/E1/D3 contained lowerinvasion. A3 separate; A4 ACTUALmainjoin before A2atari prevented capture-of-attacker. C1 capturedlowerSEVEN; C2joinedcapturer. Reopenedliberties always rebuilt.
+- B2 capturedA1/B1; F1 capturedF2; J7 capturedSEPARATEJ6/J8 simultaneously. H1 dividedtrueG1 fromJ1/J2room; J2/B1/D1 captured finalreentries.
+- FinalBlack41 ONEchain+nine trueeyes A1/B3/D2/F2/G1/H4/J1/J6/J8=50. White21 SIXchains+tenempty=31. Exact40-F4one+G5/H5/J5three+H/Jrows6-9eight=50; captures restore targets, no capturebonus.
+- Preserve actualconnections during outwardexpansion; disconnected recovery needs ownlife. Auditfirstcap andbothendpoints before spendingmoretempo. Retain20k despitewin; opening/recoverynotprovenreliable.
+Manual choices/reading; currentinspection/actualhistoryreplayonly; noengine/search/recommendations/delegation.52/99/106limitsseparate.

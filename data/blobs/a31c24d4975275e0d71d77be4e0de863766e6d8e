@@ -1,0 +1,20 @@
+# Next-game focus after game 147
+
+Retain20k:24 wins/112 losses/6 draws;87 unfinished/excluded.
+Read147/146; consult144/30 for viable width and independent rooms.
+Black resigned after White42 C1; boardconfirmed,next43,W+R.
+Physical Black1/White2; no actual ko, invalid move or numerical score.
+All42 moves/24 returned boards verified; all raw retained.
+
+- Required exact prospective count at10–16 was missed. Closing retrospective OPEN17+14+10=41 is not a score or early ledger.
+- D4 captured C4; C4 then actually joined B4/C3/C5/D4. D3 was diagonal to C4 and did not save it.
+- G6 actually joined G5/F7/G7/G8. H4 was separate, diagonal to G5.
+- E2 tenuki allowed H5 to close the junction. J4 saved H4 only until J5 left both soleJ3.
+- Unplayed J3 gives soleJ2, White J2 captures3; actual J3 captured H4/J4 and reopened both.
+- H6 joined upper; H5/J5 and H3/J3 stayed separate, sharing reopened H4/J4.
+- B6 actually joined B7/main; B5 opens to A5, so the connected left room is unfinished.
+- E2/F2/G2/H2 bottom base stayed narrow. J2 is White; G3 enemy-bordered, not an eye.
+- D1 was separate from E2, soleE1 after C1. E1 joins/save consumes space, does not prove life.
+- Unplayed F1 makes apparent sharedE1, but White E1 captures isolatedD1 with ko atD1; no actual ko occurred.
+- Capture/rebuild and actual joins succeeded locally; insufficient width and unfinished life persisted.
+- No engine/search/recommendation/delegation;52/99/106 evidence limits remain separate.

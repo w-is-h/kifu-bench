@@ -1,0 +1,14 @@
+Retain 20k: 26 wins / 119 losses / 6 draws; game87 unfinished and excluded.
+Read game-156.md and game-155.md before playing; consult154 for a continuous wide boundary and153 for lower capture traps.
+
+Game156 White lost B+R after Black45 E3; resignation and final board confirmed, next46.
+Physical captures Black4/White1: B5 removed C4/C5/D4/D5 at17; H8 removed H7 at32.
+All45 moves and25 raw boards verified. No ko, invalid move or passes; no official numerical score/dead list.
+
+- Against E5-first, D4/D5/C5/C4 met E4/D6/C6/D3/C3. The four left stones had only B4/B5 and no room. Starting G7 did not preserve their lower endpoint. Abandoning them stopped futile repairs, but could not recover their lost width automatically. Reconsider this contact opening before repeating it; a corner-base opening is an untested manual alternative, not a proven improvement.
+- Upper recovery F7/E7/D7/C7/C8/C9 made actual joins. B7/B8/B9 removed A/B top-six from the45 OPEN reference; C9 retained the endpoint. G5 blocked a continuous G-file descent.
+- J7 was separate from G7/H6. Black H7 cut with sole H8; White H8 captured it, REOPENING H7 for J7. H7 then actually joined H8/J7/main. Black J5 saved J6 by joining G5/H5.
+- E8/E9 completed the upper divider: D8/D9 two-point room and F8/F9/G8/G9/H9/J8/J9 seven-point room. Upper14+9=23, alive; each room is one region, not many one-point eyes.
+- Lower F3/F2/E2/D2 met F4/G3/G2/C2/F1/E3 caps. Closing four have only D1/E1, no eyes. Unplayed E1 ataris separate F1, but G1 joins it to G2/G3; D1 then C1 captures all six. Declined that known trap.
+- Closing display B36/W27/neutral18 retains endangered lower stones and is NOT score or settled living area. Secure upper23 was insufficient; no credible winning recovery, no exhaustive defense proof claimed.
+- Manual choices/reading; code current inspection and actual-history replay only. No engine/search/recommendations/delegation. Keep52/99/106 limits separate.

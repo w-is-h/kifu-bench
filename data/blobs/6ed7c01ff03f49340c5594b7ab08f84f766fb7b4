@@ -1,0 +1,65 @@
+# Persistent Go learning
+
+Goal: improve at 9x9 Go across fresh sessions, ultimately win consistently against human-style KataGo 9d.
+
+## Record
+- Game 1: Black vs 9d, Chinese area scoring, komi 7. Lost by resignation after White move 56 (D2).
+- Game 2: White vs 4k, same rules. Lost by resignation after Black move 49 (J6). No captures or numerical final score.
+- Game 3: Black vs 8k, same rules. Lost by resignation after White move 64 (J5). Final captures: Black 1, White 2; no numerical final score.
+- Game 4: White vs 12k, same rules. Lost by resignation after Black move 43 (F1). Final captures: Black 1, White 0; no numerical final score.
+- Game 5: Black vs 20k, same rules. Lost W+12 after consecutive passes at moves 39–40. Area: Black 38, White 43 plus 7 komi. Final captures: 0 each; dead Black D8/D9/E8/E9 were removed for scoring.
+- Game 6: White vs 20k, same rules. Lost B+24 after consecutive passes at moves 81–82. Area: Black 56, White 25 plus 7 komi. Final captures: Black 18, White 6; the nine-stone lower-left and eight-stone lower-right White groups were captured.
+- Game 7: Black vs 20k, same rules. Lost W+26 after consecutive passes at moves 61–62. Area: Black 31, White 50 plus 7 komi. Final captures: Black 1, White 4; Black F9/G9/H9 and the invading G2 stone were captured.
+- Read game-001.md for review. game-001.sgf is the full move record; game-001-log.json contains every returned position.
+- Read game-002.md for the second review; game-002.sgf and game-002-log.json contain the complete record.
+- Read game-003.md for the third review; game-003.sgf and game-003-log.json contain all 64 moves and returned positions.
+- Read game-004.md for the fourth review; game-004.sgf and game-004-log.json contain all 43 moves and returned positions.
+- Read game-005.md for the fifth review; game-005.sgf and game-005-log.json contain all 40 moves (37 stone moves, three passes) and returned positions.
+- Read game-006.md for the sixth review; game-006.sgf and game-006-log.json contain all 82 moves (79 stone moves, three passes) and returned positions. Its lower-left correction is essential: two shared liberties did NOT establish seki.
+- Read game-007.md for the latest review; game-007.sgf and game-007-log.json contain all 62 moves (60 stone moves, two passes), returned positions and verified final area.
+- No successful level has been established. One loss does not establish individual move values.
+
+## Lessons to use immediately
+1. Count prospective area early, especially after about 10-16 moves. With all 81 points assigned, Black needs at least 45 for a win with 7 komi; 44-37 is a draw. If there is neutral area, compare actual totals instead.
+2. Center influence must yield territory, an attack, or access to a viable invasion. Game 1 built a narrow central chain while White took both sides.
+3. Check two eyes for every major group before treating it as safe. Connected stones and many present liberties are not proof of life. Preserve eye space and a base before filling internal points.
+4. In capture reading, rebuild the position after each capture. Captured stones open liberties for adjacent enemy groups. The D8/E9 sacrifice in game 1 overlooked this.
+5. Ko eyes are not unconditional eyes. Game 1's lower D2 and upper E8 spaces depended on vulnerable isolated Black stones. Owning two such ko positions does not by itself guarantee double-ko life.
+6. Do not repeat the complete opening E5 C5 E3 D7 F7 G5 G6 H6 G7 G3 without reconsidering its territorial consequences. E5 itself was not shown to be wrong.
+7. Game 2 counted an insecure right-side base as territory. Black G2 followed by H1 undermined the corner; J4/J5 occupied remaining eye space. The final seven-stone White right group had only H4 and J2 as liberties and a concrete forced-capture route. Connected second-line stones do not guarantee a base.
+8. Use permitted current-board group/liberty inspection during contact fights. Game 2 missed that Black D3 put White D4/E4 in atari with only C4 available; White played J8 instead. Scan ALL own groups before pursuing a distant plan.
+9. Before invading, identify two prospective eyes or a concrete escape/connection. Game 2's late G8/H7/J8 invasion had no demonstrated life; trapping H9 would provide only one prospective eye.
+10. Check the opponent's simplest connection. In game 2, White E4 did not separate the lower Black stones: Black F4 joined F3 and F5 and squeezed White's right group.
+11. Three connected empty edge points are not already two eyes. In game 3, White J8 occupied the middle of J7/J8/J9. Black J7, White J5 left the seven-stone upper-right group with only J9. Black J9 would capture J8 but leave the entire eight-stone group with only J8; White J8 captures it all. This is not ko. Simply substituting J8 for J6 at move 61 was not verified to save it: J6 also needed boundary protection.
+12. Check the hane's cut and the new stone's own liberties. Game 3's A5 was left in atari by White B5; A6 was suicide. White A6 later captured A5 and reopened A5 for the neighboring White edge group. Black A1 then had only B1, and White B1 captured it, reopening A1. Both planned edge squeezes ignored liberties opened by captures.
+13. An invasion can gain connected stones without gaining a base. Game 3's C8/D8/D7/C7/B7/D9 ended with only B8 and C9 as liberties. White A8/A7 and E9 denied eye boundaries. The later upper-right entry also failed; neither upper group was saved.
+14. An extension must actually reach open space. In game 4, F4/F5/F6/E6 grew a connected chain without eyes. After Black E7, its remaining liberties were G1, G5, J1, J2, J3; the central escape was closed. The inventory ran every move, but did not prevent this strategic failure. Re-evaluate before the final route narrows to one point.
+15. Preserving one corner boundary does not establish two eyes. Game 4's H1 prevented game 2's undercut, but Black H4 restricted the upper base. J3/J4/J5 added occupied edge stones, not eyes. At the end the thirteen-stone White group had only J1/J2: one two-point eye space. Black J2, White J1 captures one stone, Black J2 captures fourteen; this is not ko.
+16. A threat may be answered by capturing its new stone. Game 4's G7 threatened Black G5/G6/H4/H5 but had only G8. Black G8 captured it and reopened G7 for three adjacent Black groups. Do not count such a threat as forcing.
+17. Count playable escape points, not just raw liberties. In game 5, the top D8/D9/E8/E9 block had only D7, but Black D7 was suicide: White C7, D6 and E7 surrounded it and none would be captured. After White C8 at move 32, D9/E9 added stones without creating eyes or escape. The E8/F8/D8/C8/D9/C9/E9/F9 continuation failed.
+18. A surviving framework can still be too small. Game 5's lower group scored 38 area against White's 43 plus komi. At that split, shifting six points from White to Black only draws; seven wins. Contest additional space before D6/F6 and the upper boundary close, rather than relying on a late first-line invasion.
+19. Two shared liberties do not prove seki. In game 6 after move 19, White's eight-stone lower-left group and Black A2/B2 both had only A1/A3. Black A3, White A1 captured three, but Black A2 then occupied the vital point of A2/A3/B2. White A3 allows Black B2 to capture ten; White B2 allows Black A3 to capture ten. White instead played elsewhere and Black A3/B2 captured nine. The earlier claim of seki was wrong. Read beyond the first capture to the opponent's next turn.
+20. A capture into a three-point eye space needs the dividing point before it supplies two eyes. In game 6, White A2 after capturing A2/A3/B2 would divide A3 and B2, but Black moved first and killed. By contrast, the upper group already had true eyes B9 (A9/B8/C9 boundaries) and E9 (D9/E8/F9 boundaries) before capturing H8/H9; all boundaries were connected White.
+21. Reassess a second eye's boundary immediately after an undercut. Game 6 preserved J1 with H1/J2, but G1 required a surviving White F1 boundary. Black F2/F1/E1 connected to D1–D4, so G1 was not an eye. E4/F4/G4 led into a closed strip; Black G1/E4/F4/G4 left the eight-stone White group only J1, and Black J1 captured it. H1 alone again did not establish life.
+22. Check where an atari extension ends before making the contact move. Game 6's B6 was left with only A6 by Black B7; White A6 would leave two stones with only A7, allowing Black A7 to capture both. White B8 secured the upper wall but Black A6 captured B6.
+23. Repair vulnerable connections before tenuki. In game 7, F9 had only F8/G9 and was disconnected from E8. Black G2 allowed White F8/G8 to trap the top stones. F8 before tenuki is an unverified candidate connecting F9 to E8, not an established winning move.
+24. A counter-atari may release the opponent when they capture first. After game 7's Black F7 at move 47, White F8/G8 had only H8, but Black F9/G9 had only H9. White H9 could capture two and open F9/G9 for the invaders. Actual White J9 at move 52 captured F9/G9/H9 and reopened F9/G9/H9. Black's attempted chase did not force a capture.
+25. A diagonal framework also needs a concrete area count. Game 7's vague estimate of about 45 was unsupported; the later row count gave only 38 potential points even with the top intact. Losing seven top points left 31. The main group did live: G6 (F6/G5/G7/H6 boundaries) and J6 (H6/J5/J7 boundaries) were independent true eyes after H7 connected all boundaries.
+26. Empty prospective eye points need secured boundaries and enough turns. Game 7's G2 invasion lost its right route to White H2 and its left route to White F2. Then Black G1, White F1, Black H1, White J1 would capture three. Black abandoned G2 instead; White G1 captured it. Do not treat the G2 entry as a proven living pattern.
+
+## Next-game focus
+- Choose a rank deliberately. Games against 9d, 4k, 8k, 12k and 20k were lost. Keep 20k for another controlled experiment until living groups and scored wins are repeatable; no successful rank is established. 9d remains the target.
+- Three games at 20k have now lost. Continue at 20k; game 7 established a living main group but repeated the area deficit and capture-liberty reading error.
+- Keep opening alternatives as hypotheses. Securing a corner/lower-side position earlier (for example considering C3 before the upper-right exchanges) is worth trying, not established as best.
+- Game 5 tried C3/G3/E5 and secured a surviving lower group but only 38 area. Reconsider the center/upper boundary earlier, for example move 11 before D6/F6 arrive; E6 then is an unverified candidate. Do not repeat the failed late E8 invasion continuation as a life pattern.
+- Game 7 tried C3/G7/E5 with E6/E7/E8 and still had only a 38-point outline before the top loss. Earlier upper-boundary play alone did not solve the deficit. Count by rows/regions around moves 10–16 and contest additional space while invasion bases remain available; all opening replacements remain hypotheses.
+- Before each move: identify atari/cuts, weakest group and eye prospects, largest area gain, and whether opponent can ignore the intended threat.
+- In contact fights, inspect current-board groups/liberties before EVERY move. Game 4 did this and addressed the J4/J5 atari, but still lost the main group. Use the inventory to assess eye space and escape routes as well as immediate atari.
+- Name eye boundaries and the required dividing move before calling a group safe. Preserve both corner boundaries and outside liberties; an invading stone's capture may still leave only one eye.
+- Check whose turn it will be after a capture. A hypothetical dividing move does not prove life if the opponent gets to occupy that point first. Do not reuse game 6's lower-left sequence as a seki or living pattern.
+- Count secure area and unsecured potential separately. Re-evaluate the base immediately after an undercut; do not defer it merely because the group has present liberties.
+- Save complete move records, final result, and a small number of concrete lessons after each game. Update this file with the latest record and evidence.
+
+## User constraints
+Play each game to completion (passes or resignation allowed). Choose opponent before the first move.
+Code may inspect the current board, count stones/liberties, check legality, and keep records. Do not build/use an engine, Monte Carlo, future-sequence search, or a program that selects/ranks/recommends moves.

@@ -1,0 +1,85 @@
+# Game 88: White vs 20k — B+R
+
+Played/resumed 2026-10-06. 9×9, Chinese area scoring, komi7, simple ko.
+White resigned after Black33 F5, before move34. Resign() and board() both confirmed B+R.
+Physical captures: Black1/White0; Black29 J9 captured White28 J8.
+No numerical final score or official dead list. No major White group was physically captured.
+Completed 20k record: sixteen wins, sixty-four losses, three draws, including game88; game87 remains unfinished and excluded.
+
+## Resume and records
+
+The previous game88 session's choose_opponent("20k") and two board checks returned Transport closed. This session first read88/86/85 and checked board(): White to move2, Black1 E5, selected20k, captures0/0, no ko. This confirmed that selection had applied. No reselection occurred. Read game30 for broad development.
+The three prior raw errors remain in game-088-log.json, followed by the resumed board, sixteen play responses, resignation and final confirmation.
+game-088.sgf contains all33 actual moves and RE[B+R].
+Historical replay reproduced all33 actual moves legally and matched all19 complete raw snapshots, including captures, next-move numbers and ko markers.
+Black17 turns=17 stones; White16 turns−J8 captured=15 stones.
+No refused move, pass or ko occurred. The initial file patch failed validation before writing; it was corrected and records were saved.
+Code inspected supplied positions, counted groups/liberties/regions, replayed actual recorded moves and kept records only. All move choices and hypothetical lines were manual. No engine, Monte Carlo, future-sequence search or automated move selection/ranking/recommendation was used.
+Final code inspection was retrospective, after resignation. No exhaustive death proof, optimal opening, winning alternate sequence or individual move value is established.
+
+## Exact moves
+
+1 B E5, 2 W C3, 3 B D3, 4 W G7, 5 B G3, 6 W C5, 7 B C7, 8 W G5, 9 B F7, 10 W C4, 11 B E4, 12 W G6, 13 B F6, 14 W D5, 15 B G8, 16 W H7, 17 B H8, 18 W H4, 19 B J7, 20 W H5, 21 B J6, 22 W J5, 23 B C2, 24 W H3, 25 B H2, 26 W J3, 27 B F4, 28 W J8, 29 B J9, 30 W D6, 31 B D7, 32 W E6, 33 B F5; White resigns.
+
+## Early connections did not supply enough room
+
+At11 the executed current disjoint conditional target was:
+A/B/C rows1–6 eighteen;
+G/H/J rows5–9 fifteen plus H4/J4 two;
+total35, no included enemy occupation.
+C3/C4/C5 were joined; G5/G7 were separate until G6 at12.
+White needs38 for a win when all81 points are assigned. This target was already below that threshold and had no completed eyes.
+C4 prevented the familiar left cut; G6 joined the right before F6. These useful connections did not create adequate territory.
+
+D5 at14 joined C5 and added an outside coordinate, but Black G8 entered the right upper boundary.
+H7 at16 connected G7 while Black H8 joined G8.
+H4 at18 began separate; Black J7 occupied the edge.
+H5 at20 promptly joined H4 to G5, but Black J6 extended J7 downward.
+The right eye budget needed reassessment at G8/H8, rather than continuing to regard the old upper corner as White room.
+J5 at22 stopped a further edge entry but did not capture anything.
+H3/J3 at24/26 retained the lower boundary after H2 and established true J4, whose orthogonal and diagonal boundary stones all belonged to the right main.
+Only one true eye was established.
+
+## J8: own liberties and the capture reply defeated the threat
+
+Before28, Black J6/J7 had H6/J8 two liberties.
+White J8 at28 was isolated with soleJ9. It ataried Black J6/J7 at H6.
+The manually considered threat was that White H6 could capture those two if Black ignored it.
+However, Black J9 was identified before playing J8 as a direct capture of the attacking stone and a way to reopen J8 for the threatened chain.
+Black29 J9 correctly captured J8. It had H9/J8 two liberties, so no ko arose.
+J6/J7 again had H6/J8. The move did not secure an eye, capture an enemy or yield outside territory.
+
+This repeated the execution weakness from game86: a concrete counter was known, yet the move was played in hope of an ignored threat.
+A sacrifice needs a useful continuation after the expected reply. None was established here.
+Do not substitute a threat against an unresponsive opponent for a plan that survives the identified capture response.
+No alternate J8 sequence is proved winning.
+
+## Final position and limits of the resignation judgment
+
+D6 at30 joined D5; Black D7 joined C7 and capped above.
+E6 at32 joined D6; Black F5 at33 joined E4/E5/F4 to F6/F7.
+The left six stones C3/C4/C5/D5/D6/E6 had B3/B4/B5/C6/D4/E7 six liberties and an unfinished base, with no completed two-eye proof.
+The right nine G5/G6/G7/H3/H4/H5/H7/J3/J5 had G4/H6/J2/J4 four liberties.
+J4 was a true eye. G4 touched Black F4/G3; H6 touched Black J6; J2 opened into the unfinished lower corner next to Black H2.
+Present liberties therefore did not establish a second eye.
+
+Black J6/J7 remained separate with H6/J8, G8/H8 with F8/G9/H9/J8, and J9 with H9/J8.
+These are important distinct groups: Black had not yet connected every surrounding stone.
+Resignation was a practical judgment about the territory deficit and lack of a credible recovery, not proof that all right stones were unconditionally dead.
+No official score/dead list or exhaustive rescue analysis was obtained.
+
+The original35 target now contains Black C2/G8/H8/J6/J7/J9 six.
+Actual White outside additions D5/D6/E6/H3/J3 five give a selected-coordinate ledger35−6+5=34.
+This is only an unoccupied conditional outline: it includes contested empty points, unproven endpoints and a group with only one eye. It is not34 living area or a numerical final score.
+Final displayed inventory: Black17, White15, empty49. Empty J4 touches only White; J8 only Black; the remaining47 empties touch both colors in four connected regions.
+Do not convert this unfinished board into an official area result.
+
+## Carry forward
+
+Retain20k. Read88/86 next; game87 remains separately unfinished.
+Connect chains promptly, but preserve an adequate base and second-eye route at the same time.
+Recount after the first severe endpoint reduction: G8/H8/J7/J6 removed the right upper-room plan.
+The early35 count identified a deficit; merely adding nearby connected stones did not solve it.
+Before a capturing threat, count the attacker's own liberties and check whether the opponent can capture it to reopen the target's liberty.
+Act on a known counter: J9's answer must change the J8 decision unless a useful sacrifice continuation has been established.
+Keep resignation judgments separate from proven death and numerical scores. Game52's scoring discrepancy remains unresolved.

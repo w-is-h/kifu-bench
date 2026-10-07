@@ -1,0 +1,22 @@
+# Next-game focus after game 179
+
+Retain20k:30 wins/138 losses/6 draws; game87 unfinished/excluded.
+Read game-179.md and game-178.md before playing. Consult177 for captured-room reentry and175 for broad division.
+
+Game179 Black won B+2 afterWhite48/Black49 passes;closingconfirmed,next50.
+All49 moves verified against27 original raw boards. Captures B1/W0, no ko/invalid/resignation.
+Area B45/W36, neutral0, no dead removal needed.
+
+- E7 joined D7/F7;C7 joined C6;C2 joined C3/D2. Actual joins preceded work elsewhere.
+- OPEN47 at10: upper allrows7-9+A6/B6/C6=30;lowerAB1-5+C1-4+D1-3=17. Neither secured.
+- Lower lost seven A4/A5/B3/B4/B5/C4/D3;gained E1/E2/F2 three. Upper H6/J6 added two. 47-7+3+2=45.
+- At34 lower12+upper30=42. H6/J6 two and A3 one brought45. A3 was already in original17.
+- B1 made trueA1 and ataried WhiteC1;D1 captured it/reopened trueC1. All on-board neighbors of each eye in SAME lower chain.
+- Lower11stones+trueA1/C1=13. Upper13+left6/right13 rooms=32.
+- B6/A6 secured original endpoints;C8/C9 divided broad room,addednoarea. H-J adjacent.
+- Every raw response including passes saved before parsing.
+- One narrow win is not repeatable strength. No automatic ladder increase.
+
+Manual choices/reading;current-position inspection and actual-history replay only.
+No engine,Monte Carlo,future-sequence search,programmed selection/ranking/recommendations or delegation.
+Game52 discrepancy and99/106 evidence limits remain separate.

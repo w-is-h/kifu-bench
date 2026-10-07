@@ -1,0 +1,146 @@
+# Game 179: Black vs 20k — B+2
+
+Played 2026-10-07. Chinese area scoring, komi 7, simple ko.
+White48/Black49 consecutive passes ended play; closing board confirms B+2, next50.
+White also passed at46; Black47 C9 continued before the final passes.
+Physical captures Black1/White0. No ko, invalid move or resignation.
+Completed20k:30 wins/138 losses/6 draws; game87 unfinished/excluded. Retain20k.
+
+## Evidence and result
+
+Read178/177 and consulted175 before choosing20k on the empty Black board.
+All49 actual moves replay legally and match all27 original saved raw boards, capture totals, next move numbers and ko markers.
+Selection,25 play responses and closing confirmation were each saved BEFORE parsing.
+The recorder preserved both "Your opponent passed" and "You passed" directly.
+Saved raw responses, aggregate log, SGF, inspector, actual-history verifier, verification, final inspection, review and focus.
+
+Final displayed area Black45/White36, neutral0, agrees exactly with45-36-7=2.
+No dead-stone removal is needed to reconcile the official result.
+Black24 stones+21 empties=45; White21 stones+15 empties=36.
+The tool supplied no official dead list; do not invent one.
+
+Choices and local unplayed reading were manual.
+Code only inspected the current position, recorded responses and replayed actual history.
+No engine, Monte Carlo, future-sequence search, programmed selection/ranking/recommendations or delegation.
+Game52 discrepancy and99/106 evidence limits remain separate.
+
+## Exact moves
+
+1 B C6, 2 W G4, 3 B F7, 4 W F6, 5 B D7, 6 W E6, 7 B E7, 8 W D6, 9 B C7, 10 W C5, 11 B C3, 12 W D3, 13 B D2, 14 W C4, 15 B C2, 16 W B3, 17 B E2, 18 W E3, 19 B G7, 20 W G6, 21 B F2, 22 W G2, 23 B H7, 24 W G3, 25 B B2, 26 W B4, 27 B A2, 28 W F1, 29 B E1, 30 W C1, 31 B B1, 32 W G1, 33 B D1, 34 W F3, 35 B H6, 36 W H5, 37 B J6, 38 W J5, 39 B B6, 40 W B5, 41 B A3, 42 W A4, 43 B A6, 44 W A5, 45 B C8, 46 W pass, 47 B C9, 48 W pass, 49 B pass.
+
+## Opening: join the broad upper boundary before leaving
+
+C6 and F7 began separately. D7 was also separate from both.
+E7 at7 ACTUALLY joined D7 to F7.
+White D6 occupied the diagonal junction below D7.
+C7 at9 ACTUALLY joined C6 to D7/E7/F7.
+The upper five were one physical chain before the lower-left start.
+
+This matters: a nearby diagonal stone is not a join.
+The game did not repeat176's separated C3/C6 failure or175's abandoned B5.
+G7 at19 and H7 at23 later extended this same upper chain against White F6/E6/D6/G6.
+The top had enough width to remain a broad room; no late cramped third base was attempted.
+
+## Contemporaneous disjoint early budget
+
+After move10, before Black11 C3, the prospective coordinate budget was recorded:
+UPPER30 = A/B/C/D/E/F/G/H/J rows7-9 (27) + A6/B6/C6 (3).
+LOWER17 = A/B rows1-5 (10) + C1-C4 (4) + D1-D3 (3).
+They are disjoint; total47.
+Both were explicitly OPEN and unsecured. No early two-eye proof or secure47 was claimed.
+Only two points above Black's45 winning threshold left little room for losses.
+
+White D3/C4/B3 and the left caps reduced the lower outline.
+F2/E2/E1 supplied connected gains outside that original lower reference.
+At34, after the C1 capture and White F3 cap, the lower retained12.
+Upper30+lower12=42; the deficit was explicitly recognized before further expansion.
+H6/J6 added two outside UPPER30. A3, which was ALREADY in LOWER17, restored another point to the interim12 count.
+Thus upper32+lower13 reached45.
+
+Exact final ledger from the original OPEN47:
+lose lower A4/A5/B3/B4/B5/C4/D3 seven;
+gain lower E1/E2/F2 three;
+gain upper H6/J6 two.
+47-7+3+2=45.
+The capture of White C1 restores a reference point, not an additional area bonus.
+A3 is not an outside gain from the opening reference.
+This accurate accounting does not establish any individual move as optimal.
+
+## Lower: actual C2 connection, corner protection and capture-created true C1
+
+C3 at11 was separate. White D3 capped its right.
+D2 at13 was also separate.
+C2 at15 ACTUALLY joined D2 and C3 into one lower chain.
+E2/F2 extended it; White G2/G3 capped right and F1 undercut below.
+B2 at25 joined C2, and A2 at27 joined B2 to protect the lower-left.
+White B4 joined B3/C4 and prevented expansion upward through that side.
+
+E1 at29 joined E2 and blocked the F1 undercut.
+White30 C1 invaded the undivided bottom room with B1/D1 liberties.
+B1 at31 joined B2 and ataried C1 to soleD1.
+B1 also completed TRUE A1: its on-board neighbors A2/B1 were in the same physical Black chain.
+White32 G1 joined F1/G2 and left C1 in atari.
+
+D1 at33 ACTUALLY joined D2/E1 and captured White C1 one.
+The capture REOPENED C1.
+C1's on-board neighbors B1/C2/D1 now all belonged to the SAME Black chain: TRUE C1, independent of trueA1.
+White34 F3 closed the remaining outside route; both actual eyes remained.
+No ko resulted. Physical capture totals stayed Black1/White0 thereafter.
+
+A3 at41 joined A2 and gained one point relative to the interim lower12.
+White A4 capped it. Black did not confuse White A4/B4/B3's joined chain with an isolated atari target.
+Final lower ELEVEN stones:
+A2/A3/B1/B2/C2/C3/D1/D2/E1/E2/F2.
+TrueA1/C1 two empties;11+2=13.
+The lower chain's ONLY liberties are those two eyes, which is safe here because both have complete friendly boundaries.
+Do not infer danger merely from "two liberties", or life merely from an arbitrary pair of liberties.
+
+## Upper: connected edge gains and a complete divider
+
+H6 at35 joined H7. White H5 capped below.
+J6 at37 joined H6 because H and J are adjacent (I skipped).
+White J5 joined H5.
+Those two Black extensions added H6/J6 to the original upper30 without creating another physical group.
+
+B6 at39 joined C6; White B5 capped it.
+A6 at43 joined B6 and retained the upper-left endpoint; White A5 joined its left wall.
+B6/A6 were already in UPPER30. They protected that outline rather than adding two new area points.
+
+C8 at45 joined C7. White46 passed.
+C9 at47 joined C8 and completed the divider to the top edge.
+White48 passed again; Black49 passed.
+The divider added no area under Chinese scoring, but separated two empty rooms bounded by the SAME physical Black chain:
+left A/B rows7-9 SIX;
+right D/E/F/G/H/J rows8-9 TWELVE + J7 ONE =THIRTEEN.
+This is broad room division, unlike178's H9/J9 two-point room or177's capture-reopened H8/H9.
+White did not invade these upper rooms in the actual continuation.
+The successful outcome does not prove the opening or division timing best against stronger resistance.
+
+Final upper THIRTEEN stones:
+A6/B6/C6/C7/C8/C9/D7/E7/F7/G7/H6/H7/J6.
+Thirteen stones+nineteen empties=32.
+All24 final Black stones survived in exactly TWO physical chains, with complete lower eyes and separate upper rooms.
+
+## White inventory and score
+
+White21 in FOUR physical chains:
+D6/E6/F6/G6 four;
+A4/A5/B3/B4/B5/C4/C5 seven;
+H5/J5 two;
+D3/E3/F1/F3/G1/G2/G3/G4 eight.
+White's central D4/D5/E4/E5/F4/F5/G5 room seven borders several White chains.
+Right H/J rows1-4 room eight also borders multiple White chains.
+Do not invent a separate individual-eye proof for each isolate from those geometric ownership regions.
+Together21+15=36. Every point is assigned, no neutral point.
+Black upper32+lower13=45; official B+2 is fully reconciled.
+
+## Carry forward
+
+Retain20k:30 wins/138 losses/6 draws;87 excluded.
+Read179/178 before next game; consult177 for capture-reentry danger and175 for broad corner division.
+Keep E7/C7/C2 actual joins before changing regions.
+Record an explicit disjoint early budget and revise it after endpoint losses.
+Prefer connected edge expansion when a deficit is small; here H6/J6 and A3 repaired the interim42 without starting a late unsupported base.
+Protect corners, rebuild after capture, and verify actual eye boundaries: B1 made trueA1; D1's capture reopened trueC1.
+C8/C9 divided broad room without changing area.
+One narrow win after many losses is not repeatable strength or evidence to climb the ladder.

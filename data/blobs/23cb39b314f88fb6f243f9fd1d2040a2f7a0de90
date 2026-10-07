@@ -1,0 +1,17 @@
+# Next-game focus after game165
+
+Retain20k:27 wins/127 losses/6 draws; game87 unfinished/excluded.
+Read game-165.md and game-164.md before playing; consult154 for continuous broad boundaries and163 for failed room division.
+
+Game165 Black won B+12 after passes85/86, closing board confirmed,next87.
+Area Black50/White31, neutral0; retaining all final stones matches, no dead removal needed.
+Physical captures Black8/White2. All86 moves/45 raw snapshots verified; no invalid move or ko.
+
+- D4/G3 developed lower bases; D5/C5/E5/F5 formed a fifth-row boundary. Early OPEN42 was unfinished and below Black45.
+- J4 was an isolated block. H4 ataried it, J5 captured it and reopened J4 for the lower White invasion. J5 extension would also have failed. Read the attacker as carefully as the invader.
+- H2/H1 ataried White J1/J2/J3. Ignored atari allowed J4 capture, but J3 captured the separate attacker and reopened J4. J2 actually joined Black; White J4 actually joined its upper. No ko.
+- Manual diagonal errors were corrected by inspection: D2 did NOT join C3/E3; C4 joined C3 only, C2 joined D2, E2 joined E3. B1 did NOT join A2; A4 joined A2/A3, B2 joined B1.
+- D3/F1-F2/B2-B3 invasions were captured after ignored ataris. Lower31+eight empties=39 was verified in ONE chain before recovery; exact early42 minus H4/J4/J3=39.
+- Upper D8/E8/D9/F8/G8/H8/H9 retained width against D7/C8/C9/G7/H7/J8. D9/H9 were endpoints. F9 divided E9/F9/G9 into true E9/G9 with friendly diagonals and one physical chain.
+- Upper8+two eyes=10, then E7 boundary gain=11; White F7 took the other neutral point. Final Black39+11=50, White31+7.
+- A win with ignored ataris and repeated White passes does not prove repeatable strength. Keep20k. Manual choices/current inspection/actual-history replay only; no engine, future search, recommendations or delegation. Game52/99/106 limits remain separate.

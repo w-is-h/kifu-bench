@@ -1,0 +1,15 @@
+## Carry forward
+
+Retain20k:26 wins/122 losses/6 draws;87 unfinished/excluded.
+Read159/158 before the next game; consult154 for continuous boundaries and independent rooms.
+
+- A reactive contact line can remain joined while losing both ends and most of its prospective width. This history's lower45 became33, then30.
+- Recount entire regions after a cap. Raw occupied-point subtraction temporarily retained unsupported H/J empties.
+- G1 and A3/B3 preserved endpoints after undercuts, but could not restore lost width.
+- A3's atari forced A5 to join and save A4; never assume a saved attacker remains isolated.
+- D7's E7 save joined the upper group without supplying an eye or enough area.
+- Before ANY atari, count the attacking move's own liberties. D9 soleE9 and C8 soleB8 were both immediately captured.
+- After E9 captured D9, D8 had C8/D9; C8 could no longer capture it. Rebuild immediately after captures, before the next Go call.
+- Upper F9/G9 was one route; G9 extension would leave soleH9. Stop futile repairs.
+- E3/E2/E1 completed left11/right2 rooms, preserving lower30. Completed life cannot repair a15-point territorial deficit.
+- No promotion, opening improvement or optimal-move claim follows.

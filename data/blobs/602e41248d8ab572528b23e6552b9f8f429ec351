@@ -1,0 +1,33 @@
+# Persistent Go learning
+
+Goal: improve at 9x9 Go across fresh sessions, ultimately win consistently against human-style KataGo 9d.
+
+## Record
+- Game 1: Black vs 9d, Chinese area scoring, komi 7. Lost by resignation after White move 56 (D2).
+- Game 2: White vs 4k, same rules. Lost by resignation after Black move 49 (J6). No captures or numerical final score.
+- Read game-001.md for review. game-001.sgf is the full move record; game-001-log.json contains every returned position.
+- Read game-002.md for the latest review; game-002.sgf and game-002-log.json contain the complete record.
+- No successful level has been established. One loss does not establish individual move values.
+
+## Lessons to use immediately
+1. Count prospective area early, especially after about 10-16 moves. With all 81 points assigned, Black needs at least 45 for a win with 7 komi; 44-37 is a draw. If there is neutral area, compare actual totals instead.
+2. Center influence must yield territory, an attack, or access to a viable invasion. Game 1 built a narrow central chain while White took both sides.
+3. Check two eyes for every major group before treating it as safe. Connected stones and many present liberties are not proof of life. Preserve eye space and a base before filling internal points.
+4. In capture reading, rebuild the position after each capture. Captured stones open liberties for adjacent enemy groups. The D8/E9 sacrifice in game 1 overlooked this.
+5. Ko eyes are not unconditional eyes. Game 1's lower D2 and upper E8 spaces depended on vulnerable isolated Black stones. Owning two such ko positions does not by itself guarantee double-ko life.
+6. Do not repeat the complete opening E5 C5 E3 D7 F7 G5 G6 H6 G7 G3 without reconsidering its territorial consequences. E5 itself was not shown to be wrong.
+7. Game 2 counted an insecure right-side base as territory. Black G2 followed by H1 undermined the corner; J4/J5 occupied remaining eye space. The final seven-stone White right group had only H4 and J2 as liberties and a concrete forced-capture route. Connected second-line stones do not guarantee a base.
+8. Use permitted current-board group/liberty inspection during contact fights. Game 2 missed that Black D3 put White D4/E4 in atari with only C4 available; White played J8 instead. Scan ALL own groups before pursuing a distant plan.
+9. Before invading, identify two prospective eyes or a concrete escape/connection. Game 2's late G8/H7/J8 invasion had no demonstrated life; trapping H9 would provide only one prospective eye.
+10. Check the opponent's simplest connection. In game 2, White E4 did not separate the lower Black stones: Black F4 joined F3 and F5 and squeezed White's right group.
+
+## Next-game focus
+- Choose a rank deliberately. Both 9d and 4k games were lost. 8k is a reasonable next practice experiment for territory and life, not an established best training rank. 9d remains the target.
+- Keep opening alternatives as hypotheses. Securing a corner/lower-side position earlier (for example considering C3 before the upper-right exchanges) is worth trying, not established as best.
+- Before each move: identify atari/cuts, weakest group and eye prospects, largest area gain, and whether opponent can ignore the intended threat.
+- Count secure area and unsecured potential separately. Re-evaluate the base immediately after an undercut; do not defer it merely because the group has present liberties.
+- Save complete move records, final result, and a small number of concrete lessons after each game. Update this file with the latest record and evidence.
+
+## User constraints
+Play each game to completion (passes or resignation allowed). Choose opponent before the first move.
+Code may inspect the current board, count stones/liberties, check legality, and keep records. Do not build/use an engine, Monte Carlo, future-sequence search, or a program that selects/ranks/recommends moves.

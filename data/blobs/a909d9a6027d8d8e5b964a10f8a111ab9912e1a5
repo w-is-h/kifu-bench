@@ -1,0 +1,22 @@
+# Game 5 — Black versus 20k
+
+Result: White wins by 8 points (W+8), after B39 pass and W40 pass. Chinese area, komi 7, simple ko, no suicide. Captures before scoring: 0 for both players. Exact record: game-005.sgf. Third scored game; still no demonstrated win at 20k. Existing-group distinct liberties were inspected after each opponent board move. No engine analysis, move-ranking code, or future-sequence search was used. Strategic and tactical judgments were manual and are not certified optimal.
+
+Opening: B E5/E4/E6/F6 formed a connected central boundary while White occupied D5/D6/E7/F7. B9 D4 and B11 C3 expanded toward the lower left; B13 D3 connected C3 to the main chain. B15 B3, W16 A3; B17 A2 left the new stone with {A1,B2}. B19 B2 connected outside, giving the merged group eight liberties and leaving the bottom space open. This connection was checked, unlike game 1's fatal connection. There were no established separate eyes yet, but substantial open space below the boundary.
+
+Right boundary: B21 G6, W22 H6; B23 H5, W24 J6; B25 J5, W26 H8. The H5/J5 pair retained {G5,H4,J4}. B27 G5 joined it to the main chain, producing ten liberties after W28 H7: {A1,B1,C2,D2,E3,F4,F5,G4,H4,J4}. White H7 joined its upper and right stones. Black retained broad lower-board space but only about 40 prospective area points against about 41 for White before komi. This was a rough framework count, not a secure territory count or a dead-stone calculation. It already suggested a deficit of about eight.
+
+Failed cut: Before B29 C5, White's separate left chain {A3,A4,B4,C4} had {A5,B5,C5}. Black tried to exploit these three liberties. C5 itself had only {B5,C6}, no eye, and no connection to the main chain. The tactical expectation was flawed: W30 B5 filled B5 but ADDED B6 as a liberty, leaving White {A5,B6}, while Black C5 was in atari at C6. Black had initially expected only A5. Always count the extension's newly exposed empty neighbors, not just the old liberties it fills.
+
+B31 C6, W32 B6 left the two Black stones with sole liberty C7. White's left chain now had {A5,A6,B7}; its extension again added liberties. B33 C7, W34 B7 left sole liberty C8. B35 C8 gained access to the upper-left space, but W36 D8 restricted the chain to {B8,C9}. B37 B8, W38 A8 left five Black stones {B8,C5,C6,C7,C8} with {B9,C9}. There were no established eyes. White A8 had {A7,A9}, the left White chain had {A5,A6,A7}, and the large upper White chain had seven liberties. The hoped-for upper-left space was closed without establishing life or a concrete capture.
+
+Black stopped investing and passed; White passed. The scorer returned W+8 with all stones still shown and no explicit dead-stone breakdown. Do not infer the exact treatment of the cutting group from that margin. No rescue was identified manually; that is not a proof that every continuation fails or that passing was optimal.
+
+Lessons for game 6:
+
+- When attacking a low-liberty enemy chain, account for NEW liberties created by its extension. The B5/B6 replies invalidated the intended capture; filling one old liberty does not necessarily reduce the count.
+- A cut needs a concrete capture, connection, or two-eye plan. C5 began with two liberties and no established eyes; calling the upper-left corner open was insufficient.
+- Recognize a forced-running pattern early. C6/C7 were successive atari responses; C8 briefly gained space, but D8 removed the right route. Reassess before adding B8, not only after A8 seals the enclosure.
+- Keep the useful outside connections: D3, B2, and G5 joined groups with checked merged liberties while retaining lower interior space.
+- Assess area sooner. The connected lower boundary was too small with komi once White secured the top and left. A late risky cut did not solve that strategic deficit.
+- A smaller losing margin is not evidence of winning strength. Remain at 20k until actual results justify moving up. The long-term goal remains consistent wins against 9d.

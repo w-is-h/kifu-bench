@@ -1,0 +1,17 @@
+Retain20k:28 wins/133 losses/6 draws; game87 unfinished/excluded.
+Read game-172.md and game-171.md before playing; consult170 for failed rooms and169/165/154 for actual joins and broad boundaries.
+
+Game172 White lost B+16 after White68/Black69 passes; closing confirmed,next70.
+Area B52/W29,neutral0,all final stones retained matches,no dead removal.
+Physical B16/W0;69 actual moves/36 raw boards verified. Ko J2 after49,resolved51;no invalid move/resignation.
+
+- BEFORE an atari, inspect the moving chain's full resulting liberties and whether it can be captured immediately. J9 was separate soleH9;BlackH9 captured it. G9 ataried H9 but left own eight soleE9;BlackE9 captured eight. Never assume enemy atari forces a save.
+- Rebuild after capture: H9 removed an upper White liberty and reopened J9 for BlackH9/J8. Upper seven then had E9/G9 only.
+- Earlier G7 at16 did not secure recovery: H8 needed G8 actual join;upper still one room;F6 route closed by BlackF5. Audit whole base and both endpoints after first cap.
+- Lower F2/G2/H1/G1 lacked eye room after H2/H4/D1 caps. J2/J3 left soleJ1;J1 join had no second room. Stopped futile extension. F1 left lower six soleF4,WhiteF4 suicide;BlackF4 captured six.
+- Preserve connected C1/B6/B7/B8/C8/B9/D8/D4 expansion. B5/A5 divided left into independent same-chain upper4/lower8 rooms;White17+12=29.
+- OPEN43 was unsecured;exact43-C7/C9two-all16outsideABC+D3/D4/D6/D8four=29. Winning width remains unresolved. No move established optimal.
+
+Manual choices/reading; current-position inspection and actual-history replay only.
+No engine, Monte Carlo, future-sequence search, programmed move selection/ranking/recommendations or delegation.
+Game52 scoring discrepancy and99/106 raw-evidence limits remain separate.

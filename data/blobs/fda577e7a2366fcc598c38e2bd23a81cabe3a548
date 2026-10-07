@@ -1,0 +1,21 @@
+# Next-game focus after game 146
+
+Retain20k:24 wins/111 losses/6 draws;87 unfinished/excluded.
+Read146/145; consult144/30 for viable width and true independent rooms.
+White lost B+2 after Black55/White56 passes; boardconfirmed,next57.
+Area White36/Black45,neutral0,no dead adjustment needed.
+Physical Black4/White3; no ko or invalid move.
+All56 moves/30 returned boards verified; all raw retained.
+
+- C4 joined C3/C5; C6 joined upper/lower left. Black G6/H6 blocked right development.
+- G8/G9 retained endpoints without proving corner life. After J7/F9, right four had H8/H9; Black H8 left soleH9.
+- H9 would give soleJ9 and Black J9 captures5. Actual Black H9 captured4 and reopened G7/G8/G9/H7.
+- Remaining right region lost eight points, not merely four stones. No extra subtraction for captured stones.
+- Final target ABC27+D/E7–9 six+D2/D6/E6 three=36, two below White38 win threshold.
+- C2 joined D2/main; C1 ataried D1, but Black E1 joined D1/E2 and saved it.
+- B7/D8/A6/B6/D9 contained left invasion. A8 captured A7; A7 is diagonal to B8, so B8 gained no liberty.
+- C9 joined main, put B8/C8 soleB9, while main retained other liberties; Black B9 suicide. B9 captured2.
+- B8 actually joined isolated A8/main and made trueC8. Final23 one chain: trueA7/A9/C8 plus lower10 room.
+- Continue life work after opponent passes; internal joins preserve area, not outside gains.
+- Black final19+pairH8/H9+J7 are separate chains sharing Black-only rooms; do not invent a physical join.
+- No engine/search/recommendation/delegation;52/99/106 evidence limits remain separate.

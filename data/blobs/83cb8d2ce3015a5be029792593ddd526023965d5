@@ -1,0 +1,30 @@
+# Usage: python3 count.py <<'EOF' ...board rows 9..1 pasted from the board output... EOF
+# Area count of the CURRENT position: stones + empty regions touching only one colour.
+# Empty regions touching both colours are printed as "open" (count for nobody yet).
+import sys
+cols="ABCDEFGHJ"
+rows=[l.split() for l in sys.stdin.read().strip().splitlines()]
+rows=[r[1:10] if len(r)>9 else r for r in rows]
+B={}
+for i,r in enumerate(rows):
+    for j,c in enumerate(r): B[(j,9-i)]=c
+def nb(p):
+    x,y=p
+    for q in((x+1,y),(x-1,y),(x,y+1),(x,y-1)):
+        if q in B: yield q
+score={"X":0,"O":0}
+for p in B:
+    if B[p] in "XO": score[B[p]]+=1
+seen=set();open_pts=[]
+for p in B:
+    if B[p]=='.' and p not in seen:
+        g=[p];seen.add(p);k=0;touch=set()
+        while k<len(g):
+            for q in nb(g[k]):
+                if B[q]=='.' and q not in seen: seen.add(q);g.append(q)
+                elif B[q] in "XO": touch.add(B[q])
+            k+=1
+        if len(touch)==1: score[touch.pop()]+=len(g)
+        else: open_pts+=g
+print("Black",score["X"],"White",score["O"],"+7 komi =",score["O"]+7,"open",len(open_pts))
+print("open:",",".join(sorted(cols[a]+str(b) for a,b in open_pts)))

@@ -1,0 +1,43 @@
+# Go notes (9x9 vs KataGo human-style) — READ FIRST
+
+See `games.md` for the per-game log. Update both files after every game.
+Color alternates per game (G1 Black, G2 White). Check the prompt for which color you are.
+
+## Ladder status
+- Game 1: Black vs 8k, lost W+14 (Black 37 area).
+- Game 2: White vs 8k, lost B+12 (White ~31 area + 7 komi vs 50).
+- Next suggestion: drop to 10k or 12k to get a first win and learn what works, then climb.
+
+## Key facts
+- Komi 7, area scoring. Black needs >= 44 of 81. White needs >= 38 area (37 = draw).
+- Area scoring: playing inside the opponent's territory late costs nothing, so probing
+  invasions at the end are free (but they rarely work vs correct answers).
+- Opponent passes when the game is settled; engine removes dead stones itself.
+
+## THE BIG RECURRING PROBLEM (both games)
+I build a long center wall and the opponent takes two corners/sides. A center wall does NOT
+score on 9x9. In both games I ended with ~31-37 points of mostly stones.
+=> Fix: prioritize CORNERS and SIDES. Each time, ask "which corner/side is still open?"
+   and take it before pressing/attaching in the center. Count at move ~15: if my likely
+   territory is < 38 (White) / < 44 (Black), I must take a side, not strengthen the center.
+- Game 2: B G7 (upper right), I played E5 tengen, B attached F5, I made F4/G4/E4 shape;
+  Black then took lower-left with C4/C5/D3 in sente. Try instead: answer G7 with a corner
+  move (C3 / C4 / D3 area), or after the F5 attachment, take the empty lower-left corner first.
+
+## Lessons
+1. CHECK LIBERTIES OF MY OWN STONES before every move, especially after the opponent plays
+   adjacent — AND count libs of the stone I am about to place (with its group). Game 2: W J6
+   made a 2-stone group with 1 liberty; Black captured immediately. Game 1: lost G4 in atari.
+2. Don't throw in cutting stones that end with 1-2 libs inside the opponent's area (G1 B7/B4,
+   G2 H7). Read the capturing race first: count my libs vs theirs, who moves next.
+3. When behind on count by 10+, identify the weakest enemy group EARLY (before it settles).
+   Black's lower-left in G2 was loose (C4,C5,D3,C2,E2,F2 all separate) around move 20-25;
+   that was the moment to attack, not at the end.
+4. A 1-wide strip of 4 on the edge (straight four) is alive; don't waste moves there.
+5. Good things that worked: capturing-race reading on G3/H3 (W F3 atari, H2, H4, J3 capture).
+
+## Process checklist each move
+- What did the opponent's last move threaten? (Count libs of all my groups next to it.)
+- Any of my groups at 1-2 libs? Any of theirs? Libs of the stone I'm about to play?
+- Rough count (write a quick ownership map in python): who is ahead? If behind, play
+  bigger: open corners/sides first, then attack weak groups.
